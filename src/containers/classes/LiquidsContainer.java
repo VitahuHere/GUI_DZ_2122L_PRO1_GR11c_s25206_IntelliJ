@@ -1,4 +1,4 @@
-package containers;
+package containers.classes;
 
 public class LiquidsContainer extends Container {
     public final int maxCapacity;
@@ -15,5 +15,12 @@ public class LiquidsContainer extends Container {
         super(tare, size, safetyMeasures, certificates);
         this.maxCapacity = maxCapacity;
         this.valveDiameter = valveDiameter;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", maxCapacity=" + maxCapacity +
+                ", valveDiameter=" + valveDiameter;
     }
 }

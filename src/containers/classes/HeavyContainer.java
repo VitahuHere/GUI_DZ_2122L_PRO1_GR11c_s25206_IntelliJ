@@ -1,4 +1,4 @@
-package containers;
+package containers.classes;
 
 public class HeavyContainer extends Container {
     public final int armorThickness;

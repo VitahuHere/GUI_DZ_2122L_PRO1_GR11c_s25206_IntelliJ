@@ -1,4 +1,4 @@
-package containers;
+package containers.classes;
 
 import main.Statics;
 
@@ -27,12 +27,12 @@ public class Container {
 
     @Override
     public String toString() {
-        return "Container information {" +
-                "id: " + id +
+        return "Container type: " +
+                this.getClass().getSimpleName() +
+                ", id: " + id +
                 ", tare: " + tare +
                 ", size: " + size +
                 ", safetyMeasures: " + Arrays.toString(safetyMeasures) +
-                ", certificates: " + Arrays.toString(certificates) +
-                '}';
+                ", certificates: " + Arrays.toString(certificates);
     }
 }
