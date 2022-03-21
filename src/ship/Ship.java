@@ -22,6 +22,16 @@ public class Ship {
     private String departurePort;
     private String arrivalPort;
 
+    /**
+     *
+     * @param name name of the ship.
+     * @param homePort port of origin. Also called Mother Port.
+     * @param maxContainersCount maximum number of containers possible to safely fit onto the ship.
+     * @param maxPayloadWeight maximum total weight of payload possible to safely swim to destination.
+     * @param maxToxicExplosiveContainersCount determines maximum number of toxic and explosive containers that can be places onto the ship
+     * @param maxHeavyContainersCount determines maximum number of heavy containers that can be places onto the ship
+     * @param maxElectricContainerCount determines maximum number of containers that require to be connected to electric power
+     */
     public Ship(
             String name,
             String homePort,
