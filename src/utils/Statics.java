@@ -1,4 +1,4 @@
-package main;
+package utils;
 
 public class Statics {
     public static int shipIndex = 1;

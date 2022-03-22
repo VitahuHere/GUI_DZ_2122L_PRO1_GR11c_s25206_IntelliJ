@@ -2,7 +2,7 @@
 
 package ship;
 
-import main.Statics;
+import utils.Statics;
 
 import java.util.Scanner;
 
@@ -23,7 +23,7 @@ public class Ship {
     private String arrivalPort;
 
     /**
-     *
+     * id {@value Statics#shipIndex} identifier for ship. Unique at creation. Increments with each new one.
      * @param name name of the ship.
      * @param homePort port of origin. Also called Mother Port.
      * @param maxContainersCount maximum number of containers possible to safely fit onto the ship.

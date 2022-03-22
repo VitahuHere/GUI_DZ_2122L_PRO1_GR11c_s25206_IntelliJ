@@ -1,17 +1,19 @@
 package containers.classes;
 
+import utils.Statics;
+
 public class HeavyContainer extends Container {
     public final int armorThickness;
     public final String containerMaterial;
 
     /**
-     * id -> identifier for container. Unique at creation.
-     * @param tare identifier for container. Unique at creation.
-     * @param size weight of container just by itself.
-     * @param safetyMeasures example: 20, 40, 45.
-     * @param certificates determines what is it allowed to carry.
-     * @param armorThickness determines how thick in millimeters is the outside shell.
-     * @param containerMaterial determines what material has been used to make this container.
+     * id {@value Statics#containerIndex} int, identifier for container. Unique at creation. Increments with each new one.
+     * @param tare int, weight of container just by itself.
+     * @param size int, example: 20, 40, 45.
+     * @param safetyMeasures String[], what kind of locks or bar were used to secure container.
+     * @param certificates String[], determines what is it allowed to carry.
+     * @param armorThickness int, determines how thick in millimeters is the outside shell.
+     * @param containerMaterial String, determines what material has been used to make this container.
      */
 
     public HeavyContainer(

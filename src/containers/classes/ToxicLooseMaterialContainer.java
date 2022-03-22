@@ -1,16 +1,17 @@
 package containers.classes;
 
-import containers.interfaces.LiquidInterface;
+public class ToxicLooseMaterialContainer extends HeavyContainer {
 
-public class ToxicLiquid extends HeavyContainer implements LiquidInterface {
-    public ToxicLiquid(
+
+
+    public ToxicLooseMaterialContainer(
             int tare,
             int size,
             String[] safetyMeasures,
             String[] certificates,
             int armorThickness,
             String containerMaterial
-    ){
+    ) {
         super(tare, size, safetyMeasures, certificates, armorThickness, containerMaterial);
     }
 }

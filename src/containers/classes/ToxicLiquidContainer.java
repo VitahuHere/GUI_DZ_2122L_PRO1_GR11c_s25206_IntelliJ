@@ -1,12 +1,11 @@
 package containers.classes;
 
-import containers.interfaces.ElectricInterface;
+import containers.interfaces.LiquidInterface;
 import utils.Statics;
 
-public class ChillerContainer extends HeavyContainer implements ElectricInterface {
+public class ToxicLiquidContainer extends HeavyContainer implements LiquidInterface {
 
-    // Measured in Watts
-    public final int maximumWattPowerDraw;
+    public final boolean acidSafe;
 
     /**
      * id {@value Statics#containerIndex} int, identifier for container. Unique at creation. Increments with each new one.
@@ -16,23 +15,24 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
      * @param certificates String[], determines what is it allowed to carry.
      * @param armorThickness int, determines how thick in millimeters is the outside shell.
      * @param containerMaterial String, determines what material has been used to make this container.
-     * @param maximumWattPowerDraw int, determines maximum power possible power draw of this container.
+     * @param acidSafe boolean, determines whether container can carry acids.
      */
-    public ChillerContainer(
+    public ToxicLiquidContainer(
             int tare,
             int size,
             String[] safetyMeasures,
             String[] certificates,
             int armorThickness,
             String containerMaterial,
-            int maximumWattPowerDraw
-    ) {
+            boolean acidSafe
+    ){
         super(tare, size, safetyMeasures, certificates, armorThickness, containerMaterial);
-        this.maximumWattPowerDraw = maximumWattPowerDraw;
+        this.acidSafe = acidSafe;
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         return super.toString() +
-                ", maximumWattPowerDraw: " + this.maximumWattPowerDraw;
+                ", acidSafe: " + this.acidSafe;
     }
 }

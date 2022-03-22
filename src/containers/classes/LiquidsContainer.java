@@ -1,17 +1,19 @@
 package containers.classes;
 
+import utils.Statics;
+
 public class LiquidsContainer extends Container {
     public final int maxCapacity;
     public final int valveDiameter;
 
     /**
-     * id -> identifier for container. Unique at creation.
-     * @param tare identifier for container. Unique at creation.
-     * @param size weight of container just by itself.
-     * @param safetyMeasures example: 20, 40, 45.
-     * @param certificates determines what is it allowed to carry.
-     * @param maxCapacity determines how much liquid can be stored safely.
-     * @param valveDiameter specifies diameter of the valve to use while draining and filling.
+     * id {@value Statics#containerIndex} int, identifier for container. Unique at creation. Increments with each new one.
+     * @param tare int, weight of container just by itself.
+     * @param size int, example: 20, 40, 45.
+     * @param safetyMeasures String[], what kind of locks or bar were used to secure container.
+     * @param certificates String[], determines what is it allowed to carry.
+     * @param maxCapacity int, determines how much liquid can be stored safely.
+     * @param valveDiameter int, specifies diameter of the valve to use while draining and filling.
      */
 
     public LiquidsContainer(
