@@ -10,6 +10,8 @@ public class HeavyContainer extends Container {
      * id {@value Statics#containerIndex} int, identifier for container. Unique at creation. Increments with each new one.
      * @param tare int, weight of container just by itself.
      * @param size int, example: 20, 40, 45.
+     * @param cargoWeight int, net weight of cargo inside container.
+     * totalWeight - int, total weight of container and cargo inside.
      * @param safetyMeasures String[], what kind of locks or bar were used to secure container.
      * @param certificates String[], determines what is it allowed to carry.
      * @param armorThickness int, determines how thick in millimeters is the outside shell.
@@ -19,12 +21,13 @@ public class HeavyContainer extends Container {
     public HeavyContainer(
             int tare,
             int size,
+            int cargoWeight,
             String[] safetyMeasures,
             String[] certificates,
             int armorThickness,
             String containerMaterial
     ) {
-        super(tare, size, safetyMeasures, certificates);
+        super(tare, size, cargoWeight, safetyMeasures, certificates);
         this.armorThickness = armorThickness;
         this.containerMaterial = containerMaterial;
     }

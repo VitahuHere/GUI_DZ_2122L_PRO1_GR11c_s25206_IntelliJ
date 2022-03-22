@@ -1,7 +1,8 @@
 package utils;
+// part copied from https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println user: shakram02
 
 public class ConsoleColors {
-    public static final String RESET = "\033[0m";  // Text Reset
+    public static final String RESET = "\033[0m";
 
     public static final String RED = "\033[0;31m";
     public static final String GREEN = "\033[0;32m";
@@ -12,14 +13,14 @@ public class ConsoleColors {
     public static final String WHITE = "\033[0;37m";
 
     public static void printRed(String message){
-        System.out.println(RED + message + RESET);
+        System.out.print(RED + "Warning: " + message + RESET);
     }
 
     public static void printGreen(String message){
-        System.out.println(GREEN + message + RESET);
+        System.out.print(GREEN + message + RESET);
     }
 
     public static void printBlue(String message){
-        System.out.println(BLUE + message + RESET);
+        System.out.print(BLUE + message + RESET);
     }
 }
