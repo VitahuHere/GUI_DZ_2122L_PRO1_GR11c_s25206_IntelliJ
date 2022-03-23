@@ -13,14 +13,14 @@ public class ConsoleColors {
     public static final String WHITE = "\033[0;37m";
 
     public static void printRed(String message){
-        System.out.print(RED + "Warning: " + message + RESET);
+        System.out.println(RED + "Warning: " + message + RESET);
     }
 
     public static void printGreen(String message){
-        System.out.print(GREEN + message + RESET);
+        System.out.println(GREEN + message + RESET);
     }
 
     public static void printBlue(String message){
-        System.out.print(BLUE + message + RESET);
+        System.out.println(BLUE + message + RESET);
     }
 }

@@ -27,8 +27,8 @@ public class Ship {
     private int heavyCounter;
     private int electricCounter;
 
-    private String departurePort;
-    private String arrivalPort;
+    public String departurePort;
+    public String arrivalPort;
 
     /**
      * id {@value Statics#shipIndex} identifier for ship. Unique at creation. Increments with each new one.
@@ -96,27 +96,9 @@ public class Ship {
         return maxContainersCount;
     }
 
-    // Setters
-    public void setArrivalPort(String arrivalPort) {
-        this.arrivalPort = arrivalPort;
-    }
-
-    public void setDeparturePort(String departurePort) {
-        this.departurePort = departurePort;
-    }
-
-    // Getters
-    public String getDeparturePort() {
-        return departurePort;
-    }
-
-    public String getArrivalPort() {
-        return arrivalPort;
-    }
-
     public void loadContainer(Container container) {
-        if (this.maxContainersCount <= this.cargo.size()) {
-            ConsoleColors.printRed("Maximum container count reached. Cannot add another one.");
+        if (this.maxContainersCount <= this.cargo.size() || this.cargoWeight > this.maxPayloadWeight) {
+            ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
         }
         else {
             if (container instanceof ExplosivesContainer || container instanceof ToxicAbstract) {
@@ -158,17 +140,21 @@ public class Ship {
 
     @Override
     public String toString() {
-        return "Ship information {" +
+        return "Ship information: " +
                 "id: " + id +
                 ", name: '" + name + '\'' +
-                ", homePort: '" + homePort + '\'' +
-                ", maxPayloadWeight: " + maxPayloadWeight +
-                ", maxContainersCount: " + maxContainersCount +
-                ", maxToxicExplosiveContainersCount: " + maxToxicExplosiveContainersCount +
-                ", maxHeavyContainersCount: " + maxHeavyContainersCount +
-                ", maxElectricContainerCount: " + maxElectricContainerCount +
-                ", departurePort: '" + departurePort + '\'' +
-                ", arrivalPort: '" + arrivalPort + '\'' +
-                '}';
+                ", home port: '" + homePort + '\'' +
+                ", maximum payload weight: " + maxPayloadWeight +
+                ", maximum containers count: " + maxContainersCount +
+                ", maximum toxic/explosive containers count: " + maxToxicExplosiveContainersCount +
+                ", maximum heavy containers count: " + maxHeavyContainersCount +
+                ", maximum electric container count: " + maxElectricContainerCount +
+                ", cargo: " + cargo +
+                ", cargo weight: " + cargoWeight +
+                ", number of toxic/explosive containers: " + toxicExplosiveCounter +
+                ", number of heavy containers: " + heavyCounter +
+                ", number of electric containers: " + electricCounter +
+                ", departure port: '" + departurePort + '\'' +
+                ", arrival port: '" + arrivalPort;
     }
 }
