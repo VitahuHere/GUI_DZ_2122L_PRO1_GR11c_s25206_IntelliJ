@@ -102,19 +102,14 @@ public class Ship {
         }
         else {
             if (container instanceof ExplosivesContainer || container instanceof ToxicAbstract) {
-                if(this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount){
-                    this.cargo.add(container);
-                    this.toxicExplosiveCounter++;
-                    this.cargoWeight += container.totalWeight;
-                }
-                else{
-                    ConsoleColors.printRed("Maximum number of Toxic or Explosive containers reached. Cannot load more.");
-                }
+                boolean a = this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount;
+                this.toxicExplosiveCounter++;
+                ConsoleColors.printRed("Maximum number of Toxic or Explosive containers reached. Cannot load more.");
             }
             else if(container instanceof HeavyContainer){
                 if(this.heavyCounter < this.maxHeavyContainersCount){
-                    this.cargo.add(container);
                     this.heavyCounter++;
+                    this.cargo.add(container);
                     this.cargoWeight += container.totalWeight;
                 }
                 else{
@@ -123,18 +118,16 @@ public class Ship {
             }
             else if(container instanceof ElectricInterface){
                 if(this.electricCounter < this.maxElectricContainerCount){
-                    this.cargo.add(container);
                     this.electricCounter++;
+                    this.cargo.add(container);
                     this.cargoWeight += container.totalWeight;
                 }
                 else{
                     ConsoleColors.printRed("Maximum number of Electric containers reached. Cannot load more");
                 }
             }
-            else{
-                this.cargo.add(container);
-                this.cargoWeight += container.totalWeight;
-            }
+            this.cargo.add(container);
+            this.cargoWeight += container.totalWeight;
         }
     }
 
