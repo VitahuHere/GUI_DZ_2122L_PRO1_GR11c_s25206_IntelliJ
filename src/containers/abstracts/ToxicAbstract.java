@@ -2,13 +2,15 @@ package containers.abstracts;
 
 import containers.classes.HeavyContainer;
 
+import java.util.ArrayList;
+
 public abstract class ToxicAbstract extends HeavyContainer {
-    public ToxicAbstract(
+    protected ToxicAbstract(
             int tare,
             int size,
             int cargoWeight,
-            String[] safetyMeasures,
-            String[] certificates,
+            ArrayList<String> safetyMeasures,
+            ArrayList<String> certificates,
             int armorThickness,
             String containerMaterial
     ) {

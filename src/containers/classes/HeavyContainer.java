@@ -1,29 +1,19 @@
 package containers.classes;
 
-import utils.Statics;
+import utils.Evaluators;
 
-public class HeavyContainer extends Container {
+import java.util.ArrayList;
+
+public class HeavyContainer extends StandardContainer {
     public final int armorThickness;
     public final String containerMaterial;
-
-    /**
-     * id {@value Statics#containerIndex} int, identifier for container. Unique at creation. Increments with each new one.
-     * @param tare int, weight of container just by itself.
-     * @param size int, example: 20, 40, 45.
-     * @param cargoWeight int, net weight of cargo inside container.
-     * totalWeight - int, total weight of container and cargo inside.
-     * @param safetyMeasures String[], what kind of locks or bar were used to secure container.
-     * @param certificates String[], determines what is it allowed to carry.
-     * @param armorThickness int, determines how thick in millimeters is the outside shell.
-     * @param containerMaterial String, determines what material has been used to make this container.
-     */
 
     public HeavyContainer(
             int tare,
             int size,
             int cargoWeight,
-            String[] safetyMeasures,
-            String[] certificates,
+            ArrayList<String> safetyMeasures,
+            ArrayList<String> certificates,
             int armorThickness,
             String containerMaterial
     ) {
@@ -32,10 +22,22 @@ public class HeavyContainer extends Container {
         this.containerMaterial = containerMaterial;
     }
 
+    public HeavyContainer(){
+        super(
+                Evaluators.getIntFromInput("Tare"),
+                Evaluators.getIntFromInput("Size"),
+                Evaluators.getIntFromInput("Cargo Weight"),
+                Evaluators.getArrayListFromInput("safety measures"),
+                Evaluators.getArrayListFromInput("certificates")
+        );
+        this.armorThickness = Evaluators.getIntFromInput("Armor thickness");
+        this.containerMaterial = Evaluators.getStringInput("StandardContainer material");
+    }
+
     @Override
     public String toString() {
         return super.toString() +
-                ", armorThickness: " + this.armorThickness +
-                ", containerMaterial: " + this.containerMaterial;
+                ", armor thickness: " + this.armorThickness +
+                ", container material: " + this.containerMaterial;
     }
 }

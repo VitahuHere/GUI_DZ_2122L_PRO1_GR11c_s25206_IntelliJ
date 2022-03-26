@@ -5,7 +5,7 @@ import utils.ConsoleColors;
 public class App{
     public App(){
         ConsoleColors.printGreen("Welcome to CargoApp. Here you will manage your containers, ships and ports.");
-        ObjectCreation oc = new ObjectCreation();
+        ContainerCreation oc = new ContainerCreation();
     }
 
     private void menu(){
