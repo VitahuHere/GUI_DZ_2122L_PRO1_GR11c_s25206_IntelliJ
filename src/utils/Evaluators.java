@@ -50,5 +50,21 @@ public class Evaluators {
         return choice;
     }
 
-
+    public static int getMenuOption(){
+        int choice;
+        while(true){
+            try{
+                Scanner scanner = new Scanner(System.in);
+                choice = scanner.nextInt();
+                if(choice < 0 || choice > 3){
+                    throw new InputMismatchException();
+                }
+                break;
+            }
+            catch (InputMismatchException e){
+                ConsoleColors.printRed("Invalid value, please enter again.");
+            }
+        }
+        return choice;
+    }
 }

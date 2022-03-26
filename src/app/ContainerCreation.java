@@ -6,23 +6,13 @@ import utils.ConsoleColors;
 import java.util.*;
 
 public class ContainerCreation {
-    LinkedHashMap<String, Integer> integerMap;
-
-    ArrayList<String> safetyMeasures;
-    ArrayList<String> certificates;
-
     public ContainerCreation(){
-        this.integerMap = new LinkedHashMap<>(){{
-            put("Tare", 0);
-            put("Size", 0);
-            put("Cargo Weight", 0);
-        }};
-        this.safetyMeasures = new ArrayList<>();
-        this.certificates = new ArrayList<>();
+        createContainer();
     }
 
     protected void createContainer(){
         int choice;
+        ConsoleColors.printYellow("Welcome to Container creation page!");
         ConsoleColors.printBlue("""
                 Please select container type:
                 1. Standard container

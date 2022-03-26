@@ -6,6 +6,7 @@ import containers.abstracts.ToxicAbstract;
 import containers.classes.*;
 import containers.interfaces.ElectricInterface;
 import utils.ConsoleColors;
+import utils.Evaluators;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,25 @@ public class Ship {
         this.electricCounter = 0;
     }
 
+    public Ship(){
+        ConsoleColors.printYellow("Welcome to Ship creation page!");
+        ConsoleColors.printYellow("Please enter following information:");
+        this.id = shipIndex++;
+        this.name = Evaluators.getStringInput("Name");
+        this.homePort = Evaluators.getStringInput("Home port");
+        this.maxPayloadWeight = Evaluators.getIntFromInput("Maximum payload weight");
+        this.maxToxicExplosiveContainersCount = Evaluators.getIntFromInput("Maximum number of toxic and explosive containers");
+        this.maxHeavyContainersCount = Evaluators.getIntFromInput("Maximum number of heavy containers");
+        this.maxElectricContainerCount = Evaluators.getIntFromInput("Maximum number of containers requiring electricity");
+        this.maxContainersCount = checkContainerCount(Evaluators.getIntFromInput("Maximum number of containers"));
+
+        this.cargo = new ArrayList<>();
+        this.cargoWeight = 0;
+        this.toxicExplosiveCounter = 0;
+        this.heavyCounter = 0;
+        this.electricCounter = 0;
+    }
+
     private int evaluateCount(int value) {
         return Math.max(value, 0);
     }
@@ -68,7 +88,7 @@ public class Ship {
                     " named: '" +
                     this.name +
                     "' sum of specified containers exceed maximum container capacity. " +
-                    "Setting maximum numbers of containers to their sum"
+                    "Setting maximum numbers of containers to sum of specified containers."
             );
             return containersSum;
         } else if (maxContainersCount < 0) {
@@ -115,19 +135,18 @@ public class Ship {
     public String toString() {
         return "Ship information: " +
                 "id: " + id +
-                ", name: '" + name + '\'' +
-                ", home port: '" + homePort + '\'' +
-                ", maximum payload weight: " + maxPayloadWeight +
-                ", maximum containers count: " + maxContainersCount +
-                ", maximum toxic/explosive containers count: " + maxToxicExplosiveContainersCount +
-                ", maximum heavy containers count: " + maxHeavyContainersCount +
-                ", maximum electric container count: " + maxElectricContainerCount +
-                ", cargo: " + cargo +
-                ", cargo weight: " + cargoWeight +
-                ", number of toxic/explosive containers: " + toxicExplosiveCounter +
-                ", number of heavy containers: " + heavyCounter +
-                ", number of electric containers: " + electricCounter +
-                ", departure port: '" + departurePort + '\'' +
-                ", arrival port: '" + arrivalPort;
+                ", \nname: '" + name + '\'' +
+                ", \nhome port: '" + homePort + '\'' +
+                ", \nmaximum payload weight: " + maxPayloadWeight +
+                ", \nmaximum containers count: " + maxContainersCount +
+                ", \nmaximum toxic/explosive containers count: " + maxToxicExplosiveContainersCount +
+                ", \nmaximum heavy containers count: " + maxHeavyContainersCount +
+                ", \nmaximum electric container count: " + maxElectricContainerCount +
+                ", \ncargo weight: " + cargoWeight +
+                ", \nnumber of toxic/explosive containers: " + toxicExplosiveCounter +
+                ", \nnumber of heavy containers: " + heavyCounter +
+                ", \nnumber of electric containers: " + electricCounter +
+                ", \ndeparture port: '" + departurePort + '\'' +
+                ", \narrival port: '" + arrivalPort;
     }
 }

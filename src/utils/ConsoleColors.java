@@ -23,4 +23,8 @@ public class ConsoleColors {
     public static void printBlue(String message){
         System.out.println(BLUE + message + RESET);
     }
+
+    public static void printYellow(String message){
+        System.out.println(YELLOW + message + RESET);
+    }
 }

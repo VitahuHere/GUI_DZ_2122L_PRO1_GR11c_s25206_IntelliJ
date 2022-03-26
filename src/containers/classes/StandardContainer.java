@@ -40,7 +40,6 @@ public class StandardContainer {
         this.totalWeight = cargoWeight + tare;
         this.safetyMeasures = Evaluators.getArrayListFromInput("safety measures");
         this.certificates = Evaluators.getArrayListFromInput("certificates");
-        System.out.println(this);
     }
 
     @Override
