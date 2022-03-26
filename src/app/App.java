@@ -12,14 +12,14 @@ public class App{
 
     private void menu() {
         ConsoleColors.printBlue("""
-                    Type in command you want to perform
+                    Type in number of command you want to perform
                     1. Create a cargo ship
                     2. Create a container
                     3. Load or unload containers
                     0. Exit
                     """);
 
-        int option = Evaluators.getMenuOption();
+        int option = Evaluators.getIntFromInput(0, 3);
 
         switch (option) {
             case 1 -> new Ship();

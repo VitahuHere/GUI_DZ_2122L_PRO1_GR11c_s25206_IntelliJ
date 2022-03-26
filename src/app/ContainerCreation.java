@@ -2,6 +2,7 @@ package app;
 
 import containers.classes.*;
 import utils.ConsoleColors;
+import utils.Evaluators;
 
 import java.util.*;
 
@@ -24,19 +25,7 @@ public class ContainerCreation {
                 7. Toxic loose material container
                 0. Back
                 """);
-        while(true){
-            try{
-                Scanner scanner = new Scanner(System.in);
-                choice = scanner.nextInt();
-                if(choice < 0 || choice > 7){
-                    throw new InputMismatchException();
-                }
-                break;
-            }
-            catch (InputMismatchException e){
-                ConsoleColors.printRed("Invalid option. Please enter the correct option.");
-            }
-        }
+        choice = Evaluators.getIntFromInput(0, 7);
 
         switch(choice){
             case 1 -> new StandardContainer();

@@ -17,12 +17,15 @@ public class Evaluators {
     }
 
     public static ArrayList<String> getArrayListFromInput(String key){
-        ConsoleColors.printGreen("Please enter " + key + " pressing enter after each one. Enter 'end' to finish adding.");
+        ConsoleColors.printGreen("Please enter " + key + " pressing enter after each one. Enter 'end' to finish adding or 'none' to set nothing.");
         ArrayList<String> returner = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
         String value = scanner.next();
-
+        if(value.equals("none")) {
+            returner.add("none");
+            return returner;
+        }
         while (!value.equals("end")){
             returner.add(value);
             value = scanner.next();
@@ -50,13 +53,31 @@ public class Evaluators {
         return choice;
     }
 
-    public static int getMenuOption(){
+    public static int getIntFromInput(int min, int max){
         int choice;
         while(true){
             try{
                 Scanner scanner = new Scanner(System.in);
                 choice = scanner.nextInt();
-                if(choice < 0 || choice > 3){
+                if(choice < min || choice > max){
+                    throw new InputMismatchException();
+                }
+                break;
+            }
+            catch (InputMismatchException e){
+                ConsoleColors.printRed("Invalid value, please enter again.");
+            }
+        }
+        return choice;
+    }
+
+    public static int getIntFromInput(int max){
+        int choice;
+        while(true){
+            try{
+                Scanner scanner = new Scanner(System.in);
+                choice = scanner.nextInt();
+                if(choice > max){
                     throw new InputMismatchException();
                 }
                 break;

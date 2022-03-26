@@ -31,7 +31,7 @@ public class ToxicLooseMaterialContainer extends ToxicAbstract {
                 Evaluators.getArrayListFromInput("safety measures"),
                 Evaluators.getArrayListFromInput("certificates"),
                 Evaluators.getIntFromInput("Armor thickness"),
-                Evaluators.getStringInput("container material")
+                Evaluators.getStringInput("Container material")
         );
         this.waterproof = Evaluators.getBooleanFromInput("Is it waterproof?");
     }
