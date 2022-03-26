@@ -2,6 +2,7 @@ package containers.classes;
 
 import containers.abstracts.ToxicAbstract;
 import containers.interfaces.LiquidInterface;
+import utils.ConsoleColors;
 import utils.Evaluators;
 
 import java.util.ArrayList;
@@ -35,11 +36,13 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
                 Evaluators.getStringInput("Container material")
         );
         this.acidSafe = Evaluators.getBooleanFromInput("Acid safe? [y/N]");
+        ConsoleColors.printGreen("Successfully created container!");
+        ConsoleColors.printYellow(this.toString());
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                ", acid safe: " + this.acidSafe;
+                ", \nacid safe: " + this.acidSafe;
     }
 }

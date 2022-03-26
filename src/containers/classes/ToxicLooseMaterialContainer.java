@@ -1,6 +1,7 @@
 package containers.classes;
 
 import containers.abstracts.ToxicAbstract;
+import utils.ConsoleColors;
 import utils.Evaluators;
 
 import java.util.ArrayList;
@@ -34,11 +35,13 @@ public class ToxicLooseMaterialContainer extends ToxicAbstract {
                 Evaluators.getStringInput("Container material")
         );
         this.waterproof = Evaluators.getBooleanFromInput("Is it waterproof?");
+        ConsoleColors.printGreen("Successfully created container!");
+        ConsoleColors.printYellow(this.toString());
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                ", waterproof: " + waterproof;
+                ", \nwaterproof: " + waterproof;
     }
 }

@@ -1,6 +1,7 @@
 package containers.classes;
 
 import containers.interfaces.ElectricInterface;
+import utils.ConsoleColors;
 import utils.Evaluators;
 
 import java.util.ArrayList;
@@ -35,10 +36,12 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
                 Evaluators.getStringInput("container material")
         );
         this.maximumWattPowerDraw = Evaluators.getIntFromInput("Maximum power draw");
+        ConsoleColors.printGreen("Successfully created container!");
+        ConsoleColors.printYellow(this.toString());
     }
 
     public String toString(){
         return super.toString() +
-                ", maximum power draw: " + this.maximumWattPowerDraw;
+                ", \nmaximum power draw: " + this.maximumWattPowerDraw;
     }
 }

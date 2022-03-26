@@ -38,6 +38,8 @@ public class ExplosivesContainer extends HeavyContainer{
         );
         this.riskLevel = evalRisk(Evaluators.getIntFromInput("Risk level"));
         this.maxTemp = Evaluators.getIntFromInput("Max Temperature");
+        ConsoleColors.printGreen("Successfully created container!");
+        ConsoleColors.printYellow(this.toString());
     }
 
     private int evalRisk(int value){
@@ -57,7 +59,7 @@ public class ExplosivesContainer extends HeavyContainer{
     @Override
     public String toString() {
         return super.toString() +
-                ", risk level: " + riskLevel +
-                ", maximum temp: " + maxTemp;
+                ", \nrisk level: " + riskLevel +
+                ", \nmaximum temp: " + maxTemp;
     }
 }

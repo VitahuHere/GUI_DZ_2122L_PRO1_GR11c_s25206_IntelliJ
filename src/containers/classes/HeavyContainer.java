@@ -1,5 +1,6 @@
 package containers.classes;
 
+import utils.ConsoleColors;
 import utils.Evaluators;
 
 import java.util.ArrayList;
@@ -30,14 +31,16 @@ public class HeavyContainer extends StandardContainer {
                 Evaluators.getArrayListFromInput("safety measures"),
                 Evaluators.getArrayListFromInput("certificates")
         );
-        this.armorThickness = Evaluators.getIntFromInput("Armor thickness");
+        this.armorThickness = Evaluators.getIntFromInput("Armor thickness in millimeters");
         this.containerMaterial = Evaluators.getStringInput("StandardContainer material");
+        ConsoleColors.printGreen("Successfully created container!");
+        ConsoleColors.printYellow(this.toString());
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                ", armor thickness: " + this.armorThickness +
-                ", container material: " + this.containerMaterial;
+                ", \narmor thickness: " + this.armorThickness +
+                ", \ncontainer material: " + this.containerMaterial;
     }
 }

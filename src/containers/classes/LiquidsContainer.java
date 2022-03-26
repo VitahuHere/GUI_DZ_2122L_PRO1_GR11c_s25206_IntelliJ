@@ -1,6 +1,8 @@
 package containers.classes;
 
 import java.util.ArrayList;
+
+import utils.ConsoleColors;
 import utils.Evaluators;
 
 public class LiquidsContainer extends StandardContainer {
@@ -31,12 +33,14 @@ public class LiquidsContainer extends StandardContainer {
         );
         this.maxCapacity = Evaluators.getIntFromInput("Maximum capacity");
         this.valveDiameter = Evaluators.getIntFromInput("Valve diameter");
+        ConsoleColors.printGreen("Successfully created container!");
+        ConsoleColors.printYellow(this.toString());
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                ", max capacity=" + maxCapacity +
-                ", valve diameter=" + valveDiameter;
+                ", \nmax capacity=" + maxCapacity +
+                ", \nvalve diameter=" + valveDiameter;
     }
 }

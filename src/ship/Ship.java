@@ -111,29 +111,48 @@ public class Ship {
 
     public void loadContainer(StandardContainer container) {
         boolean addToCargo = false;
+        if(container.status.equals("On Ship") || container.shipId != -1){
+            ConsoleColors.printRed("Container is already taken. Cannot load onto the ship.");
+        } else{
+            if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight > this.maxCargoWeight) {
+                ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
+            } else {
+                if ((container instanceof ExplosivesContainer || container instanceof ToxicAbstract) && this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount) {
+                    addToCargo = true;
+                    this.toxicExplosiveCounter++;
+                } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
+                    addToCargo = true;
+                    this.heavyCounter++;
+                } else if (container instanceof ElectricInterface && this.electricCounter < this.maxElectricContainersCount) {
+                    addToCargo = true;
+                    this.electricCounter++;
+                }
 
-        if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight > this.maxCargoWeight) {
-            ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
-        } else {
-            if ((container instanceof ExplosivesContainer || container instanceof ToxicAbstract) && this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount) {
-                addToCargo = true;
-                this.toxicExplosiveCounter++;
-            } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
-                addToCargo = true;
-                this.heavyCounter++;
-            } else if (container instanceof ElectricInterface && this.electricCounter < this.maxElectricContainersCount) {
-                addToCargo = true;
-                this.electricCounter++;
-            }
-
-            if (addToCargo) {
-                this.listOfContainers.add(container);
-                this.cargoWeight += container.totalWeight;
-            }
-            else{
-                ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                if (addToCargo) {
+                    this.listOfContainers.add(container);
+                    this.cargoWeight += container.totalWeight;
+                    container.status = "On Ship";
+                    container.shipId = this.id;
+                }
+                else{
+                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                }
             }
         }
+    }
+
+    public void offloadContainerToDock(StandardContainer container){
+        if(container.shipId == this.id && container.status.equals("On Ship") && this.listOfContainers.contains(container)){
+            if (container instanceof ExplosivesContainer || container instanceof ToxicAbstract) {
+                this.toxicExplosiveCounter--;
+            } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
+                this.heavyCounter--;
+            } else if (container instanceof ElectricInterface && this.electricCounter < this.maxElectricContainersCount) {
+                this.electricCounter--;
+            }
+            this.listOfContainers.remove(container);
+        }
+
     }
 
     @Override
@@ -152,6 +171,7 @@ public class Ship {
                 ", \nnumber of heavy containers: " + heavyCounter +
                 ", \nnumber of electric containers: " + electricCounter +
                 ", \ndeparture port: '" + departurePort + '\'' +
-                ", \narrival port: '" + arrivalPort;
+                ", \narrival port: '" + arrivalPort +
+                ", \ncontainers: " + listOfContainers;
     }
 }

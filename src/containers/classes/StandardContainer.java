@@ -1,5 +1,6 @@
 package containers.classes;
 
+import utils.ConsoleColors;
 import utils.Evaluators;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ public class StandardContainer {
     public ArrayList<String> safetyMeasures;
     public ArrayList<String> certificates;
 
+    public String status;
+    public int shipId;
+
     public StandardContainer(
             int tare,
             int size,
@@ -30,6 +34,8 @@ public class StandardContainer {
         this.totalWeight = cargoWeight + tare;
         this.safetyMeasures = safetyMeasures;
         this.certificates = certificates;
+        this.status = "Available";
+        this.shipId = -1;
     }
 
     public StandardContainer(){
@@ -40,18 +46,24 @@ public class StandardContainer {
         this.totalWeight = cargoWeight + tare;
         this.safetyMeasures = Evaluators.getArrayListFromInput("safety measures");
         this.certificates = Evaluators.getArrayListFromInput("certificates");
+        this.status = "Available";
+        this.shipId = -1;
+        ConsoleColors.printGreen("Successfully created container!");
+        ConsoleColors.printYellow(this.toString());
     }
 
     @Override
     public String toString() {
-        return "StandardContainer type: " +
+        return "Container type: " +
                 this.getClass().getSimpleName() +
-                ", id: " + id +
-                ", tare: " + tare +
-                ", size: " + size +
-                ", cargo weight: " + cargoWeight +
-                ", total weight: " + totalWeight +
-                ", safety measures: " + safetyMeasures +
-                ", certificates: " + certificates;
+                ", \nid: " + id +
+                ", \ntare: " + tare +
+                ", \nsize: " + size +
+                ", \ncargo weight: " + cargoWeight +
+                ", \ntotal weight: " + totalWeight +
+                ", \nsafety measures: " + safetyMeasures +
+                ", \ncertificates: " + certificates +
+                ", \nstatus: " + status +
+                ", \nship id: " + shipId + "\n";
     }
 }
