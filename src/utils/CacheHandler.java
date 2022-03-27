@@ -4,6 +4,8 @@ import java.io.File;
 import java.nio.file.Paths;
 
 public class CacheHandler {
+
+
     private final String path = Paths.get(".cache").toAbsolutePath().toString(); // https://www.baeldung.com/java-current-directory 5th answer
     private final String shipPath = Paths.get(path + "ShipCache.txt").toString();
     private final String containerPath = Paths.get(path + "ContainerCache.txt").toString();

@@ -7,10 +7,9 @@ import containers.classes.*;
 import containers.interfaces.ElectricInterface;
 import utils.ConsoleColors;
 import utils.Evaluators;
+import warehouse.Warehouse;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Ship {
     public static int shipIndex = 1;
@@ -141,7 +140,7 @@ public class Ship {
         }
     }
 
-    public void offloadContainerToDock(StandardContainer container){
+    public void offloadContainerToWarehouse(StandardContainer container){
         if(container.shipId == this.id && container.status.equals("On Ship") && this.listOfContainers.contains(container)){
             if (container instanceof ExplosivesContainer || container instanceof ToxicAbstract) {
                 this.toxicExplosiveCounter--;
@@ -151,8 +150,14 @@ public class Ship {
                 this.electricCounter--;
             }
             this.listOfContainers.remove(container);
+            this.cargoWeight -= container.totalWeight;
+            container.status = "At warehouse";
+            container.daysStored = 0;
+            container.shipId = -1;
         }
-
+        else{
+            ConsoleColors.printRed("Container is not on this ship. Cannot offload.");
+        }
     }
 
     @Override
