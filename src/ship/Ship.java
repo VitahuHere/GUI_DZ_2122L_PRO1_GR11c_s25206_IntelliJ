@@ -7,7 +7,7 @@ import containers.classes.*;
 import containers.interfaces.ElectricInterface;
 import utils.ConsoleColors;
 import utils.Evaluators;
-import warehouse.Warehouse;
+import utils.Status;
 
 import java.util.ArrayList;
 
@@ -110,7 +110,7 @@ public class Ship {
 
     public void loadContainer(StandardContainer container) {
         boolean addToCargo = false;
-        if(container.status.equals("On Ship") || container.shipId != -1){
+        if(container.status == Status.ON_SHIP || container.shipId != -1){
             ConsoleColors.printRed("Container is already taken. Cannot load onto the ship.");
         } else{
             if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight > this.maxCargoWeight) {
@@ -130,7 +130,7 @@ public class Ship {
                 if (addToCargo) {
                     this.listOfContainers.add(container);
                     this.cargoWeight += container.totalWeight;
-                    container.status = "On Ship";
+                    container.status = Status.ON_SHIP;
                     container.shipId = this.id;
                 }
                 else{
@@ -141,7 +141,7 @@ public class Ship {
     }
 
     public void offloadContainerToWarehouse(StandardContainer container){
-        if(container.shipId == this.id && container.status.equals("On Ship") && this.listOfContainers.contains(container)){
+        if(container.shipId == this.id && container.status == Status.ON_SHIP && this.listOfContainers.contains(container)){
             if (container instanceof ExplosivesContainer || container instanceof ToxicAbstract) {
                 this.toxicExplosiveCounter--;
             } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
@@ -151,7 +151,7 @@ public class Ship {
             }
             this.listOfContainers.remove(container);
             this.cargoWeight -= container.totalWeight;
-            container.status = "At warehouse";
+            container.status = Status.AT_WAREHOUSE;
             container.daysStored = 0;
             container.shipId = -1;
         }

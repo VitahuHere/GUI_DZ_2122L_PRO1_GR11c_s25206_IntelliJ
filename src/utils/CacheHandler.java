@@ -1,20 +1,18 @@
 package utils;
 
 import java.io.File;
-import java.nio.file.Paths;
 
 public class CacheHandler {
-
-
-    private final String path = Paths.get(".cache").toAbsolutePath().toString(); // https://www.baeldung.com/java-current-directory 5th answer
-    private final String shipPath = Paths.get(path + "ShipCache.txt").toString();
-    private final String containerPath = Paths.get(path + "ContainerCache.txt").toString();
-    private final String senderPath = Paths.get(path + "senderCache.txt").toString();
-    private final String warehousePath = Paths.get(path + "warehouseCache.txt").toString();
+    private static final String CACHE_DIR = "cache";
+    private static final String CONTAINERS_CACHE = "containers.txt";
+    private static final String SHIPS_CACHE = "ships.txt";
 
     public CacheHandler() {
-        // Line copied from https://stackoverflow.com/questions/1554252/how-do-i-create-a-directory-within-the-current-working-directory-in-java Daniel Fortunov
-        boolean created = (new File(".cache")).mkdir();
+        File cacheDir = new File(CACHE_DIR);
+        if (!cacheDir.exists()) {
+            boolean trash = cacheDir.mkdir();
+        }
     }
+
 
 }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class ChillerContainer extends HeavyContainer implements ElectricInterface {
 
-    // Measured in Watts
     public final int maximumWattPowerDraw;
 
     public ChillerContainer(
