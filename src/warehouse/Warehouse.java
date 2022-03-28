@@ -2,6 +2,7 @@ package warehouse;
 
 import containers.classes.StandardContainer;
 import utils.ConsoleColors;
+import utils.Status;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class Warehouse {
 
     public void addContainer(StandardContainer container) {
         if (this.currentCapacity < this.maxCapacity) {
-            if(container.status.equals("At warehouse")){
+            if(container.status == Status.AT_WAREHOUSE){
                 ConsoleColors.printRed("Container is already at warehouse");
             }
             else {
