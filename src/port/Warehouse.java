@@ -1,16 +1,14 @@
-package warehouse;
+package port;
 
 import containers.classes.StandardContainer;
 import utils.ConsoleColors;
-import utils.Status;
 
 import java.util.ArrayList;
 
 public class Warehouse {
-    private final int maxCapacity;
-
+    public final int maxCapacity;
     private int currentCapacity;
-    private final ArrayList<StandardContainer> containers;
+    public ArrayList<StandardContainer> containers;
 
     public Warehouse(int maxCapacity) {
         this.maxCapacity = maxCapacity;
@@ -20,16 +18,11 @@ public class Warehouse {
 
     public void addContainer(StandardContainer container) {
         if (this.currentCapacity < this.maxCapacity) {
-            if(container.status == Status.AT_WAREHOUSE){
-                ConsoleColors.printRed("Container is already at warehouse");
-            }
-            else {
-                this.containers.add(container);
-                this.currentCapacity++;
-            }
+            this.containers.add(container);
+            this.currentCapacity++;
         }
         else{
-            ConsoleColors.printRed("Warehouse is full. Cannot add container");
+            ConsoleColors.printRed("Warehouse is full!");
         }
     }
 
@@ -39,7 +32,7 @@ public class Warehouse {
             this.currentCapacity--;
         }
         else{
-            ConsoleColors.printRed("Container is not at warehouse");
+            ConsoleColors.printRed("Container is not in the warehouse!");
         }
     }
 }

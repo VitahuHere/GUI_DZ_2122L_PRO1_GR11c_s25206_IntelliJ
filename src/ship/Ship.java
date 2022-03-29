@@ -72,8 +72,8 @@ public class Ship {
 
 
         this.id = shipIndex++;
-        this.name = Evaluators.getStringInput("Name");
-        this.homePort = Evaluators.getStringInput("Home port");
+        this.name = Evaluators.getStringFromInput("Name");
+        this.homePort = Evaluators.getStringFromInput("Home port");
         this.maxCargoWeight = Evaluators.getIntFromInput("Maximum cargo weight");
         this.maxContainersCount = Evaluators.getIntFromInput("Maximum number of containers");
         this.slotsAvailable = this.maxContainersCount;
@@ -152,7 +152,6 @@ public class Ship {
             this.listOfContainers.remove(container);
             this.cargoWeight -= container.totalWeight;
             container.status = Status.AT_WAREHOUSE;
-            container.daysStored = 0;
             container.shipId = -1;
         }
         else{

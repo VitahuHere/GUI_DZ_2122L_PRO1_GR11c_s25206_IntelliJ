@@ -34,7 +34,7 @@ public class ExplosivesContainer extends HeavyContainer{
                 Evaluators.getArrayListFromInput("safety measures"),
                 Evaluators.getArrayListFromInput("certificates"),
                 Evaluators.getIntFromInput("Armor thickness"),
-                Evaluators.getStringInput("StandardContainer material")
+                Evaluators.getStringFromInput("StandardContainer material")
         );
         this.riskLevel = evalRisk(Evaluators.getIntFromInput("Risk level"));
         this.maxTemp = Evaluators.getIntFromInput("Max Temperature");
@@ -43,10 +43,10 @@ public class ExplosivesContainer extends HeavyContainer{
     }
 
     private int evalRisk(int value){
-        if(Constants.minRiskValue < value && value < Constants.maxRiskValue){
+        if(Constants.MIN_RISK_VALUE < value && value < Constants.MAX_RISK_VALUE){
             return riskLevel;
         }
-        else if(value < Constants.minRiskValue){
+        else if(value < Constants.MIN_RISK_VALUE){
             ConsoleColors.printRed("Invalid value: Risk level too low, setting to 0 [y]");
         }
         else{

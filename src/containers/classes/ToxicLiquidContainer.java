@@ -33,7 +33,7 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
                 Evaluators.getArrayListFromInput("safety measures"),
                 Evaluators.getArrayListFromInput("certificates"),
                 Evaluators.getIntFromInput("Armor thickness"),
-                Evaluators.getStringInput("Container material")
+                Evaluators.getStringFromInput("Container material")
         );
         this.acidSafe = Evaluators.getBooleanFromInput("Acid safe? [y/N]");
         ConsoleColors.printGreen("Successfully created container!");

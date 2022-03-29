@@ -21,8 +21,6 @@ public class StandardContainer {
     public Status status;
     public int shipId;
 
-    public int daysStored;
-
     public StandardContainer(
             int tare,
             int size,
@@ -39,7 +37,6 @@ public class StandardContainer {
         this.certificates = certificates;
         this.status = Status.AVAILABLE;
         this.shipId = -1;
-        this.daysStored = 0;
     }
 
     public StandardContainer(){
@@ -52,7 +49,6 @@ public class StandardContainer {
         this.certificates = Evaluators.getArrayListFromInput("certificates");
         this.status = Status.AVAILABLE;
         this.shipId = -1;
-        this.daysStored = 0;
         ConsoleColors.printGreen("Successfully created container!");
         ConsoleColors.printYellow(this.toString());
     }

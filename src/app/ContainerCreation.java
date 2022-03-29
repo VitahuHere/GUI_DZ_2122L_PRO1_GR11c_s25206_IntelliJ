@@ -4,8 +4,6 @@ import containers.classes.*;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
-import java.util.*;
-
 public class ContainerCreation {
     public ContainerCreation(){
         createContainer();
@@ -35,12 +33,8 @@ public class ContainerCreation {
             case 5 -> new LiquidsContainer();
             case 6 -> new ToxicLiquidContainer();
             case 7 -> new ToxicLooseMaterialContainer();
-            case 0 -> exit();
+            case 0 -> App.menu();
         }
-    }
-
-    private void exit(){
-
     }
 }
 

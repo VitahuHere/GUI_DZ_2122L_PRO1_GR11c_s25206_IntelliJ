@@ -32,7 +32,7 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
                 Evaluators.getArrayListFromInput("safety measures"),
                 Evaluators.getArrayListFromInput("certificates"),
                 Evaluators.getIntFromInput("Armor thickness"),
-                Evaluators.getStringInput("container material")
+                Evaluators.getStringFromInput("container material")
         );
         this.maximumWattPowerDraw = Evaluators.getIntFromInput("Maximum power draw");
         ConsoleColors.printGreen("Successfully created container!");
