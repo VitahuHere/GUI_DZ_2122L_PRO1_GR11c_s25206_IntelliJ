@@ -7,7 +7,6 @@ import containers.classes.*;
 import containers.interfaces.ElectricInterface;
 import utils.ConsoleColors;
 import utils.Evaluators;
-import utils.Status;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class Ship {
     public final int maxToxicExplosiveContainersCount;
     public final int maxHeavyContainersCount;
     public final int maxElectricContainersCount;
-    private final ArrayList<StandardContainer> listOfContainers;
+    public final ArrayList<StandardContainer> listOfContainers;
 
     // helper fields
     private int cargoWeight;
@@ -110,7 +109,7 @@ public class Ship {
 
     public void loadContainer(StandardContainer container) {
         boolean addToCargo = false;
-        if(container.status == Status.ON_SHIP || container.shipId != -1){
+        if(container.shipId != -1){
             ConsoleColors.printRed("Container is already taken. Cannot load onto the ship.");
         } else{
             if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight > this.maxCargoWeight) {
@@ -126,11 +125,9 @@ public class Ship {
                     addToCargo = true;
                     this.electricCounter++;
                 }
-
                 if (addToCargo) {
                     this.listOfContainers.add(container);
                     this.cargoWeight += container.totalWeight;
-                    container.status = Status.ON_SHIP;
                     container.shipId = this.id;
                 }
                 else{
@@ -141,7 +138,7 @@ public class Ship {
     }
 
     public void offloadContainerToWarehouse(StandardContainer container){
-        if(container.shipId == this.id && container.status == Status.ON_SHIP && this.listOfContainers.contains(container)){
+        if(this.listOfContainers.contains(container)){
             if (container instanceof ExplosivesContainer || container instanceof ToxicAbstract) {
                 this.toxicExplosiveCounter--;
             } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
@@ -151,8 +148,8 @@ public class Ship {
             }
             this.listOfContainers.remove(container);
             this.cargoWeight -= container.totalWeight;
-            container.status = Status.AT_WAREHOUSE;
             container.shipId = -1;
+
         }
         else{
             ConsoleColors.printRed("Container is not on this ship. Cannot offload.");

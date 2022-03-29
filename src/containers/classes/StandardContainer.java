@@ -2,7 +2,6 @@ package containers.classes;
 
 import utils.ConsoleColors;
 import utils.Evaluators;
-import utils.Status;
 
 import java.util.ArrayList;
 
@@ -18,8 +17,9 @@ public class StandardContainer {
     public ArrayList<String> safetyMeasures;
     public ArrayList<String> certificates;
 
-    public Status status;
     public int shipId;
+
+    public int daysStored;
 
     public StandardContainer(
             int tare,
@@ -35,8 +35,8 @@ public class StandardContainer {
         this.totalWeight = cargoWeight + tare;
         this.safetyMeasures = safetyMeasures;
         this.certificates = certificates;
-        this.status = Status.AVAILABLE;
         this.shipId = -1;
+        this.daysStored = 0;
     }
 
     public StandardContainer(){
@@ -47,8 +47,8 @@ public class StandardContainer {
         this.totalWeight = cargoWeight + tare;
         this.safetyMeasures = Evaluators.getArrayListFromInput("safety measures");
         this.certificates = Evaluators.getArrayListFromInput("certificates");
-        this.status = Status.AVAILABLE;
         this.shipId = -1;
+        this.daysStored = 0;
         ConsoleColors.printGreen("Successfully created container!");
         ConsoleColors.printYellow(this.toString());
     }
@@ -64,7 +64,6 @@ public class StandardContainer {
                 ", \ntotal weight: " + totalWeight +
                 ", \nsafety measures: " + safetyMeasures +
                 ", \ncertificates: " + certificates +
-                ", \nstatus: " + status +
                 ", \nship id: " + shipId + "\n";
     }
 }

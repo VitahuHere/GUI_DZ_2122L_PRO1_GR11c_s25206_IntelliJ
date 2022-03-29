@@ -6,18 +6,23 @@ import ship.Ship;
 import java.util.ArrayList;
 
 public class Port {
-    public final String name;
+    public static ArrayList<Ship> ships = new ArrayList<>();
+    public static Warehouse warehouse;
 
-    private final Warehouse warehouse;
-
-    private ArrayList<Ship> ships;
-
-    public Port(String name, int warehouseCapacity) {
-        this.name = name;
-        this.warehouse = new Warehouse(warehouseCapacity);
+    public Port(int capacity) {
+        warehouse = new Warehouse(capacity);
     }
 
-    public void addContainer(StandardContainer container) {
-        this.warehouse.addContainer(container);
+    public static void dockShip(Ship ship) {
+        ships.add(ship);
+    }
+
+    public static void unDockShip(Ship ship) {
+        ships.remove(ship);
+    }
+
+    public static void unloadContainer(Ship ship, StandardContainer container) {
+        ship.offloadContainerToWarehouse(container);
+        warehouse.addContainer(container);
     }
 }
