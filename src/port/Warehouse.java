@@ -35,4 +35,8 @@ public class Warehouse {
             ConsoleColors.printRed("Container is not in the warehouse!");
         }
     }
+
+    public ArrayList<StandardContainer> getContainers() {
+        return this.containers;
+    }
 }

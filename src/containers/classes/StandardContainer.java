@@ -1,5 +1,6 @@
 package containers.classes;
 
+import app.App;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
@@ -37,6 +38,7 @@ public class StandardContainer {
         this.certificates = certificates;
         this.shipId = -1;
         this.daysStored = 0;
+        App.containers.add(this);
     }
 
     public StandardContainer(){
@@ -51,6 +53,7 @@ public class StandardContainer {
         this.daysStored = 0;
         ConsoleColors.printGreen("Successfully created container!");
         ConsoleColors.printYellow(this.toString());
+        App.containers.add(this);
     }
 
     @Override
@@ -62,8 +65,8 @@ public class StandardContainer {
                 ", \nsize: " + size +
                 ", \ncargo weight: " + cargoWeight +
                 ", \ntotal weight: " + totalWeight +
-                ", \nsafety measures: " + safetyMeasures +
-                ", \ncertificates: " + certificates +
-                ", \nship id: " + shipId + "\n";
+                ", \nsafety measures: " + (safetyMeasures.size() == 0 ? "None" : safetyMeasures) +
+                ", \ncertificates: " + (certificates.size() == 0 ? "None" : certificates) +
+                ", \nship id: " + (shipId == -1 ? "not on ship" : shipId);
     }
 }

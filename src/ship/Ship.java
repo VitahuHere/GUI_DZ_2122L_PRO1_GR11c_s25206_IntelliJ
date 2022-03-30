@@ -171,8 +171,8 @@ public class Ship {
                 ", \nnumber of toxic/explosive containers: " + toxicExplosiveCounter +
                 ", \nnumber of heavy containers: " + heavyCounter +
                 ", \nnumber of electric containers: " + electricCounter +
-                ", \ndeparture port: '" + departurePort + '\'' +
-                ", \narrival port: '" + arrivalPort +
-                ", \ncontainers: " + listOfContainers;
+                ", \ndeparture port: " + (departurePort == null ? "Not set" : departurePort) +
+                ", \narrival port: " + (arrivalPort == null ? "Not set" : departurePort) +
+                ", \ncontainers: " + (listOfContainers.size() == 0 ? "None" : listOfContainers);
     }
 }

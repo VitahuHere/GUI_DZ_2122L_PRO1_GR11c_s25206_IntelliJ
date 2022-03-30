@@ -22,8 +22,7 @@ public class Evaluators {
 
         Scanner scanner = new Scanner(System.in);
         String value = scanner.next();
-        if (value.equals("none")) {
-            returner.add("none");
+        if (value.equals("none") || value.equals("None") || value.equals("NONE")) {
             return returner;
         }
         while (!value.equals("end")) {

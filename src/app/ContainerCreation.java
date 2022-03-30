@@ -25,6 +25,7 @@ public class ContainerCreation {
                 """);
         choice = Evaluators.getIntFromInput(0, 7);
 
+
         switch(choice){
             case 1 -> new StandardContainer();
             case 2 -> new HeavyContainer();
@@ -35,6 +36,7 @@ public class ContainerCreation {
             case 7 -> new ToxicLooseMaterialContainer();
             case 0 -> App.menu();
         }
+
     }
 }
 

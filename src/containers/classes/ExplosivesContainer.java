@@ -33,7 +33,7 @@ public class ExplosivesContainer extends HeavyContainer{
                 Evaluators.getIntFromInput("Cargo Weight"),
                 Evaluators.getArrayListFromInput("safety measures"),
                 Evaluators.getArrayListFromInput("certificates"),
-                Evaluators.getIntFromInput("Armor thickness"),
+                Evaluators.getIntFromInput("Armor thickness in millimeters"),
                 Evaluators.getStringFromInput("StandardContainer material")
         );
         this.riskLevel = evalRisk(Evaluators.getIntFromInput("Risk level"));
