@@ -2,9 +2,11 @@
 
 package ship;
 
+import app.App;
 import containers.abstracts.ToxicAbstract;
 import containers.classes.*;
 import containers.interfaces.ElectricInterface;
+import port.Port;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
@@ -43,6 +45,7 @@ public class Ship {
             int maxHeavyContainersCount,
             int maxElectricContainersCount
     ) {
+        this.listOfContainers = new ArrayList<>();
         this.cargoWeight = 0;
         this.toxicExplosiveCounter = 0;
         this.heavyCounter = 0;
@@ -51,12 +54,12 @@ public class Ship {
         this.id = shipIndex++;
         this.name = name;
         this.homePort = homePort;
-        this.maxCargoWeight = maxPayloadWeight;
+        this.maxCargoWeight = checkPositiveValue(maxPayloadWeight);
         this.maxContainersCount = checkPositiveValue(maxContainersCount);
         this.maxToxicExplosiveContainersCount = maxToxicExplosiveContainersCount;
         this.maxHeavyContainersCount = maxHeavyContainersCount;
         this.maxElectricContainersCount = maxElectricContainersCount;
-        this.listOfContainers = new ArrayList<>();
+        this.slotsAvailable = this.maxContainersCount - this.maxToxicExplosiveContainersCount - this.maxHeavyContainersCount - this.maxElectricContainersCount;
     }
 
     public Ship(){
@@ -112,7 +115,7 @@ public class Ship {
         if(container.shipId != -1){
             ConsoleColors.printRed("Container is already taken. Cannot load onto the ship.");
         } else{
-            if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight > this.maxCargoWeight) {
+            if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight + container.totalWeight > this.maxCargoWeight) {
                 ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
             } else {
                 if ((container instanceof ExplosivesContainer || container instanceof ToxicAbstract) && this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount) {
@@ -125,10 +128,14 @@ public class Ship {
                     addToCargo = true;
                     this.electricCounter++;
                 }
+                else if(container.getClass().getSimpleName().equals("StandardContainer")){
+                    addToCargo = true;
+                }
                 if (addToCargo) {
                     this.listOfContainers.add(container);
                     this.cargoWeight += container.totalWeight;
                     container.shipId = this.id;
+                    App.containers.remove(container);
                 }
                 else{
                     ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
@@ -149,16 +156,20 @@ public class Ship {
             this.listOfContainers.remove(container);
             this.cargoWeight -= container.totalWeight;
             container.shipId = -1;
-
+            Port.warehouse.addContainer(container);
         }
         else{
             ConsoleColors.printRed("Container is not on this ship. Cannot offload.");
         }
     }
 
+    public int getSlotsAvailable() {
+        return slotsAvailable;
+    }
+
     @Override
     public String toString() {
-        return "Ship information: " +
+        return "\nShip information: " +
                 "id: " + id +
                 ", \nname: '" + name + '\'' +
                 ", \nhome port: '" + homePort + '\'' +
@@ -168,11 +179,12 @@ public class Ship {
                 ", \nmaximum heavy containers count: " + maxHeavyContainersCount +
                 ", \nmaximum electric container count: " + maxElectricContainersCount +
                 ", \ncargo weight: " + cargoWeight +
+                ", \nnumber of standard containers: " + (listOfContainers.size() - toxicExplosiveCounter - heavyCounter - electricCounter) +
                 ", \nnumber of toxic/explosive containers: " + toxicExplosiveCounter +
                 ", \nnumber of heavy containers: " + heavyCounter +
                 ", \nnumber of electric containers: " + electricCounter +
-                ", \ndeparture port: " + (departurePort == null ? "Not set" : departurePort) +
-                ", \narrival port: " + (arrivalPort == null ? "Not set" : departurePort) +
-                ", \ncontainers: " + (listOfContainers.size() == 0 ? "None" : listOfContainers);
+                ", \ndeparture port: " + (departurePort == null ? "n/a" : departurePort) +
+                ", \narrival port: " + (arrivalPort == null ? "n/a" : departurePort) +
+                ", \ncontainers: " + (listOfContainers.size() == 0 ? "n/a" : listOfContainers);
     }
 }

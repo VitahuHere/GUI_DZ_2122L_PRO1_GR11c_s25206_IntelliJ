@@ -58,7 +58,7 @@ public class StandardContainer {
 
     @Override
     public String toString() {
-        return "Container type: " +
+        return "\nContainer type: " +
                 this.getClass().getSimpleName() +
                 ", \nid: " + id +
                 ", \ntare: " + tare +
