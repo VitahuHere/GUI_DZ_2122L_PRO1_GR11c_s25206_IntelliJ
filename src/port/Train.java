@@ -1,5 +1,6 @@
 package port;
 
+import app.App;
 import containers.classes.StandardContainer;
 import utils.ConsoleColors;
 import utils.Constants;
@@ -19,6 +20,7 @@ public class Train {
         this.MAX_CAPACITY = Constants.MAX_TRAIN_CAPACITY;
         this.currentCapacity = 0;
         this.containers = new ArrayList<>();
+        App.trains.add(this);
     }
 
     public void addContainer(StandardContainer container) {
@@ -28,6 +30,9 @@ public class Train {
         }
         else{
             ConsoleColors.printRed("Train is full");
+        }
+        if(this.currentCapacity == this.MAX_CAPACITY) {
+            Port.train = new Train(this.MAX_CAPACITY);
         }
     }
 
@@ -39,5 +44,15 @@ public class Train {
         else{
             ConsoleColors.printRed("Container not found");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "Train id=" + id +
+                ", maximum capacity: " + MAX_CAPACITY +
+                ", current capacity=" + currentCapacity +
+                ", containers=" + containers +
+                '}';
     }
 }

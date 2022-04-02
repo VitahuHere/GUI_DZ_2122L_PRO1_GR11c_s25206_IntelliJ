@@ -4,6 +4,7 @@ import containers.classes.StandardContainer;
 import port.Port;
 import ship.Ship;
 import utils.ConsoleColors;
+import utils.Constants;
 import utils.Evaluators;
 
 public class ContainerUnloading {
@@ -31,11 +32,16 @@ public class ContainerUnloading {
         return true;
     }
 
-    public static boolean containerLookUp(int id){
+    private static boolean containerLookUp(int id, String key){
         for(Ship ship : Port.ships){
             for(StandardContainer container : ship.listOfContainers){
                 if(container.id == id){
-                    ship.offloadContainerToWarehouse(container);
+                    if(key.equals("warehouse")){
+                        ship.offloadContainerToWarehouse(container);
+                    }
+                    else if(key.equals("train")){
+                        ship.offloadOntoTrain(container);
+                    }
                     return true;
                 }
             }
@@ -45,10 +51,10 @@ public class ContainerUnloading {
 
     public static void unloadToWarehouse(){
         ConsoleColors.printYellow("Welcome to warehouse container unloading page.");
-        ConsoleColors.printYellow("Please enter the container id you want to unload to warehouse.");
         if(listAvailableContainers()){
+            ConsoleColors.printYellow("Please enter the container id you want to unload to warehouse.");
             int choice = Evaluators.getIntFromInput("Container id");
-            if(containerLookUp(choice)){
+            if(containerLookUp(choice, "warehouse")){
                 ConsoleColors.printGreen("Container unloading successful.");
             }
         }
@@ -56,6 +62,18 @@ public class ContainerUnloading {
     }
 
     public static void unloadToTrain(){
-
+        ConsoleColors.printYellow("Welcome to train container unloading page.");
+        if(Port.train.currentCapacity == Constants.MAX_TRAIN_CAPACITY){
+            ConsoleColors.printRed("Train is full.");
+        }
+        else{
+            if(listAvailableContainers()){
+                ConsoleColors.printYellow("Please enter the container id you want to unload onto a train.");
+                int choice = Evaluators.getIntFromInput("Container id");
+                if(containerLookUp(choice, "train")){
+                    ConsoleColors.printGreen("Container unloading successful.");
+                }
+            }
+        }
     }
 }

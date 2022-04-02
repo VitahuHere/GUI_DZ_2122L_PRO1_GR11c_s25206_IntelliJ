@@ -2,9 +2,9 @@ package app;
 
 import containers.classes.*;
 import port.Port;
+import port.Train;
 import ship.Ship;
 import utils.ConsoleColors;
-import utils.Constants;
 import utils.Evaluators;
 
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class App {
     public static ArrayList<Ship> ships = new ArrayList<>();
     public static ArrayList<StandardContainer> containers = new ArrayList<>();
+    public static ArrayList<Train> trains = new ArrayList<>();
 
     public static void menu() {
         ConsoleColors.printYellow("Type in number of command you want to perform");
@@ -37,6 +38,7 @@ public class App {
             case 5 -> showShipInfo();
             case 6 -> showWarehouseInfo();
         }
+        App.menu();
     }
 
     public static void showWarehouseInfo(){
@@ -79,6 +81,7 @@ public class App {
             case 7 -> new ToxicLooseMaterialContainer();
             case 0 -> App.menu();
         }
+        App.menu();
     }
 
     public static void containerUnloading() {
@@ -96,5 +99,6 @@ public class App {
             case 1 -> ContainerUnloading.unloadToWarehouse();
             case 2 -> ContainerUnloading.unloadToTrain();
         }
+        App.menu();
     }
 }
