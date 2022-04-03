@@ -7,5 +7,4 @@ public class Task extends TimerTask {
     public void run(){
         System.out.println("Timer is running");
     }
-
 }

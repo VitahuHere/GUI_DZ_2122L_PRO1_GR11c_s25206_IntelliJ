@@ -15,7 +15,7 @@ public class Train {
     private final int id;
     private final ArrayList<StandardContainer> containers;
 
-    public Train(int maxCapacity) {
+    public Train() {
         this.id = trainIndex++;
         this.MAX_CAPACITY = Constants.MAX_TRAIN_CAPACITY;
         this.currentCapacity = 0;
@@ -32,17 +32,7 @@ public class Train {
             ConsoleColors.printRed("Train is full");
         }
         if(this.currentCapacity == this.MAX_CAPACITY) {
-            Port.train = new Train(this.MAX_CAPACITY);
-        }
-    }
-
-    public void removeContainer(StandardContainer container) {
-        if(this.containers.contains(container)) {
-            this.containers.remove(container);
-            this.currentCapacity--;
-        }
-        else{
-            ConsoleColors.printRed("Container not found");
+            Port.train = new Train();
         }
     }
 

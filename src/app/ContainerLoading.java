@@ -86,8 +86,9 @@ public class ContainerLoading {
                 System.out.println(
                         "Ship id " + ship.id +
                         ": \n" + "Ship name: " + ship.name +
-                        "\n" + ship.getSlotsAvailable() + " slots available \n" +
-                        "From: " + (ship.departurePort == null ? "n/a" : ship.departurePort) +
+                        "\n" + ship.getSlotsAvailable() + " slots available" +
+                        "\n" + "payload weight available: " + ship.getWeightAvailable() + " kg" +
+                        "\nFrom: " + (ship.departurePort == null ? "n/a" : ship.departurePort) +
                         "\n" + "To: " + (ship.arrivalPort == null ? "n/a" : ship.arrivalPort) + "\n"
                 );
             }

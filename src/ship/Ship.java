@@ -1,5 +1,3 @@
-// Written by Cong Minh Vu s25206
-
 package ship;
 
 import app.App;
@@ -61,6 +59,8 @@ public class Ship {
         this.maxHeavyContainersCount = maxHeavyContainersCount;
         this.maxElectricContainersCount = maxElectricContainersCount;
         this.slotsAvailable = this.maxContainersCount - this.maxToxicExplosiveContainersCount - this.maxHeavyContainersCount - this.maxElectricContainersCount;
+        App.ships.add(this);
+        Port.ships.add(this);
     }
 
     public Ship() {
@@ -84,9 +84,11 @@ public class Ship {
         this.maxToxicExplosiveContainersCount = checkSlotsLeft(Evaluators.getIntFromInput("Maximum number of toxic and explosive containers"));
         this.maxHeavyContainersCount = checkSlotsLeft(Evaluators.getIntFromInput("Maximum number of heavy containers"));
         this.maxElectricContainersCount = checkSlotsLeft(Evaluators.getIntFromInput("Maximum number of containers requiring electricity"));
+        App.ships.add(this);
+        Port.ships.add(this);
 
         ConsoleColors.printGreen("Successfully created new Ship!");
-        ConsoleColors.printYellow(this.toString());
+        ConsoleColors.printBlue(this.toString());
     }
 
     private int checkPositiveValue(int value) {
@@ -181,7 +183,11 @@ public class Ship {
     }
 
     public int getSlotsAvailable() {
-        return slotsAvailable;
+        return maxContainersCount - listOfContainers.size();
+    }
+
+    public int getWeightAvailable(){
+        return maxCargoWeight - cargoWeight;
     }
 
     @Override

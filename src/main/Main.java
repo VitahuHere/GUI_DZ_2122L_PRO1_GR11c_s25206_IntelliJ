@@ -13,9 +13,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args){
-        Ship ship = new Ship("moby", "Amsterdam", 1200, 100, 12, 12,12);
-        Port.ships.add(ship);
-        App.ships.add(ship);
+        new Ship("moby", "Amsterdam", 1200, 100, 12, 12,12);
         ArrayList<String> list = new ArrayList<>();
         list.add("moby");
         list.add("moby");

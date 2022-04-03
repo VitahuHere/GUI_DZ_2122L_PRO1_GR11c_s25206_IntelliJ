@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 
 public class App {
+    // storing all objects of an app for later injecting or saving
     public static ArrayList<Ship> ships = new ArrayList<>();
     public static ArrayList<StandardContainer> containers = new ArrayList<>();
     public static ArrayList<Train> trains = new ArrayList<>();
@@ -31,7 +32,7 @@ public class App {
 
         switch (option) {
             case 0 -> System.exit(0);
-            case 1 -> ships.add(new Ship());
+            case 1 -> new Ship();
             case 2 -> createContainer();
             case 3 -> ContainerLoading.listAndLoadContainer();
             case 4 -> containerUnloading();
@@ -42,8 +43,7 @@ public class App {
     }
 
     public static void showWarehouseInfo(){
-        System.out.println(Port.warehouse.getContainers());
-        App.menu();
+        System.out.println(Port.warehouse.getContainers().size() == 0 ? "Warehouse is empty" : Port.warehouse.getContainers());
     }
 
     public static void showShipInfo() {
@@ -51,7 +51,6 @@ public class App {
             ConsoleColors.printBlue(ship.toString());
         }
         System.out.println();
-        App.menu();
     }
 
     public static void createContainer() {
@@ -81,7 +80,6 @@ public class App {
             case 7 -> new ToxicLooseMaterialContainer();
             case 0 -> App.menu();
         }
-        App.menu();
     }
 
     public static void containerUnloading() {
@@ -99,6 +97,5 @@ public class App {
             case 1 -> ContainerUnloading.unloadToWarehouse();
             case 2 -> ContainerUnloading.unloadToTrain();
         }
-        App.menu();
     }
 }
