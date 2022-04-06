@@ -9,11 +9,12 @@ import ship.Ship;
 import utils.ConsoleColors;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 
 public class Main {
     public static void main(String[] args){
-        new Ship("moby", "Amsterdam", 1200, 100, 12, 12,12);
+        new Ship("Evergreen", "Amsterdam", 1200, 100, 12, 12,12);
         ArrayList<String> list = new ArrayList<>();
         list.add("moby");
         list.add("moby");
@@ -24,6 +25,8 @@ public class Main {
         new StandardContainer(12, 12, 12, list, list);
         new ToxicLiquidContainer(12, 12, 12, list, list, 12, "idk", true);
         ConsoleColors.printGreen("Welcome to CargoApp. Here you will manage your containers na ships.");
+        Timer timer = new Timer();
+        timer.schedule(new TimeOperations(), 0, 1000);
         App.menu();
     }
 }

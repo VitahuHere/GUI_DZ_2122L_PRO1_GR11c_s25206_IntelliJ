@@ -170,6 +170,7 @@ public class Ship {
         if(containerLookUp(container)){
             removeContainer(container);
             Port.warehouse.addContainer(container);
+            container.daysStored = 0;
         }
     }
 
@@ -178,6 +179,7 @@ public class Ship {
             removeContainer(container);
             if(Port.train.currentCapacity < Constants.MAX_TRAIN_CAPACITY){
                 Port.train.addContainer(container);
+                container.daysStored = 0;
             }
         }
     }

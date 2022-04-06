@@ -2,6 +2,7 @@ package port;
 
 import app.App;
 import containers.classes.StandardContainer;
+import main.TimeOperations;
 import utils.ConsoleColors;
 import utils.Constants;
 
@@ -15,12 +16,15 @@ public class Train {
     private final int id;
     private final ArrayList<StandardContainer> containers;
 
+    private boolean isFull;
+
     public Train() {
         this.id = trainIndex++;
         this.MAX_CAPACITY = Constants.MAX_TRAIN_CAPACITY;
         this.currentCapacity = 0;
         this.containers = new ArrayList<>();
         App.trains.add(this);
+        this.isFull = false;
     }
 
     public void addContainer(StandardContainer container) {
@@ -29,11 +33,13 @@ public class Train {
             this.currentCapacity++;
         }
         else{
-            ConsoleColors.printRed("Train is full");
+            if(!isFull){
+                TimeOperations.newTrainDelay();
+            }
+            ConsoleColors.printRed("Train is full. Waiting for a new train.");
+            isFull = true;
         }
-        if(this.currentCapacity == this.MAX_CAPACITY) {
-            Port.train = new Train();
-        }
+
     }
 
     @Override
