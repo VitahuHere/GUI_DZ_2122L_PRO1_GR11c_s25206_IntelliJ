@@ -171,15 +171,19 @@ public class Ship {
             removeContainer(container);
             Port.warehouse.addContainer(container);
             container.daysStored = 0;
+            ConsoleColors.printGreen("Container offloaded to warehouse");
         }
     }
 
     public void offloadOntoTrain(StandardContainer container) {
         if(containerLookUp(container)){
-            removeContainer(container);
             if(Port.train.currentCapacity < Constants.MAX_TRAIN_CAPACITY){
+                removeContainer(container);
                 Port.train.addContainer(container);
-                container.daysStored = 0;
+                ConsoleColors.printGreen("Container offloaded onto train");
+            }
+            else{
+                Port.train.addContainer(container);
             }
         }
     }

@@ -9,4 +9,5 @@ public interface Constants {
     int EXPLOSIVES_MAX_DAYS = 5;
     int TOXIC_LIQUID_MAX_DAYS = 10;
     int TOXIC_LOOSE_MAX_DAYS = 14;
+    int TRAIN_DELAY = 30;
 }

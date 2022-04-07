@@ -36,7 +36,7 @@ public class Train {
             if(!isFull){
                 TimeOperations.newTrainDelay();
             }
-            ConsoleColors.printRed("Train is full. Waiting for a new train.");
+            ConsoleColors.printRed("Train is full. Waiting for a new train. Please wait " + TimeOperations.getRemainingTime() + " seconds.");
             isFull = true;
         }
 
@@ -44,11 +44,10 @@ public class Train {
 
     @Override
     public String toString() {
-        return "Train{" +
-                "Train id=" + id +
+        return "Train: " +
+                "Train id: " + id +
                 ", maximum capacity: " + MAX_CAPACITY +
-                ", current capacity=" + currentCapacity +
-                ", containers=" + containers +
-                '}';
+                ", current capacity: " + currentCapacity +
+                ", containers: " + containers;
     }
 }

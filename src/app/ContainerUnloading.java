@@ -63,16 +63,11 @@ public class ContainerUnloading {
 
     public static void unloadToTrain(){
         ConsoleColors.printYellow("Welcome to train container unloading page.");
-        if(Port.train.currentCapacity == Constants.MAX_TRAIN_CAPACITY){
-            ConsoleColors.printRed("Train is full.");
-        }
-        else{
-            if(listAvailableContainers()){
-                ConsoleColors.printYellow("Please enter the container id you want to unload onto a train.");
-                int choice = Evaluators.getIntFromInput("Container id");
-                if(containerLookUp(choice, "train")){
-                    ConsoleColors.printGreen("Container unloading successful.");
-                }
+        if(listAvailableContainers()){
+            ConsoleColors.printYellow("Please enter the container id you want to unload onto a train.");
+            int choice = Evaluators.getIntFromInput("Container id");
+            if(containerLookUp(choice, "train")){
+                ConsoleColors.printGreen("Container unloading successful.");
             }
         }
     }
