@@ -1,5 +1,7 @@
 package utils;
 
+import java.time.LocalDate;
+
 public interface Constants {
     int MAX_RISK_VALUE = 5;
     int MIN_RISK_VALUE = 0;
@@ -10,4 +12,5 @@ public interface Constants {
     int TOXIC_LIQUID_MAX_DAYS = 10;
     int TOXIC_LOOSE_MAX_DAYS = 14;
     int TRAIN_DELAY = 30;
+    LocalDate startDate = LocalDate.of(1990, 1, 1);
 }

@@ -56,7 +56,7 @@ public class ContainerLoading {
             while(ship == null){
                 ship = listAvailableShips();
             }
-            ship.loadContainer(container);
+            ship.addContainer(container);
             App.containers.remove(container);
             ConsoleColors.printGreen("Successfully loaded container.");
             ConsoleColors.printBlue("Returning to main menu.");

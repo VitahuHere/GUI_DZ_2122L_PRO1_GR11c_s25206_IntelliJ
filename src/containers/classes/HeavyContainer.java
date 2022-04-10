@@ -1,5 +1,6 @@
 package containers.classes;
 
+import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
@@ -9,7 +10,7 @@ public class HeavyContainer extends StandardContainer {
     public final int armorThickness;
     public final String containerMaterial;
 
-    public HeavyContainer(
+    protected HeavyContainer(
             int tare,
             int size,
             int cargoWeight,
@@ -23,7 +24,22 @@ public class HeavyContainer extends StandardContainer {
         this.containerMaterial = containerMaterial;
     }
 
-    public HeavyContainer(){
+    public HeavyContainer(
+            int tare,
+            int size,
+            int cargoWeight,
+            ArrayList<String> safetyMeasures,
+            ArrayList<String> certificates,
+            int armorThickness,
+            String containerMaterial,
+            Sender sender
+    ) {
+        super(tare, size, cargoWeight, safetyMeasures, certificates, sender);
+        this.armorThickness = armorThickness;
+        this.containerMaterial = containerMaterial;
+    }
+
+    public HeavyContainer() {
         super(
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),

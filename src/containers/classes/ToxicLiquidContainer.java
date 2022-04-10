@@ -2,6 +2,7 @@ package containers.classes;
 
 import containers.abstracts.ToxicAbstract;
 import containers.interfaces.LiquidInterface;
+import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
@@ -11,6 +12,20 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
 
     public final boolean acidSafe;
 
+//    public ToxicLiquidContainer(
+//            int tare,
+//            int size,
+//            int cargoWeight,
+//            ArrayList<String> safetyMeasures,
+//            ArrayList<String> certificates,
+//            int armorThickness,
+//            String containerMaterial,
+//            boolean acidSafe
+//    ){
+//        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+//        this.acidSafe = acidSafe;
+//    }
+
     public ToxicLiquidContainer(
             int tare,
             int size,
@@ -19,9 +34,10 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
             ArrayList<String> certificates,
             int armorThickness,
             String containerMaterial,
-            boolean acidSafe
+            boolean acidSafe,
+            Sender sender
     ){
-        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial, sender);
         this.acidSafe = acidSafe;
     }
 

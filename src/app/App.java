@@ -1,8 +1,10 @@
 package app;
 
 import containers.classes.*;
+import main.TimeOperations;
 import port.Port;
 import port.Train;
+import sender.Sender;
 import ship.Ship;
 import utils.ConsoleColors;
 import utils.Evaluators;
@@ -15,34 +17,61 @@ public class App {
     public static ArrayList<Ship> ships = new ArrayList<>();
     public static ArrayList<StandardContainer> containers = new ArrayList<>();
     public static ArrayList<Train> trains = new ArrayList<>();
+    public static ArrayList<Sender> senders = new ArrayList<>();
 
     public static void menu() {
-        ConsoleColors.printYellow("Type in number of command you want to perform");
         ConsoleColors.printBlue("""
                 1. Create a cargo ship
                 2. Create a container
-                3. Load container on ship
-                4. Unload container from ship
-                5. Ships info
-                6. Warehouse info
+                3. Create sender
+                4. Load container on ship
+                5. Unload container from ship
+                6. Ships info
+                7. Warehouse info
+                8. Train info
+                9. Senders info
                 0. Exit
                 """);
+        ConsoleColors.printYellow("Type in number of the command you want to perform: ");
 
-        int option = Evaluators.getIntFromInput(0, 6);
+        int option = Evaluators.getIntFromInput(0, 9);
 
         switch (option) {
             case 0 -> System.exit(0);
             case 1 -> new Ship();
             case 2 -> createContainer();
-            case 3 -> ContainerLoading.listAndLoadContainer();
-            case 4 -> containerUnloading();
-            case 5 -> showShipInfo();
-            case 6 -> showWarehouseInfo();
+            case 3 -> new Sender();
+            case 4 -> ContainerLoading.listAndLoadContainer();
+            case 5 -> containerUnloading();
+            case 6 -> showShipInfo();
+            case 7 -> showWarehouseInfo();
+            case 8 -> showTrainInfo();
+            case 9 -> showSendersInfo();
         }
         App.menu();
     }
 
+    public static void showSendersInfo(){
+        if(senders.size() == 0){
+            System.out.println("There are no senders");
+        }
+        else{
+            System.out.println("List of senders: ");
+            senders.forEach(System.out::println);
+        }
+    }
+
+    public static void showTrainInfo(){
+        if (Port.train.getContainers().size() == 0){
+            System.out.println("Train is empty");
+        }
+        else{
+            Port.train.getContainers().forEach(System.out::println);
+        }
+    }
+
     public static void showWarehouseInfo(){
+        System.out.println("Current date: " + TimeOperations.currentDate);
         System.out.println(Port.warehouse.getContainers().size() == 0 ? "Warehouse is empty" : Port.warehouse.getContainers());
     }
 

@@ -1,6 +1,7 @@
 package containers.classes;
 
 import containers.interfaces.ElectricInterface;
+import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
@@ -10,6 +11,20 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
 
     public final int maximumWattPowerDraw;
 
+//    public ChillerContainer(
+//            int tare,
+//            int size,
+//            int cargoWeight,
+//            ArrayList<String> safetyMeasures,
+//            ArrayList<String> certificates,
+//            int armorThickness,
+//            String containerMaterial,
+//            int maximumWattPowerDraw
+//    ) {
+//        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+//        this.maximumWattPowerDraw = maximumWattPowerDraw;
+//    }
+
     public ChillerContainer(
             int tare,
             int size,
@@ -18,13 +33,14 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
             ArrayList<String> certificates,
             int armorThickness,
             String containerMaterial,
-            int maximumWattPowerDraw
+            int maximumWattPowerDraw,
+            Sender sender
     ) {
-        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial, sender);
         this.maximumWattPowerDraw = maximumWattPowerDraw;
     }
 
-    public ChillerContainer(){
+    public ChillerContainer() {
         super(
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
@@ -39,7 +55,7 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
         ConsoleColors.printYellow(this.toString());
     }
 
-    public String toString(){
+    public String toString() {
         return super.toString() +
                 ", \nmaximum power draw: " + this.maximumWattPowerDraw;
     }

@@ -1,5 +1,6 @@
 package containers.classes;
 
+import sender.Sender;
 import utils.ConsoleColors;
 import utils.Constants;
 import utils.Evaluators;
@@ -10,6 +11,22 @@ public class ExplosivesContainer extends HeavyContainer{
     public final int riskLevel;
     public final int maxTemp;
 
+//    public ExplosivesContainer(
+//            int tare,
+//            int size,
+//            int cargoWeight,
+//            ArrayList<String> safetyMeasures,
+//            ArrayList<String> certificates,
+//            int armorThickness,
+//            String containerMaterial,
+//            int riskLevel,
+//            int maxTemp
+//    ){
+//        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+//        this.riskLevel = evalRisk(riskLevel);
+//        this.maxTemp = maxTemp;
+//    }
+
     public ExplosivesContainer(
             int tare,
             int size,
@@ -19,9 +36,10 @@ public class ExplosivesContainer extends HeavyContainer{
             int armorThickness,
             String containerMaterial,
             int riskLevel,
-            int maxTemp
+            int maxTemp,
+            Sender sender
     ){
-        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial, sender);
         this.riskLevel = evalRisk(riskLevel);
         this.maxTemp = maxTemp;
     }

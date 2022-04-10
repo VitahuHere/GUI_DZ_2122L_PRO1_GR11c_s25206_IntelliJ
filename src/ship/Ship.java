@@ -4,7 +4,9 @@ import app.App;
 import containers.abstracts.ToxicAbstract;
 import containers.classes.*;
 import containers.interfaces.ElectricInterface;
+import main.TimeOperations;
 import port.Port;
+import sender.Sender;
 import utils.ConsoleColors;
 import utils.Constants;
 import utils.Evaluators;
@@ -112,33 +114,73 @@ public class Ship {
         return value;
     }
 
-    public void loadContainer(StandardContainer container) {
-        boolean addToCargo = false;
+    private void setSender(StandardContainer container) {
+        if (App.senders.size() == 0) {
+            ConsoleColors.printRed("No senders available. Please create new sender to be able to load container");
+        } else {
+            ConsoleColors.printYellow("Please select sender:");
+            for (int i = 1; i <= App.senders.size(); i++) {
+                Sender sender = App.senders.get(i - 1);
+                ConsoleColors.printBlue(i + ") " + sender.name + " " + sender.surname + " " + sender.getBirthday());
+            }
+            int senderIndex = Evaluators.getIntFromInput(App.senders.size());
+            container.sender = App.senders.get(senderIndex);
+        }
+    }
+
+    private boolean isSenderSet(StandardContainer container) {
+        if (container.sender == null) {
+            ConsoleColors.printRed("Container doesn't have sender. Please assign sender before loading");
+            setSender(container);
+        }
+        return true;
+    }
+
+    private boolean isContainerOnShip(StandardContainer container) {
         if (container.shipId != -1) {
             ConsoleColors.printRed("Container is already taken. Cannot load onto the ship.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isLoadingSafe(StandardContainer container) {
+        if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight + container.totalWeight > this.maxCargoWeight) {
+            ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
+            return false;
+        }
+        return true;
+    }
+
+    private void loadContainer(StandardContainer container) {
+        this.listOfContainers.add(container);
+        this.cargoWeight += container.totalWeight;
+        container.shipId = this.id;
+        App.containers.remove(container);
+    }
+
+    private void checkType(StandardContainer container) {
+        if ((container instanceof ExplosivesContainer || container instanceof ToxicAbstract) && this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount) {
+            loadContainer(container);
+            this.toxicExplosiveCounter++;
+        } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
+            loadContainer(container);
+            this.heavyCounter++;
+        } else if (container instanceof ElectricInterface && this.electricCounter < this.maxElectricContainersCount) {
+            loadContainer(container);
+            this.electricCounter++;
+        } else if (container.getClass().getSimpleName().equals("StandardContainer")) {
+            loadContainer(container);
         } else {
-            if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight + container.totalWeight > this.maxCargoWeight) {
-                ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
-            } else {
-                if ((container instanceof ExplosivesContainer || container instanceof ToxicAbstract) && this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount) {
-                    addToCargo = true;
-                    this.toxicExplosiveCounter++;
-                } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
-                    addToCargo = true;
-                    this.heavyCounter++;
-                } else if (container instanceof ElectricInterface && this.electricCounter < this.maxElectricContainersCount) {
-                    addToCargo = true;
-                    this.electricCounter++;
-                } else if (container.getClass().getSimpleName().equals("StandardContainer")) {
-                    addToCargo = true;
-                }
-                if (addToCargo) {
-                    this.listOfContainers.add(container);
-                    this.cargoWeight += container.totalWeight;
-                    container.shipId = this.id;
-                    App.containers.remove(container);
-                } else {
-                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+            ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+        }
+    }
+
+    public void addContainer(StandardContainer container) {
+        if (isSenderSet(container)) {
+            if (isContainerOnShip(container)) {
+                if (isLoadingSafe(container)) {
+                    checkType(container);
                 }
             }
         }
@@ -167,22 +209,24 @@ public class Ship {
     }
 
     public void offloadContainerToWarehouse(StandardContainer container) {
-        if(containerLookUp(container)){
-            removeContainer(container);
-            Port.warehouse.addContainer(container);
-            container.daysStored = 0;
-            ConsoleColors.printGreen("Container offloaded to warehouse");
+        if (containerLookUp(container)) {
+            if (container.sender.strikes >= 2) {
+                ConsoleColors.printRed("Sender has received 2 or more strikes. Cannot offload container to warehouse");
+            }
+            else{
+                removeContainer(container);
+                Port.warehouse.addContainer(container);
+            }
         }
     }
 
     public void offloadOntoTrain(StandardContainer container) {
-        if(containerLookUp(container)){
-            if(Port.train.currentCapacity < Constants.MAX_TRAIN_CAPACITY){
+        if (containerLookUp(container)) {
+            if (Port.train.currentCapacity < Constants.MAX_TRAIN_CAPACITY) {
                 removeContainer(container);
                 Port.train.addContainer(container);
                 ConsoleColors.printGreen("Container offloaded onto train");
-            }
-            else{
+            } else {
                 Port.train.addContainer(container);
             }
         }
@@ -192,7 +236,7 @@ public class Ship {
         return maxContainersCount - listOfContainers.size();
     }
 
-    public int getWeightAvailable(){
+    public int getWeightAvailable() {
         return maxCargoWeight - cargoWeight;
     }
 

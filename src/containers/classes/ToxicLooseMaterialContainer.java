@@ -1,6 +1,7 @@
 package containers.classes;
 
 import containers.abstracts.ToxicAbstract;
+import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
@@ -10,6 +11,20 @@ public class ToxicLooseMaterialContainer extends ToxicAbstract {
 
     public final boolean waterproof;
 
+//    public ToxicLooseMaterialContainer(
+//            int tare,
+//            int size,
+//            int cargoWeight,
+//            ArrayList<String> safetyMeasures,
+//            ArrayList<String> certificates,
+//            int armorThickness,
+//            String containerMaterial,
+//            boolean waterproof
+//    ) {
+//        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+//        this.waterproof = waterproof;
+//    }
+
     public ToxicLooseMaterialContainer(
             int tare,
             int size,
@@ -18,13 +33,14 @@ public class ToxicLooseMaterialContainer extends ToxicAbstract {
             ArrayList<String> certificates,
             int armorThickness,
             String containerMaterial,
-            boolean waterproof
+            boolean waterproof,
+            Sender sender
     ) {
-        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
+        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial, sender);
         this.waterproof = waterproof;
     }
 
-    public ToxicLooseMaterialContainer(){
+    public ToxicLooseMaterialContainer() {
         super(
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),

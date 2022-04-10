@@ -1,7 +1,9 @@
 package port;
 
 import containers.classes.StandardContainer;
+import main.TimeOperations;
 import utils.ConsoleColors;
+import utils.Constants;
 
 import java.util.ArrayList;
 
@@ -16,10 +18,21 @@ public class Warehouse {
         this.containers = new ArrayList<>();
     }
 
+    private int checkContainerType(StandardContainer container) {
+        return switch (container.getClass().getSimpleName()) {
+            case "ExplosivesContainer" -> Constants.EXPLOSIVES_MAX_DAYS;
+            case "ToxicLiquidContainer" -> Constants.TOXIC_LIQUID_MAX_DAYS;
+            case "ToxicLooseMaterialContainer" -> Constants.TOXIC_LOOSE_MAX_DAYS;
+            default -> 0;
+        };
+    }
+
     public void addContainer(StandardContainer container) {
         if (this.currentCapacity < this.maxCapacity) {
             this.containers.add(container);
             this.currentCapacity++;
+            container.arrivalDate = TimeOperations.currentDate;
+            container.dueDate = container.arrivalDate.plusDays(checkContainerType(container)) == container.arrivalDate ? null : container.arrivalDate.plusDays(checkContainerType(container));
         }
         else{
             ConsoleColors.printRed("Warehouse is full!");

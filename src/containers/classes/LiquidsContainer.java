@@ -2,12 +2,27 @@ package containers.classes;
 
 import java.util.ArrayList;
 
+import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
 public class LiquidsContainer extends StandardContainer {
     public final int maxCapacity;
     public final int valveDiameter;
+
+//    public LiquidsContainer(
+//            int tare,
+//            int size,
+//            int cargoWeight,
+//            ArrayList<String> safetyMeasures,
+//            ArrayList<String> certificates,
+//            int maxCapacity,
+//            int valveDiameter
+//    ) {
+//        super(tare, size, cargoWeight, safetyMeasures, certificates);
+//        this.maxCapacity = maxCapacity;
+//        this.valveDiameter = valveDiameter;
+//    }
 
     public LiquidsContainer(
             int tare,
@@ -16,9 +31,10 @@ public class LiquidsContainer extends StandardContainer {
             ArrayList<String> safetyMeasures,
             ArrayList<String> certificates,
             int maxCapacity,
-            int valveDiameter
+            int valveDiameter,
+            Sender sender
     ) {
-        super(tare, size, cargoWeight, safetyMeasures, certificates);
+        super(tare, size, cargoWeight, safetyMeasures, certificates, sender);
         this.maxCapacity = maxCapacity;
         this.valveDiameter = valveDiameter;
     }

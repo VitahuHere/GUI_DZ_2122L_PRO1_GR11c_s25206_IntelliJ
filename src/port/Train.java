@@ -39,7 +39,10 @@ public class Train {
             ConsoleColors.printRed("Train is full. Waiting for a new train. Please wait " + TimeOperations.getRemainingTime() + " seconds.");
             isFull = true;
         }
+    }
 
+    public ArrayList<StandardContainer> getContainers() {
+        return containers;
     }
 
     @Override

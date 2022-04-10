@@ -93,20 +93,24 @@ public class Evaluators {
                 Scanner scanner = new Scanner(System.in);
                 pesel = scanner.next();
                 if (pesel.length() != 11) {
-                    throw new InputMismatchException();
+                    ConsoleColors.printRed("PESEL must be 11 digits long, please enter again.");
+                    continue;
                 }
                 if(!validatepesel(pesel)) {
                     throw new InputMismatchException();
                 }
                 break;
             } catch (InputMismatchException e) {
-                ConsoleColors.printRed("PESEL must be 11 digits long, please enter again.");
+                ConsoleColors.printRed("Invalid PESEL, please enter again.");
             }
         }
         return pesel;
     }
 
-    private static boolean validatepesel(String pesel) {
+    public static boolean validatepesel(String pesel) {
+        if(pesel.length() != 11) {
+            return false;
+        }
         int[] peselArray = new int[11];
         for (int i = 0; i < 11; i++) {
             peselArray[i] = Character.getNumericValue(pesel.charAt(i));
