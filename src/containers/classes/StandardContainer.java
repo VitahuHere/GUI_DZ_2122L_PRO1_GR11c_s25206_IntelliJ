@@ -1,10 +1,9 @@
 package containers.classes;
 
-import app.App;
+import main.App;
 import main.TimeOperations;
 import sender.Sender;
 import utils.ConsoleColors;
-import utils.Constants;
 import utils.Evaluators;
 
 import java.time.LocalDate;
@@ -17,13 +16,12 @@ public class StandardContainer {
     public final int size;
 
     public int cargoWeight;
-    public int totalWeight;
+    public int totalWeight; // cargo weight + tare
 
     public ArrayList<String> safetyMeasures;
     public ArrayList<String> certificates;
 
     public Sender sender;
-    public int shipId;
 
     public LocalDate arrivalDate;
     public LocalDate dueDate;
@@ -42,7 +40,6 @@ public class StandardContainer {
         this.totalWeight = cargoWeight + tare;
         this.safetyMeasures = safetyMeasures;
         this.certificates = certificates;
-        this.shipId = -1;
         App.containers.add(this);
     }
 
@@ -66,9 +63,7 @@ public class StandardContainer {
         this.totalWeight = cargoWeight + tare;
         this.safetyMeasures = Evaluators.getArrayListFromInput("safety measures");
         this.certificates = Evaluators.getArrayListFromInput("certificates");
-        this.shipId = -1;
         ConsoleColors.printGreen("Successfully created container!");
-        ConsoleColors.printYellow(this.toString());
         App.containers.add(this);
     }
 
@@ -89,7 +84,6 @@ public class StandardContainer {
                 ", \ntotal weight: " + totalWeight +
                 ", \nsafety measures: " + (safetyMeasures.size() == 0 ? "None" : safetyMeasures) +
                 ", \ncertificates: " + (certificates.size() == 0 ? "None" : certificates) +
-                ", \nship id: " + (shipId == -1 ? "not on ship" : shipId) +
                 ", \narrival date: " + (arrivalDate == null ? "not set" : arrivalDate) +
                 ", \ndue date: " + (dueDate == null ? "not set" : dueDate) +
                 ", \nsenders name: " + (sender == null ? "not set" : sender.name);

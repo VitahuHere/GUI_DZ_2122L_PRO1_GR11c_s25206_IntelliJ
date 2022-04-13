@@ -1,7 +1,6 @@
 package main;
 
 
-import app.App;
 import containers.classes.StandardContainer;
 import containers.classes.ToxicLiquidContainer;
 import port.Port;
@@ -25,11 +24,11 @@ public class Main {
         Sender sender4 = new Sender("Andrew", "Nowacki", "86082872825", "Some Street 123");
 
         for (int i = 0; i < 3; i++) {
-            Port.ships.get(0).addContainer(new StandardContainer(12, 12, 12, list, list, sender));
+            Port.ships.get(0).addContainerOfType(new StandardContainer(12, 12, 12, list, list, sender));
         }
 
         for (int i = 0; i < 10; i++) {
-            Port.ships.get(0).addContainer(new ToxicLiquidContainer(12, 12, 12, list, list, 12, "idk", true, sender));
+            Port.ships.get(0).addContainerOfType(new ToxicLiquidContainer(12, 12, 12, list, list, 12, "idk", true, sender));
         }
 
         ConsoleColors.printGreen("Welcome to CargoApp. Here you will manage your containers na ships.");

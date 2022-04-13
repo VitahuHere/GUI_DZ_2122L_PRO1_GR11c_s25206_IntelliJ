@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Warehouse {
     public final int maxCapacity;
     private int currentCapacity;
-    public ArrayList<StandardContainer> containers;
+    private final ArrayList<StandardContainer> containers;
 
     public Warehouse(int maxCapacity) {
         this.maxCapacity = maxCapacity;
@@ -51,5 +51,12 @@ public class Warehouse {
 
     public ArrayList<StandardContainer> getContainers() {
         return this.containers;
+    }
+
+    @Override
+    public String toString() {
+        return "Warehouse " +
+                " current capacity:" + currentCapacity +
+                ", containers: " + containers;
     }
 }

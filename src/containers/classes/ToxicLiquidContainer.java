@@ -12,20 +12,6 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
 
     public final boolean acidSafe;
 
-//    public ToxicLiquidContainer(
-//            int tare,
-//            int size,
-//            int cargoWeight,
-//            ArrayList<String> safetyMeasures,
-//            ArrayList<String> certificates,
-//            int armorThickness,
-//            String containerMaterial,
-//            boolean acidSafe
-//    ){
-//        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
-//        this.acidSafe = acidSafe;
-//    }
-
     public ToxicLiquidContainer(
             int tare,
             int size,
@@ -53,12 +39,12 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
         );
         this.acidSafe = Evaluators.getBooleanFromInput("Acid safe? [y/N]");
         ConsoleColors.printGreen("Successfully created container!");
-        ConsoleColors.printYellow(this.toString());
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                ", \nacid safe: " + this.acidSafe;
+                ", \nacid safe: " + this.acidSafe +
+                ", \nvalve diameter " + valveDiameter;
     }
 }

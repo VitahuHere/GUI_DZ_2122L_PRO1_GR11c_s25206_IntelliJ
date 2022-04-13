@@ -24,7 +24,7 @@ public class TimeOperations extends TimerTask {
 
     private void checkContainers() {
         ArrayList<StandardContainer> toBeRemoved = new ArrayList<>();
-        for (StandardContainer container : Port.warehouse.containers) {
+        for (StandardContainer container : Port.warehouse.getContainers()) {
             try {
                 if (container instanceof ExplosivesContainer && container.daysLeft() <= 0 ||
                         container instanceof ToxicLiquidContainer && container.daysLeft() <= 0 ||
@@ -39,7 +39,7 @@ public class TimeOperations extends TimerTask {
             }
         }
         for(StandardContainer container : toBeRemoved){
-            Port.warehouse.containers.remove(container);
+            Port.warehouse.removeContainer(container);
         }
     }
 

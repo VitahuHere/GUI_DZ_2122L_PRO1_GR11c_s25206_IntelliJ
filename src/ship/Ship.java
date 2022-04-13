@@ -1,14 +1,13 @@
 package ship;
 
-import app.App;
+import main.App;
 import containers.abstracts.ToxicAbstract;
-import containers.classes.*;
+import containers.classes.ExplosivesContainer;
+import containers.classes.HeavyContainer;
+import containers.classes.StandardContainer;
 import containers.interfaces.ElectricInterface;
-import main.TimeOperations;
 import port.Port;
-import sender.Sender;
 import utils.ConsoleColors;
-import utils.Constants;
 import utils.Evaluators;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class Ship {
     public final int maxToxicExplosiveContainersCount;
     public final int maxHeavyContainersCount;
     public final int maxElectricContainersCount;
-    public final ArrayList<StandardContainer> listOfContainers;
+    public final ArrayList<StandardContainer> containers;
 
     // helper fields
     private int cargoWeight;
@@ -40,13 +39,13 @@ public class Ship {
     public Ship(
             String name,
             String homePort,
-            int maxPayloadWeight,
+            int maxCargoWeight,
             int maxContainersCount,
             int maxToxicExplosiveContainersCount,
             int maxHeavyContainersCount,
             int maxElectricContainersCount
     ) {
-        this.listOfContainers = new ArrayList<>();
+        this.containers = new ArrayList<>();
         this.cargoWeight = 0;
         this.toxicExplosiveCounter = 0;
         this.heavyCounter = 0;
@@ -55,21 +54,17 @@ public class Ship {
         this.id = shipIndex++;
         this.name = name;
         this.homePort = homePort;
-        this.maxCargoWeight = checkPositiveValue(maxPayloadWeight);
+        this.maxCargoWeight = checkPositiveValue(maxCargoWeight);
         this.maxContainersCount = checkPositiveValue(maxContainersCount);
         this.maxToxicExplosiveContainersCount = maxToxicExplosiveContainersCount;
         this.maxHeavyContainersCount = maxHeavyContainersCount;
         this.maxElectricContainersCount = maxElectricContainersCount;
         this.slotsAvailable = this.maxContainersCount - this.maxToxicExplosiveContainersCount - this.maxHeavyContainersCount - this.maxElectricContainersCount;
-        App.ships.add(this);
         Port.ships.add(this);
     }
 
     public Ship() {
-        ConsoleColors.printYellow("Welcome to Ship creation page!");
-        ConsoleColors.printYellow("Please enter following information:");
-
-        this.listOfContainers = new ArrayList<>();
+        this.containers = new ArrayList<>();
         this.cargoWeight = 0;
         this.toxicExplosiveCounter = 0;
         this.heavyCounter = 0;
@@ -86,11 +81,79 @@ public class Ship {
         this.maxToxicExplosiveContainersCount = checkSlotsLeft(Evaluators.getIntFromInput("Maximum number of toxic and explosive containers"));
         this.maxHeavyContainersCount = checkSlotsLeft(Evaluators.getIntFromInput("Maximum number of heavy containers"));
         this.maxElectricContainersCount = checkSlotsLeft(Evaluators.getIntFromInput("Maximum number of containers requiring electricity"));
-        App.ships.add(this);
         Port.ships.add(this);
 
         ConsoleColors.printGreen("Successfully created new Ship!");
-        ConsoleColors.printBlue(this.toString());
+    }
+
+    public void addContainerOfType(StandardContainer container) {
+        // spent too much time trying to optimise this >:((
+        String containerType = container.getClass().getSimpleName();
+        switch (containerType) {
+            case "ExplosivesContainer":
+            case "ToxicLiquidContainer":
+            case "ToxicLooseMaterialContainer":
+                if (this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount) {
+                    addContainer(container);
+                    this.toxicExplosiveCounter++;
+                    this.heavyCounter++;
+                } else {
+                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                }
+                break;
+            case "ChillerContainer":
+                if (this.electricCounter < this.maxElectricContainersCount) {
+                    addContainer(container);
+                    this.electricCounter++;
+                    this.heavyCounter++;
+                } else {
+                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                }
+                break;
+            case "HeavyContainer":
+                if (this.heavyCounter < this.maxHeavyContainersCount) {
+                    addContainer(container);
+                    this.heavyCounter++;
+                } else {
+                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                }
+                break;
+            default:
+                addContainer(container);
+        }
+    }
+
+    public void removeContainerOfType(StandardContainer container) {
+        if (this.containers.contains(container)) {
+            String containerType = container.getClass().getSimpleName();
+            switch(containerType){
+                case "ExplosivesContainer":
+                case "ToxicLiquidContainer":
+                case "ToxicLooseMaterialContainer":
+                    this.toxicExplosiveCounter--;
+                    this.heavyCounter--;
+                    break;
+                case "HeavyContainer":
+                    this.heavyCounter--;
+                case "ChillerContainer":
+                    this.electricCounter--;
+                    this.heavyCounter--;
+            }
+            removeContainer(container);
+        } else {
+            ConsoleColors.printRed("Container is not on this ship. Cannot offload.");
+        }
+    }
+
+    private void addContainer(StandardContainer container) {
+        this.containers.add(container);
+        this.cargoWeight += container.totalWeight;
+        App.containers.remove(container);
+    }
+
+    private void removeContainer(StandardContainer container) {
+        this.containers.remove(container);
+        this.cargoWeight -= container.totalWeight;
     }
 
     private int checkPositiveValue(int value) {
@@ -114,135 +177,28 @@ public class Ship {
         return value;
     }
 
-    private void setSender(StandardContainer container) {
-        if (App.senders.size() == 0) {
-            ConsoleColors.printRed("No senders available. Please create new sender to be able to load container");
-        } else {
-            ConsoleColors.printYellow("Please select sender:");
-            for (int i = 1; i <= App.senders.size(); i++) {
-                Sender sender = App.senders.get(i - 1);
-                ConsoleColors.printBlue(i + ") " + sender.name + " " + sender.surname + " " + sender.getBirthday());
-            }
-            int senderIndex = Evaluators.getIntFromInput(App.senders.size());
-            container.sender = App.senders.get(senderIndex);
-        }
-    }
-
-    private boolean isSenderSet(StandardContainer container) {
-        if (container.sender == null) {
-            ConsoleColors.printRed("Container doesn't have sender. Please assign sender before loading");
-            setSender(container);
-        }
-        return true;
-    }
-
-    private boolean isContainerOnShip(StandardContainer container) {
-        if (container.shipId != -1) {
-            ConsoleColors.printRed("Container is already taken. Cannot load onto the ship.");
-            return false;
-        }
-        return true;
-    }
-
-    private boolean isLoadingSafe(StandardContainer container) {
-        if (this.maxContainersCount <= this.listOfContainers.size() || this.cargoWeight + container.totalWeight > this.maxCargoWeight) {
-            ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
-            return false;
-        }
-        return true;
-    }
-
-    private void loadContainer(StandardContainer container) {
-        this.listOfContainers.add(container);
-        this.cargoWeight += container.totalWeight;
-        container.shipId = this.id;
-        App.containers.remove(container);
-    }
-
-    private void checkType(StandardContainer container) {
-        if ((container instanceof ExplosivesContainer || container instanceof ToxicAbstract) && this.toxicExplosiveCounter < this.maxToxicExplosiveContainersCount) {
-            loadContainer(container);
-            this.toxicExplosiveCounter++;
-        } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
-            loadContainer(container);
-            this.heavyCounter++;
-        } else if (container instanceof ElectricInterface && this.electricCounter < this.maxElectricContainersCount) {
-            loadContainer(container);
-            this.electricCounter++;
-        } else if (container.getClass().getSimpleName().equals("StandardContainer")) {
-            loadContainer(container);
-        } else {
-            ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
-        }
-    }
-
-    public void addContainer(StandardContainer container) {
-        if (isSenderSet(container)) {
-            if (isContainerOnShip(container)) {
-                if (isLoadingSafe(container)) {
-                    checkType(container);
-                }
-            }
-        }
-    }
-
-    private boolean containerLookUp(StandardContainer container) {
-        if (this.listOfContainers.contains(container)) {
-            if (container instanceof ExplosivesContainer || container instanceof ToxicAbstract) {
-                this.toxicExplosiveCounter--;
-            } else if (container instanceof HeavyContainer && this.heavyCounter < this.maxHeavyContainersCount) {
-                this.heavyCounter--;
-            } else if (container instanceof ElectricInterface && this.electricCounter < this.maxElectricContainersCount) {
-                this.electricCounter--;
-            }
-            return true;
-        } else {
-            ConsoleColors.printRed("Container is not on this ship. Cannot offload.");
-        }
-        return false;
-    }
-
-    private void removeContainer(StandardContainer container) {
-        this.listOfContainers.remove(container);
-        this.cargoWeight -= container.totalWeight;
-        container.shipId = -1;
-    }
-
-    public void offloadContainerToWarehouse(StandardContainer container) {
-        if (containerLookUp(container)) {
-            if (container.sender.strikes >= 2) {
-                ConsoleColors.printRed("Sender has received 2 or more strikes. Cannot offload container to warehouse");
-            }
-            else{
-                removeContainer(container);
-                Port.warehouse.addContainer(container);
-            }
-        }
-    }
-
-    public void offloadOntoTrain(StandardContainer container) {
-        if (containerLookUp(container)) {
-            if (Port.train.currentCapacity < Constants.MAX_TRAIN_CAPACITY) {
-                removeContainer(container);
-                Port.train.addContainer(container);
-                ConsoleColors.printGreen("Container offloaded onto train");
-            } else {
-                Port.train.addContainer(container);
-            }
-        }
-    }
-
     public int getSlotsAvailable() {
-        return maxContainersCount - listOfContainers.size();
+        return maxContainersCount - containers.size();
     }
 
     public int getWeightAvailable() {
         return maxCargoWeight - cargoWeight;
     }
 
+    private ArrayList<String> listContainers() {
+        ArrayList<String> containerList = new ArrayList<>();
+        for (StandardContainer container : containers) {
+            containerList.add(
+                    "\nid: " + container.id + ", container type: " + container.getClass().getSimpleName() + ", sender: " + container.sender.name + " " + container.sender.surname
+            );
+        }
+
+        return containerList;
+    }
+
     @Override
     public String toString() {
-        return "\nShip information: " +
+        return "Ship information: " +
                 "id: " + id +
                 ", \nname: '" + name + '\'' +
                 ", \nhome port: '" + homePort + '\'' +
@@ -252,12 +208,12 @@ public class Ship {
                 ", \nmaximum heavy containers count: " + maxHeavyContainersCount +
                 ", \nmaximum electric container count: " + maxElectricContainersCount +
                 ", \ncargo weight: " + cargoWeight +
-                ", \nnumber of standard containers: " + (listOfContainers.size() - toxicExplosiveCounter - heavyCounter - electricCounter) +
+                ", \nnumber of standard containers: " + (containers.size() - toxicExplosiveCounter - heavyCounter - electricCounter) +
                 ", \nnumber of toxic/explosive containers: " + toxicExplosiveCounter +
                 ", \nnumber of heavy containers: " + heavyCounter +
                 ", \nnumber of electric containers: " + electricCounter +
                 ", \ndeparture port: " + (departurePort == null ? "n/a" : departurePort) +
                 ", \narrival port: " + (arrivalPort == null ? "n/a" : departurePort) +
-                ", \ncontainers: " + (listOfContainers.size() == 0 ? "n/a" : listOfContainers);
+                ", \ncontainers: " + listContainers();
     }
 }

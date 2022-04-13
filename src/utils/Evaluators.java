@@ -1,10 +1,12 @@
 package utils;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Evaluators {
     public static boolean getBooleanFromInput(String key) {
-        System.out.println(key + ":");
+        System.out.println(key);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
         return input.equals("yes") || input.equals("Yes") || input.equals("y") || input.equals("Y");
@@ -31,6 +33,10 @@ public class Evaluators {
         }
 
         return returner;
+    }
+
+    public static int getIntFromInput(){
+        return new Scanner(System.in).nextInt();
     }
 
     public static int getIntFromInput(String key) {
@@ -96,7 +102,7 @@ public class Evaluators {
                     ConsoleColors.printRed("PESEL must be 11 digits long, please enter again.");
                     continue;
                 }
-                if(!validatepesel(pesel)) {
+                if (!validatepesel(pesel)) {
                     throw new InputMismatchException();
                 }
                 break;
@@ -108,7 +114,7 @@ public class Evaluators {
     }
 
     public static boolean validatepesel(String pesel) {
-        if(pesel.length() != 11) {
+        if (pesel.length() != 11) {
             return false;
         }
         int[] peselArray = new int[11];
@@ -129,6 +135,24 @@ public class Evaluators {
         sum %= 10;
         sum = 10 - sum;
         sum %= 10;
-        return sum == peselArray[10];
+        if (sum != peselArray[10]) {
+            return false;
+        }
+        int year, month, day;
+        year = Integer.parseInt(pesel.substring(0, 2));
+        month = Integer.parseInt(pesel.substring(2, 4));
+        day = Integer.parseInt(pesel.substring(4, 6));
+        if (0 < month && month < 13) {
+            year += 1900;
+        } else if (month > 20) {
+            year += 2000;
+            month -= 20;
+        }
+        try {
+            LocalDate.of(year, month, day);
+        } catch (DateTimeException e) {
+            return false;
+        }
+        return true;
     }
 }

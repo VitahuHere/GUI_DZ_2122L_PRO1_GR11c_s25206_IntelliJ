@@ -11,20 +11,6 @@ public class ToxicLooseMaterialContainer extends ToxicAbstract {
 
     public final boolean waterproof;
 
-//    public ToxicLooseMaterialContainer(
-//            int tare,
-//            int size,
-//            int cargoWeight,
-//            ArrayList<String> safetyMeasures,
-//            ArrayList<String> certificates,
-//            int armorThickness,
-//            String containerMaterial,
-//            boolean waterproof
-//    ) {
-//        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
-//        this.waterproof = waterproof;
-//    }
-
     public ToxicLooseMaterialContainer(
             int tare,
             int size,
@@ -50,9 +36,8 @@ public class ToxicLooseMaterialContainer extends ToxicAbstract {
                 Evaluators.getIntFromInput("Armor thickness in millimeters"),
                 Evaluators.getStringFromInput("Container material")
         );
-        this.waterproof = Evaluators.getBooleanFromInput("Is it waterproof?");
+        this.waterproof = Evaluators.getBooleanFromInput("Is it waterproof? [y/N]");
         ConsoleColors.printGreen("Successfully created container!");
-        ConsoleColors.printYellow(this.toString());
     }
 
     @Override

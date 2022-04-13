@@ -1,6 +1,6 @@
 package sender;
 
-import app.App;
+import main.App;
 import utils.ConsoleColors;
 import utils.Evaluators;
 

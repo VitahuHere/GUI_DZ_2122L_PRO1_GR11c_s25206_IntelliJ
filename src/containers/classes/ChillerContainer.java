@@ -11,20 +11,6 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
 
     public final int maximumWattPowerDraw;
 
-//    public ChillerContainer(
-//            int tare,
-//            int size,
-//            int cargoWeight,
-//            ArrayList<String> safetyMeasures,
-//            ArrayList<String> certificates,
-//            int armorThickness,
-//            String containerMaterial,
-//            int maximumWattPowerDraw
-//    ) {
-//        super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial);
-//        this.maximumWattPowerDraw = maximumWattPowerDraw;
-//    }
-
     public ChillerContainer(
             int tare,
             int size,
@@ -52,7 +38,6 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
         );
         this.maximumWattPowerDraw = Evaluators.getIntFromInput("Maximum power draw");
         ConsoleColors.printGreen("Successfully created container!");
-        ConsoleColors.printYellow(this.toString());
     }
 
     public String toString() {
