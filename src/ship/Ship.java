@@ -1,11 +1,7 @@
 package ship;
 
 import main.App;
-import containers.abstracts.ToxicAbstract;
-import containers.classes.ExplosivesContainer;
-import containers.classes.HeavyContainer;
 import containers.classes.StandardContainer;
-import containers.interfaces.ElectricInterface;
 import port.Port;
 import utils.ConsoleColors;
 import utils.Evaluators;
@@ -208,12 +204,8 @@ public class Ship {
                 ", \nmaximum heavy containers count: " + maxHeavyContainersCount +
                 ", \nmaximum electric container count: " + maxElectricContainersCount +
                 ", \ncargo weight: " + cargoWeight +
-                ", \nnumber of standard containers: " + (containers.size() - toxicExplosiveCounter - heavyCounter - electricCounter) +
-                ", \nnumber of toxic/explosive containers: " + toxicExplosiveCounter +
-                ", \nnumber of heavy containers: " + heavyCounter +
-                ", \nnumber of electric containers: " + electricCounter +
                 ", \ndeparture port: " + (departurePort == null ? "n/a" : departurePort) +
                 ", \narrival port: " + (arrivalPort == null ? "n/a" : departurePort) +
-                ", \ncontainers: " + listContainers();
+                ", \ncontainers: " + (listContainers().size() == 0 ? "n/a" : listContainers());
     }
 }

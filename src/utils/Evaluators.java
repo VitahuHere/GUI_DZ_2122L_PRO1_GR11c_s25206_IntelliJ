@@ -36,57 +36,42 @@ public class Evaluators {
     }
 
     public static int getIntFromInput(){
-        return new Scanner(System.in).nextInt();
-    }
-
-    public static int getIntFromInput(String key) {
         int choice;
         while (true) {
             try {
-                System.out.println(key + ":");
                 Scanner scanner = new Scanner(System.in);
                 choice = scanner.nextInt();
-                if (choice < 0) {
-                    throw new InputMismatchException();
-                }
-                break;
+                return choice;
             } catch (InputMismatchException e) {
                 ConsoleColors.printRed("Invalid value, please enter again.");
             }
+        }
+    }
+
+    public static int getIntFromInput(String key) {
+        System.out.println(key + ":");
+        int choice = getIntFromInput();
+        while(choice < 0){
+            ConsoleColors.printRed("Invalid value, please enter again.");
+            choice = getIntFromInput();
         }
         return choice;
     }
 
     public static int getIntFromInput(int min, int max) {
-        int choice;
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                choice = scanner.nextInt();
-                if (choice < min || choice > max) {
-                    throw new InputMismatchException();
-                }
-                break;
-            } catch (InputMismatchException e) {
-                ConsoleColors.printRed("Invalid value, please enter again.");
-            }
+        int choice = getIntFromInput();
+        while (choice < min || choice > max) {
+            ConsoleColors.printRed("Invalid value, please enter again.");
+            choice = getIntFromInput();
         }
         return choice;
     }
 
     public static int getIntFromInput(int max) {
-        int choice;
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                choice = scanner.nextInt();
-                if (choice > max) {
-                    throw new InputMismatchException();
-                }
-                break;
-            } catch (InputMismatchException e) {
-                ConsoleColors.printRed("Invalid value, please enter again.");
-            }
+        int choice = getIntFromInput();
+        while (choice > max) {
+            ConsoleColors.printRed("Invalid value, please enter again.");
+            choice = getIntFromInput();
         }
         return choice;
     }

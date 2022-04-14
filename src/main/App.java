@@ -3,7 +3,6 @@ package main;
 import containers.classes.*;
 import port.Port;
 import port.Train;
-import port.Warehouse;
 import sender.Sender;
 import ship.ContainerLoading;
 import ship.ContainerUnloading;
@@ -77,26 +76,75 @@ public class App {
         }
     }
 
-    private static void manualContainerRemoval(){
-
+    private static ArrayList<String> listContainers(){
+        ArrayList<String> lc = new ArrayList<>();
+        for(StandardContainer container : Port.warehouse.getContainers()){
+            lc.add("id: " + container.id +
+                    ", arrival date: " + container.arrivalDate +
+                    ", due date: " + container.dueDate);
+        }
+        return lc;
     }
 
-    private static void listShip(ArrayList<Ship> ships){
-        ships.forEach(ship -> System.out.println(
+    private static void manualContainerRemoval(){
+        if(Port.warehouse.getContainers().size() == 0){
+            System.out.println("No containers available");
+        }
+        else{
+            System.out.println("Select container to be removed:");
+            for (int i = 1; i <= Port.warehouse.getContainers().size(); i++) {
+                System.out.println(i + ") " + listContainers().get(i-1));
+            }
+            int choice = Evaluators.getIntFromInput(1, Port.warehouse.getContainers().size());
+            Port.warehouse.removeContainer(Port.warehouse.getContainers().get(choice-1));
+            System.out.println("Successfully removed");
+        }
+    }
+
+    private static ArrayList<String> listShip(ArrayList<Ship> ships){
+        ArrayList<String> s = new ArrayList<>();
+        ships.forEach(ship -> s.add(
                 "Ship id: " + ship.id +
                         " name: " + ship.name +
                         " home port: " + ship.homePort +
                         " departure port: " + ship.departurePort +
                         " arrival port: " + ship.arrivalPort)
         );
+        return s;
     }
 
     public static void arriveShip() {
-
+        if(App.ships.size() == 0){
+            System.out.println("No ships available");
+        }
+        else{
+            System.out.println("Select a ship to dock: ");
+            for (int i = 1; i <= App.ships.size(); i++) {
+                System.out.println(i + ") " + listShip(App.ships).get(i-1));
+            }
+            int choice = Evaluators.getIntFromInput(1, App.ships.size());
+            Port.ships.add(App.ships.get(choice-1));
+            App.ships.get(choice-1).arrivalPort = Port.name;
+            App.ships.remove(App.ships.get(choice-1));
+            System.out.println("Ship arrived");
+        }
     }
 
     public static void departShip() {
-
+        if(Port.ships.size() == 0){
+            System.out.println("No ships available");
+        }
+        else{
+            System.out.println("Select a ship to depart: ");
+            for (int i = 1; i <= Port.ships.size(); i++) {
+                System.out.println(i + ") " + listShip(Port.ships).get(i-1));
+            }
+            int choice = Evaluators.getIntFromInput(1, Port.ships.size());
+            App.ships.add(Port.ships.get(choice-1));
+            Port.ships.get(choice-1).departurePort = Port.name;
+            Port.ships.remove(Port.ships.get(choice-1));
+            System.out.println("Ship departed");
+        }
     }
 
     public static void showSendersInfo() {
