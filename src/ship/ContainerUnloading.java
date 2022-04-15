@@ -43,7 +43,7 @@ public class ContainerUnloading {
         }
 
         for (Ship ship : Port.ships) {
-            ConsoleColors.printGreen(
+            System.out.println(
                     "Ship id: " + ship.id +
                             "\nShip name: " + ship.name +
                             "\nContainers on board: {"
@@ -62,7 +62,7 @@ public class ContainerUnloading {
     }
 
     private static StandardContainer containerLookUp() {
-        System.out.println("Please enter container id: ");
+        ConsoleColors.printYellow("Please enter container id: ");
         int id;
         while(true){
             id = Evaluators.getIntFromInput();
@@ -78,7 +78,7 @@ public class ContainerUnloading {
                     }
                 }
             }
-            System.out.println("Container id is invalid or container doesn't exist. Please re-enter or enter -1 to exit");
+            ConsoleColors.printYellow("Container id is invalid or container doesn't exist. Please re-enter or enter -1 to exit");
         }
     }
 

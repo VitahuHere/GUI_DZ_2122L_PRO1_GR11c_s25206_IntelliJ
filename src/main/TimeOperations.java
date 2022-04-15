@@ -12,7 +12,6 @@ import utils.Constants;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.TimerTask;
 
 public class TimeOperations extends TimerTask {
@@ -33,7 +32,7 @@ public class TimeOperations extends TimerTask {
                     throw new IrresponsibleSenderWithDangerousGood(container);
                 }
             } catch (IrresponsibleSenderWithDangerousGood e) {
-                System.out.println(e.getMessage());
+                ConsoleColors.printRed(e.getMessage());
                 container.sender.strikes++;
                 toBeRemoved.add(container);
             }

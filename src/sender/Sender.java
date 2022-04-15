@@ -2,6 +2,7 @@ package sender;
 
 import main.App;
 import utils.ConsoleColors;
+import utils.Constants;
 import utils.Evaluators;
 
 import java.time.LocalDate;
@@ -24,7 +25,7 @@ public class Sender {
             App.senders.add(this);
         }
         else{
-            ConsoleColors.printRed("Sender already exists with this PESEL or PESEL is invalid.");
+            ConsoleColors.printRed(Constants.INVALID_PESEL);
         }
     }
 
@@ -39,7 +40,7 @@ public class Sender {
             App.senders.add(this);
         }
         else{
-            ConsoleColors.printRed("Sender already exists with this PESEL.");
+            ConsoleColors.printRed(Constants.INVALID_PESEL);
         }
     }
 

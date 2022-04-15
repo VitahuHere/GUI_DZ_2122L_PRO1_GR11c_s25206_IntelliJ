@@ -116,7 +116,7 @@ public class ContainerLoading {
                     return c;
                 }
             }
-            ConsoleColors.printRed("Container with id " + choice + " does not exist or is not available. " +
+            ConsoleColors.printYellow("Container with id " + choice + " does not exist or is not available. " +
                     "Please re-enter or type -1 to exit:");
             choice = Evaluators.getIntFromInput("Container id");
         }
@@ -140,7 +140,7 @@ public class ContainerLoading {
                 );
             }
         } else {
-            ConsoleColors.printRed("No ships available.");
+            ConsoleColors.printYellow("No ships available.");
         }
         return Port.ships.size() > 0;
     }
@@ -155,7 +155,8 @@ public class ContainerLoading {
                     return ship;
                 }
             }
-            ConsoleColors.printRed("Ship with id " + choice + " does not exist or is not available. Please re-enter or type -1 to exit:");
+            ConsoleColors.printYellow("Ship with id " + choice + " does not exist or is not available. " +
+                    "Please re-enter or type -1 to exit:");
             choice = Evaluators.getIntFromInput("Ship id");
         }
     }

@@ -13,4 +13,6 @@ public interface Constants {
     int TOXIC_LOOSE_MAX_DAYS = 14;
     int TRAIN_DELAY = 30;
     LocalDate startDate = LocalDate.of(1990, 1, 1);
+    String INVALID_PESEL = "Sender already exists with this PESEL or PESEL is invalid.";
+    String LIMIT_CONTAINER_TYPE = "Reached maximum number of containers of this type. Cannot load more";
 }

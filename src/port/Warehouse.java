@@ -2,7 +2,6 @@ package port;
 
 import containers.classes.StandardContainer;
 import main.TimeOperations;
-import utils.ConsoleColors;
 import utils.Constants;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class Warehouse {
             container.dueDate = container.arrivalDate.plusDays(checkContainerType(container)) == container.arrivalDate ? null : container.arrivalDate.plusDays(checkContainerType(container));
         }
         else{
-            ConsoleColors.printRed("Warehouse is full!");
+            System.out.println("Warehouse is full!");
         }
     }
 
@@ -45,7 +44,7 @@ public class Warehouse {
             this.currentCapacity--;
         }
         else{
-            ConsoleColors.printRed("Container is not in the warehouse!");
+            System.out.println("Container is not in the warehouse!");
         }
     }
 

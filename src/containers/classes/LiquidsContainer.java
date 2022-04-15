@@ -38,7 +38,14 @@ public class LiquidsContainer extends StandardContainer implements LiquidInterfa
     @Override
     public String toString() {
         return super.toString() +
-                ", \nmax capacity=" + maxCapacity +
-                ", \nvalve diameter=" + valveDiameter;
+                ", max capacity=" + maxCapacity +
+                ", valve diameter=" + valveDiameter;
+    }
+
+    @Override
+    public String toSaveString(){
+        return super.toSaveString() +
+                ", maxCapacity" + maxCapacity +
+                ", valveDiameter" + valveDiameter;
     }
 }

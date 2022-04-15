@@ -4,11 +4,13 @@ import main.App;
 import containers.classes.StandardContainer;
 import port.Port;
 import utils.ConsoleColors;
+import utils.Constants;
 import utils.Evaluators;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Ship {
+public class Ship implements Comparable<Ship> {
     public static int shipIndex = 1;
 
     public final int id;
@@ -83,7 +85,7 @@ public class Ship {
     }
 
     public void addContainerOfType(StandardContainer container) {
-        // spent too much time trying to optimise this >:((
+        // spent too much time trying to optimise this and nothing works>:((
         String containerType = container.getClass().getSimpleName();
         switch (containerType) {
             case "ExplosivesContainer":
@@ -94,7 +96,7 @@ public class Ship {
                     this.toxicExplosiveCounter++;
                     this.heavyCounter++;
                 } else {
-                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                    ConsoleColors.printRed(Constants.LIMIT_CONTAINER_TYPE);
                 }
                 break;
             case "ChillerContainer":
@@ -103,7 +105,7 @@ public class Ship {
                     this.electricCounter++;
                     this.heavyCounter++;
                 } else {
-                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                    ConsoleColors.printRed(Constants.LIMIT_CONTAINER_TYPE);
                 }
                 break;
             case "HeavyContainer":
@@ -111,7 +113,7 @@ public class Ship {
                     addContainer(container);
                     this.heavyCounter++;
                 } else {
-                    ConsoleColors.printRed("Reached maximum number of containers of this type. Cannot load more");
+                    ConsoleColors.printRed(Constants.LIMIT_CONTAINER_TYPE);
                 }
                 break;
             default:
@@ -188,7 +190,6 @@ public class Ship {
                     "\nid: " + container.id + ", container type: " + container.getClass().getSimpleName() + ", sender: " + container.sender.name + " " + container.sender.surname
             );
         }
-
         return containerList;
     }
 
@@ -207,5 +208,39 @@ public class Ship {
                 ", \ndeparture port: " + (departurePort == null ? "n/a" : departurePort) +
                 ", \narrival port: " + (arrivalPort == null ? "n/a" : departurePort) +
                 ", \ncontainers: " + (listContainers().size() == 0 ? "n/a" : listContainers());
+    }
+
+    private ArrayList<String> listContainersToSave(){
+        ArrayList<String> containerList = new ArrayList<>();
+        Collections.sort(containers);
+        for(StandardContainer container : containers){
+            containerList.add(container.toSaveString());
+        }
+        return containerList;
+    }
+
+    public String toSaveString() {
+        return "Ship" +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", homePort='" + homePort + '\'' +
+                ", maxCargoWeight=" + maxCargoWeight +
+                ", maxContainersCount=" + maxContainersCount +
+                ", maxToxicExplosiveContainersCount=" + maxToxicExplosiveContainersCount +
+                ", maxHeavyContainersCount=" + maxHeavyContainersCount +
+                ", maxElectricContainersCount=" + maxElectricContainersCount +
+                ", cargoWeight=" + cargoWeight +
+                ", toxicExplosiveCounter=" + toxicExplosiveCounter +
+                ", heavyCounter=" + heavyCounter +
+                ", electricCounter=" + electricCounter +
+                ", slotsAvailable=" + slotsAvailable +
+                ", departurePort='" + departurePort + '\'' +
+                ", arrivalPort='" + arrivalPort + '\'' +
+                ", containers=" + listContainersToSave();
+    }
+
+    @Override
+    public int compareTo(Ship o) {
+        return this.name.compareTo(o.name);
     }
 }

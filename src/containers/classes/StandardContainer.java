@@ -2,6 +2,7 @@ package containers.classes;
 
 import main.App;
 import main.TimeOperations;
+import port.Port;
 import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
@@ -9,7 +10,7 @@ import utils.Evaluators;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class StandardContainer {
+public class StandardContainer implements Comparable<StandardContainer> {
     public static int containerIndex = 1;
     public final int id;
     public final int tare;
@@ -76,16 +77,38 @@ public class StandardContainer {
 
     @Override
     public String toString() {
-        return "\nContainer id: " + id +
-                ", \ntype: " + this.getClass().getSimpleName() +
-                ", \ntare: " + tare +
-                ", \nsize: " + size +
-                ", \ncargo weight: " + cargoWeight +
-                ", \ntotal weight: " + totalWeight +
-                ", \nsafety measures: " + (safetyMeasures.size() == 0 ? "None" : safetyMeasures) +
-                ", \ncertificates: " + (certificates.size() == 0 ? "None" : certificates) +
-                ", \narrival date: " + (arrivalDate == null ? "not set" : arrivalDate) +
-                ", \ndue date: " + (dueDate == null ? "not set" : dueDate) +
-                ", \nsenders name: " + (sender == null ? "not set" : sender.name);
+        return "Container id: " + id +
+                ", type: " + this.getClass().getSimpleName() +
+                ", tare: " + tare +
+                ", size: " + size +
+                ", cargo weight: " + cargoWeight +
+                ", total weight: " + totalWeight +
+                ", safety measures: " + (safetyMeasures.size() == 0 ? "None" : safetyMeasures) +
+                ", certificates: " + (certificates.size() == 0 ? "None" : certificates) +
+                ", arrival date: " + (arrivalDate == null ? "not set" : arrivalDate) +
+                ", due date: " + (dueDate == null ? "not set" : dueDate) +
+                ", senders name: " + (sender == null ? "not set" : sender.name);
+    }
+
+    public String toSaveString() {
+        return this.getClass().getSimpleName() +
+                ", id=" + id +
+                ", tare=" + tare +
+                ", size=" + size +
+                ", cargoWeight=" + cargoWeight +
+                ", totalWeight=" + totalWeight +
+                ", safetyMeasures=" + safetyMeasures +
+                ", certificates=" + certificates +
+                ", sender=" + sender.PESEL +
+                ", arrivalDate=" + arrivalDate +
+                ", dueDate=" + dueDate;
+    }
+
+    @Override
+    public int compareTo(StandardContainer o) {
+        if(Port.warehouse.getContainers().contains(this) && Port.warehouse.getContainers().contains(o)) {
+            return this.arrivalDate.compareTo(o.arrivalDate);
+        }
+        return this.totalWeight - o.totalWeight;
     }
 }

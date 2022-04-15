@@ -21,6 +21,7 @@ public class App {
     public static ArrayList<Sender> senders = new ArrayList<>();
 
     public static void menu() {
+        ConsoleColors.printYellow("Main menu:");
         ConsoleColors.printBlue("""
                 1. Create a cargo ship
                 2. Create a container
@@ -36,7 +37,7 @@ public class App {
                 """);
         ConsoleColors.printYellow("Type in number of the command you want to perform: ");
 
-        int option = Evaluators.getIntFromInput(0, 11);
+        int option = Evaluators.getIntFromInput(0, 10);
 
         switch (option) {
             case 0 -> System.exit(0);
@@ -61,8 +62,8 @@ public class App {
     }
 
     public static void manageContainers(){
-        System.out.println("""
-                Welcome to container managing page
+        ConsoleColors.printYellow("Welcome to container managing page");
+        ConsoleColors.printBlue("""
                 Please select from the following:
                 1. Load container onto a ship
                 2. Offload container from a ship
@@ -91,13 +92,13 @@ public class App {
             System.out.println("No containers available");
         }
         else{
-            System.out.println("Select container to be removed:");
+            ConsoleColors.printYellow("Select container to be removed:");
             for (int i = 1; i <= Port.warehouse.getContainers().size(); i++) {
                 System.out.println(i + ") " + listContainers().get(i-1));
             }
             int choice = Evaluators.getIntFromInput(1, Port.warehouse.getContainers().size());
             Port.warehouse.removeContainer(Port.warehouse.getContainers().get(choice-1));
-            System.out.println("Successfully removed");
+           ConsoleColors.printGreen("Successfully removed");
         }
     }
 
@@ -118,7 +119,7 @@ public class App {
             System.out.println("No ships available");
         }
         else{
-            System.out.println("Select a ship to dock: ");
+            ConsoleColors.printYellow("Select a ship to dock: ");
             for (int i = 1; i <= App.ships.size(); i++) {
                 System.out.println(i + ") " + listShip(App.ships).get(i-1));
             }
@@ -126,7 +127,7 @@ public class App {
             Port.ships.add(App.ships.get(choice-1));
             App.ships.get(choice-1).arrivalPort = Port.name;
             App.ships.remove(App.ships.get(choice-1));
-            System.out.println("Ship arrived");
+            ConsoleColors.printGreen("Ship arrived");
         }
     }
 
@@ -135,7 +136,7 @@ public class App {
             System.out.println("No ships available");
         }
         else{
-            System.out.println("Select a ship to depart: ");
+            ConsoleColors.printYellow("Select a ship to depart: ");
             for (int i = 1; i <= Port.ships.size(); i++) {
                 System.out.println(i + ") " + listShip(Port.ships).get(i-1));
             }
@@ -143,7 +144,7 @@ public class App {
             App.ships.add(Port.ships.get(choice-1));
             Port.ships.get(choice-1).departurePort = Port.name;
             Port.ships.remove(Port.ships.get(choice-1));
-            System.out.println("Ship departed");
+            ConsoleColors.printGreen("Ship departed");
         }
     }
 

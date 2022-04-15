@@ -38,7 +38,7 @@ public class ExplosivesContainer extends HeavyContainer{
                 Evaluators.getIntFromInput("Armor thickness in millimeters"),
                 Evaluators.getStringFromInput("StandardContainer material")
         );
-        this.riskLevel = evalRisk(Evaluators.getIntFromInput("Risk level"));
+        this.riskLevel = evalRisk(Evaluators.getIntFromInput("Risk level 0-5"));
         this.maxTemp = Evaluators.getIntFromInput("Max Temperature");
         ConsoleColors.printGreen("Successfully created container!");
     }
@@ -48,19 +48,24 @@ public class ExplosivesContainer extends HeavyContainer{
             return riskLevel;
         }
         else if(value < Constants.MIN_RISK_VALUE){
-            ConsoleColors.printRed("Invalid value: Risk level too low, setting to 0 [y]");
-            Evaluators.getBooleanFromInput("");
+            ConsoleColors.printRed("Invalid value: Risk level too low, setting to 0");
             return 0;
         }
-        ConsoleColors.printRed("Invalid value: Risk level too high, setting to 5 [y]");
-        Evaluators.getBooleanFromInput("");
+        ConsoleColors.printRed("Invalid value: Risk level too high, setting to 5");
         return 5;
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                ", \nrisk level: " + riskLevel +
-                ", \nmaximum temp: " + maxTemp;
+                ", risk level: " + riskLevel +
+                ", maximum temp: " + maxTemp;
+    }
+
+    @Override
+    public String toSaveString(){
+        return super.toSaveString() +
+                ", riskLevel=" + riskLevel +
+                ", maxTemp=" + maxTemp;
     }
 }

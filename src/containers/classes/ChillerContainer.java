@@ -42,6 +42,11 @@ public class ChillerContainer extends HeavyContainer implements ElectricInterfac
 
     public String toString() {
         return super.toString() +
-                ", \nmaximum power draw: " + this.maximumWattPowerDraw;
+                ", maximum power draw: " + this.maximumWattPowerDraw;
+    }
+
+    @Override
+    public String toSaveString() {
+        return super.toSaveString() + ", maximumWattPowerDraw=" + this.maximumWattPowerDraw;
     }
 }
