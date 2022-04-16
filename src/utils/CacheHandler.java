@@ -3,6 +3,8 @@ package utils;
 import containers.classes.StandardContainer;
 import main.App;
 import port.Port;
+import port.Train;
+import sender.Sender;
 import ship.Ship;
 
 import java.io.FileOutputStream;
@@ -40,6 +42,8 @@ public class CacheHandler {
         saveAppContainers();
         saveShips();
         saveWarehouse();
+        saveTrains();
+        saveSenders();
     }
 
     private static void saveShips(){
@@ -64,6 +68,28 @@ public class CacheHandler {
         try(FileOutputStream fos = new FileOutputStream(APP_CONTAINERS)){
             for(StandardContainer container : App.containers){
                 fos.write((container.toSaveString() + "\n").getBytes());
+            }
+        }
+        catch (IOException ignore){}
+    }
+
+    private static void saveTrains(){
+        try(FileOutputStream fos = new FileOutputStream(APP_TRAINS)){
+            for(Train train : App.trains){
+                fos.write((train.toSaveString() + "\n").getBytes());
+            }
+        }
+        catch (IOException ignore){}
+
+        try(FileOutputStream fos = new FileOutputStream(PORT_TRAIN)){
+            fos.write((Port.train.toSaveString() + "\n").getBytes());
+        } catch (IOException ignore){}
+    }
+
+    private static void saveSenders(){
+        try(FileOutputStream fos = new FileOutputStream(APP_SENDERS)){
+            for(Sender sender : App.senders){
+                fos.write((sender.toSaveString() + "\n").getBytes());
             }
         }
         catch (IOException ignore){}

@@ -9,6 +9,24 @@ import utils.Evaluators;
 
 public class ContainerLoading {
 
+    public static void loadContainerToWarehouse(StandardContainer container) {
+        Port.warehouse.addContainer(container);
+        App.containers.remove(container);
+    }
+
+    public static void loadContainerToWarehouse(){
+        ConsoleColors.printYellow("Welcome to the container loading page.");
+        if(App.containers.size() > 0){
+            ConsoleColors.printYellow("Please select a container");
+            int id = Evaluators.getIntFromInput("Container id");
+            StandardContainer container = containerLookUp(id);
+
+            if(container != null){
+                loadContainerToWarehouse(container);
+            }
+        }
+    }
+
     public static void loadContainerOntoAShip() {
         ConsoleColors.printYellow("Welcome to the container loading page.");
         if(listContainers()){
@@ -35,11 +53,8 @@ public class ContainerLoading {
         App.menu();
     }
 
-    private static boolean listContainers() {
-        boolean isNotEmpty = false;
-        ConsoleColors.printYellow("Free available containers:");
+    private static void listFreeContainers(){
         if (App.containers.size() > 0) {
-            isNotEmpty = true;
             for (StandardContainer container : App.containers) {
                 System.out.println(
                         "Container type: " + container.getClass().getSimpleName() +
@@ -51,10 +66,10 @@ public class ContainerLoading {
         } else {
             ConsoleColors.printGreen("N/A");
         }
+    }
 
-        ConsoleColors.printYellow("Free available containers in warehouse:");
+    private static void listWarehouseContainers(){
         if (Port.warehouse.getContainers().size() > 0) {
-            isNotEmpty = true;
             for (StandardContainer container : Port.warehouse.getContainers()) {
                 System.out.println(
                         "Container id " + container.id +
@@ -66,7 +81,14 @@ public class ContainerLoading {
         } else {
             ConsoleColors.printGreen("N/A");
         }
-        return isNotEmpty;
+    }
+
+    private static boolean listContainers() {
+        ConsoleColors.printYellow("Free available containers:");
+        listFreeContainers();
+        ConsoleColors.printYellow("Free available containers in warehouse:");
+        listWarehouseContainers();
+        return Port.warehouse.getContainers().size() > 0 || App.containers.size() > 0;
     }
 
     private static void loadContainer(Ship ship, StandardContainer container) {

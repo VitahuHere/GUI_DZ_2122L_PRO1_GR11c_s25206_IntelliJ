@@ -5,6 +5,7 @@ import containers.classes.StandardContainer;
 import main.TimeOperations;
 import utils.ConsoleColors;
 import utils.Constants;
+import utils.Returns;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,15 @@ public class Train {
                 "Train id: " + id +
                 ", maximum capacity: " + MAX_CAPACITY +
                 ", current capacity: " + currentCapacity +
-                ", containers: " + containers;
+                ", containers: " + Returns.listContainers(containers);
+    }
+
+    public String toSaveString() {
+        return "Train" +
+                ", MAX_CAPACITY=" + MAX_CAPACITY +
+                ", currentCapacity=" + currentCapacity +
+                ", id=" + id +
+                ", containers=" + Returns.listContainersToSave(containers) +
+                ", isFull=" + isFull;
     }
 }

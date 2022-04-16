@@ -78,4 +78,14 @@ public class Sender {
                 ", birthday: " + getBirthday() +
                 ", strikes: " + strikes;
     }
+
+
+    public String toSaveString() {
+        return "Sender" +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", PESEL='" + PESEL + '\'' +
+                ", address='" + address + '\'' +
+                ", strikes=" + strikes;
+    }
 }

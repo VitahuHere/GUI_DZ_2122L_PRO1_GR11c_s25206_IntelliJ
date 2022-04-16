@@ -6,6 +6,7 @@ import port.Port;
 import utils.ConsoleColors;
 import utils.Constants;
 import utils.Evaluators;
+import utils.Returns;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -183,16 +184,6 @@ public class Ship implements Comparable<Ship> {
         return maxCargoWeight - cargoWeight;
     }
 
-    private ArrayList<String> listContainers() {
-        ArrayList<String> containerList = new ArrayList<>();
-        for (StandardContainer container : containers) {
-            containerList.add(
-                    "\nid: " + container.id + ", container type: " + container.getClass().getSimpleName() + ", sender: " + container.sender.name + " " + container.sender.surname
-            );
-        }
-        return containerList;
-    }
-
     @Override
     public String toString() {
         return "Ship information: " +
@@ -207,16 +198,7 @@ public class Ship implements Comparable<Ship> {
                 ", \ncargo weight: " + cargoWeight +
                 ", \ndeparture port: " + (departurePort == null ? "n/a" : departurePort) +
                 ", \narrival port: " + (arrivalPort == null ? "n/a" : departurePort) +
-                ", \ncontainers: " + (listContainers().size() == 0 ? "n/a" : listContainers());
-    }
-
-    private ArrayList<String> listContainersToSave(){
-        ArrayList<String> containerList = new ArrayList<>();
-        Collections.sort(containers);
-        for(StandardContainer container : containers){
-            containerList.add(container.toSaveString());
-        }
-        return containerList;
+                ", \ncontainers: " + (Returns.listContainers(containers).size() == 0 ? "n/a" : Returns.listContainers(containers));
     }
 
     public String toSaveString() {
@@ -236,7 +218,7 @@ public class Ship implements Comparable<Ship> {
                 ", slotsAvailable=" + slotsAvailable +
                 ", departurePort='" + departurePort + '\'' +
                 ", arrivalPort='" + arrivalPort + '\'' +
-                ", containers=" + listContainersToSave();
+                ", containers=" + Returns.listContainersToSave(containers);
     }
 
     @Override
