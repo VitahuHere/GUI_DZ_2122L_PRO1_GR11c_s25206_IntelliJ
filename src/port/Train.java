@@ -14,7 +14,7 @@ public class Train {
     public int currentCapacity;
 
     private static int trainIndex = 0;
-    private final int id;
+    private int id;
     private final ArrayList<StandardContainer> containers;
 
     private boolean isFull;
@@ -44,6 +44,11 @@ public class Train {
 
     public ArrayList<StandardContainer> getContainers() {
         return containers;
+    }
+
+    public void setParams(int id, int index){
+        this.id = id;
+        trainIndex = index;
     }
 
     @Override

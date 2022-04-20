@@ -54,6 +54,10 @@ public class Warehouse {
         return this.containers;
     }
 
+    public void loadContainers(ArrayList<StandardContainer> containers){
+        this.containers.addAll(containers);
+    }
+
     @Override
     public String toString() {
         return "Warehouse" +

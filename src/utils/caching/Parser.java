@@ -107,6 +107,23 @@ public class Parser {
         return result;
     }
 
+    public static ArrayList<String> getParamList(String list){
+        ArrayList<String> result = new ArrayList<>();
+        StringBuilder value = new StringBuilder();
+        int c, i = 0;
+        while((c = list.charAt(++i)) != ']'){
+            if(c == ','){
+                result.add(value.toString());
+                value.setLength(0);
+            }
+            else {
+                value.append((char) c);
+            }
+        }
+        result.add(value.toString());
+        return result;
+    }
+
     public static ArrayList<HashMap<String, String>> parse(String path) {
         ArrayList<HashMap<String, String>> result = new ArrayList<>();
         try {

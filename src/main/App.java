@@ -10,7 +10,6 @@ import ship.Ship;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 

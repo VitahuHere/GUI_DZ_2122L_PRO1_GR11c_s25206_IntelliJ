@@ -24,11 +24,11 @@ public class Ship implements Comparable<Ship> {
     public final ArrayList<StandardContainer> containers;
 
     // helper fields
-    private int cargoWeight;
-    private int toxicExplosiveCounter;
-    private int heavyCounter;
-    private int electricCounter;
-    private int slotsAvailable;
+    int cargoWeight;
+    int toxicExplosiveCounter;
+    int heavyCounter;
+    int electricCounter;
+    int slotsAvailable;
 
 
     public String departurePort;

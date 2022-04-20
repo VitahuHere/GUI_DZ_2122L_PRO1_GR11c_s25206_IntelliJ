@@ -3,6 +3,7 @@ package utils;
 import containers.classes.StandardContainer;
 import main.App;
 import sender.Sender;
+import utils.caching.loaders.LoadSenders;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +29,7 @@ public class Returns {
     }
 
     public static Sender findSender(String PESEL) {
-        for(Sender sender : App.senders) {
+        for(Sender sender : LoadSenders.senders) {
             if (sender.PESEL.equals(PESEL)) {
                 return sender;
             }
