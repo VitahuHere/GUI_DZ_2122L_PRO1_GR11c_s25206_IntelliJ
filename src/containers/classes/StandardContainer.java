@@ -91,17 +91,17 @@ public class StandardContainer implements Comparable<StandardContainer> {
     }
 
     public String toSaveString() {
-        return this.getClass().getSimpleName() +
-                ", id=" + id +
-                ", tare=" + tare +
-                ", size=" + size +
-                ", cargoWeight=" + cargoWeight +
-                ", totalWeight=" + totalWeight +
-                ", safetyMeasures=" + safetyMeasures +
-                ", certificates=" + certificates +
-                ", sender=" + sender.PESEL +
-                ", arrivalDate=" + arrivalDate +
-                ", dueDate=" + dueDate;
+        return "\n\ttype: " + this.getClass().getSimpleName() +
+                ", \n\tid: " + id +
+                ", \n\ttare: " + tare +
+                ", \n\tsize: " + size +
+                ", \n\tcargoWeight: " + cargoWeight +
+                ", \n\ttotalWeight: " + totalWeight +
+                ", \n\tsafetyMeasures: " + safetyMeasures +
+                ", \n\tcertificates: " + certificates +
+                ", \n\tsender: " + sender.PESEL +
+                ", \n\tarrivalDate: " + arrivalDate +
+                ", \n\tdueDate: " + dueDate;
     }
 
     @Override

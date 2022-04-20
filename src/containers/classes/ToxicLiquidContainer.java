@@ -45,13 +45,13 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
     public String toString() {
         return super.toString() +
                 ", acid safe: " + this.acidSafe +
-                ", valve diameter " + valveDiameter;
+                ", valve diameter: " + valveDiameter;
     }
 
     @Override
     public String toSaveString(){
         return super.toSaveString() +
-                ", acidSafe=" + this.acidSafe +
-                ", valveDiameter=" + valveDiameter;
+                ", \n\tacidSafe: " + this.acidSafe +
+                ", \n\tvalveDiameter: " + valveDiameter;
     }
 }

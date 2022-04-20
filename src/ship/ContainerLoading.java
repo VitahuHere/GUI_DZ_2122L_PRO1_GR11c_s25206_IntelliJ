@@ -3,6 +3,7 @@ package ship;
 import main.App;
 import containers.classes.StandardContainer;
 import port.Port;
+import port.Warehouse;
 import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
@@ -16,7 +17,7 @@ public class ContainerLoading {
 
     public static void loadContainerToWarehouse(){
         ConsoleColors.printYellow("Welcome to the container loading page.");
-        if(App.containers.size() > 0){
+        if(App.containers.size() > 0 && checkList(Port.warehouse)){
             ConsoleColors.printYellow("Please select a container");
             int id = Evaluators.getIntFromInput("Container id");
             StandardContainer container = containerLookUp(id);
@@ -25,6 +26,13 @@ public class ContainerLoading {
                 loadContainerToWarehouse(container);
             }
         }
+        else{
+            ConsoleColors.printRed("No containers available or Warehouse is full");
+        }
+    }
+
+    private static boolean checkList(Warehouse warehouse){
+        return warehouse.getContainers().size() < warehouse.maxCapacity;
     }
 
     public static void loadContainerOntoAShip() {

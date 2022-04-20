@@ -65,7 +65,7 @@ public class ExplosivesContainer extends HeavyContainer{
     @Override
     public String toSaveString(){
         return super.toSaveString() +
-                ", riskLevel=" + riskLevel +
-                ", maxTemp=" + maxTemp;
+                ", \n\triskLevel: " + riskLevel +
+                ", \n\tmaxTemp: " + maxTemp;
     }
 }

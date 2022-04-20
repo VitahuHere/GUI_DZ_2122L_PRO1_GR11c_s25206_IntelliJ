@@ -10,6 +10,7 @@ import ship.Ship;
 import utils.ConsoleColors;
 import utils.Evaluators;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -68,12 +69,15 @@ public class App {
                 1. Load container onto a ship
                 2. Offload container from a ship
                 3. Remove container from warehouse
+                4. Move free container to warehouse
+                0. Back
                 """);
-        int choice = Evaluators.getIntFromInput(1, 3);
+        int choice = Evaluators.getIntFromInput(0, 4);
         switch (choice){
             case 1 -> ContainerLoading.loadContainerOntoAShip();
             case 2 -> containerUnloading();
             case 3 -> manualContainerRemoval();
+            case 4 -> ContainerLoading.loadContainerToWarehouse();
         }
     }
 

@@ -1,6 +1,8 @@
 package utils;
 
 import containers.classes.StandardContainer;
+import main.App;
+import sender.Sender;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,8 +11,8 @@ public class Returns {
     public static ArrayList<String> listContainersToSave(ArrayList<StandardContainer> containers) {
         ArrayList<String> containerList = new ArrayList<>();
         Collections.sort(containers);
-        for(StandardContainer container : containers){
-            containerList.add(container.toSaveString());
+        for (StandardContainer container : containers) {
+            containerList.add("[" + container.toSaveString() + "]\n\t");
         }
         return containerList;
     }
@@ -23,5 +25,14 @@ public class Returns {
             );
         }
         return containerList;
+    }
+
+    public static Sender findSender(String PESEL) {
+        for(Sender sender : App.senders) {
+            if (sender.PESEL.equals(PESEL)) {
+                return sender;
+            }
+        }
+        return null;
     }
 }

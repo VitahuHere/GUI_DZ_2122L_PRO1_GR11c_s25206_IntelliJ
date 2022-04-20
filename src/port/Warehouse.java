@@ -6,6 +6,8 @@ import utils.Constants;
 
 import java.util.ArrayList;
 
+import static utils.Returns.listContainersToSave;
+
 public class Warehouse {
     public final int maxCapacity;
     private int currentCapacity;
@@ -54,8 +56,14 @@ public class Warehouse {
 
     @Override
     public String toString() {
-        return "Warehouse " +
-                " current capacity:" + currentCapacity +
+        return "Warehouse" +
+                ", current capacity:" + currentCapacity +
                 ", containers: " + containers;
+    }
+
+    public String toSaveString(){
+        return "\n\ttype: Warehouse" +
+                ", \n\tcurrent capacity: " + currentCapacity +
+                ", \n\tcontainers: " + listContainersToSave(containers);
     }
 }

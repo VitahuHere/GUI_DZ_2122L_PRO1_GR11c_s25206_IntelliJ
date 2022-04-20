@@ -56,11 +56,11 @@ public class Train {
     }
 
     public String toSaveString() {
-        return "Train" +
-                ", MAX_CAPACITY=" + MAX_CAPACITY +
-                ", currentCapacity=" + currentCapacity +
-                ", id=" + id +
-                ", containers=" + Returns.listContainersToSave(containers) +
-                ", isFull=" + isFull;
+        return "\n\ttype: Train" +
+                ", \n\tMAX_CAPACITY: " + MAX_CAPACITY +
+                ", \n\tcurrentCapacity: " + currentCapacity +
+                ", \n\tid: " + id +
+                ", \n\tcontainers: " + Returns.listContainersToSave(containers) +
+                ", \n\tisFull: " + isFull;
     }
 }

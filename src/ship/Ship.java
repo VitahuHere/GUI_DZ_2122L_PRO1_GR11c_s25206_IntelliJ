@@ -9,7 +9,6 @@ import utils.Evaluators;
 import utils.Returns;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Ship implements Comparable<Ship> {
     public static int shipIndex = 1;
@@ -202,23 +201,23 @@ public class Ship implements Comparable<Ship> {
     }
 
     public String toSaveString() {
-        return "Ship" +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", homePort='" + homePort + '\'' +
-                ", maxCargoWeight=" + maxCargoWeight +
-                ", maxContainersCount=" + maxContainersCount +
-                ", maxToxicExplosiveContainersCount=" + maxToxicExplosiveContainersCount +
-                ", maxHeavyContainersCount=" + maxHeavyContainersCount +
-                ", maxElectricContainersCount=" + maxElectricContainersCount +
-                ", cargoWeight=" + cargoWeight +
-                ", toxicExplosiveCounter=" + toxicExplosiveCounter +
-                ", heavyCounter=" + heavyCounter +
-                ", electricCounter=" + electricCounter +
-                ", slotsAvailable=" + slotsAvailable +
-                ", departurePort='" + departurePort + '\'' +
-                ", arrivalPort='" + arrivalPort + '\'' +
-                ", containers=" + Returns.listContainersToSave(containers);
+        return "\n\ttype: Ship" +
+                ", \n\tid: " + id +
+                ", \n\tname: '" + name + '\'' +
+                ", \n\thomePort: '" + homePort + '\'' +
+                ", \n\tmaxCargoWeight: " + maxCargoWeight +
+                ", \n\tmaxContainersCount: " + maxContainersCount +
+                ", \n\tmaxToxicExplosiveContainersCount: " + maxToxicExplosiveContainersCount +
+                ", \n\tmaxHeavyContainersCount: " + maxHeavyContainersCount +
+                ", \n\tmaxElectricContainersCount: " + maxElectricContainersCount +
+                ", \n\tcargoWeight: " + cargoWeight +
+                ", \n\ttoxicExplosiveCounter: " + toxicExplosiveCounter +
+                ", \n\theavyCounter: " + heavyCounter +
+                ", \n\telectricCounter: " + electricCounter +
+                ", \n\tslotsAvailable: " + slotsAvailable +
+                ", \n\tdeparturePort: '" + departurePort + '\'' +
+                ", \n\tarrivalPort: '" + arrivalPort + '\'' +
+                ", \n\tcontainers: " + Returns.listContainersToSave(containers);
     }
 
     @Override

@@ -81,11 +81,11 @@ public class Sender {
 
 
     public String toSaveString() {
-        return "Sender" +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", PESEL='" + PESEL + '\'' +
-                ", address='" + address + '\'' +
-                ", strikes=" + strikes;
+        return "\n\ttype: Sender" +
+                ", \n\tname: '" + name + '\'' +
+                ", \n\tsurname: '" + surname + '\'' +
+                ", \n\tPESEL: '" + PESEL + '\'' +
+                ", \n\taddress: '" + address + '\'' +
+                ", \n\tstrikes: " + strikes;
     }
 }
