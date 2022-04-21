@@ -44,11 +44,11 @@ public class HeavyContainer extends StandardContainer {
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
                 Evaluators.getIntFromInput("Cargo Weight"),
-                Evaluators.getArrayListFromInput("safety measures"),
-                Evaluators.getArrayListFromInput("certificates")
+                Evaluators.getArrayListFromInput("Safety measures"),
+                Evaluators.getArrayListFromInput("Certificates")
         );
         this.armorThickness = Evaluators.getIntFromInput("Armor thickness in millimeters");
-        this.containerMaterial = Evaluators.getStringFromInput("StandardContainer material");
+        this.containerMaterial = Evaluators.getStringFromInput("Container material");
         ConsoleColors.printGreen("Successfully created container!");
     }
 

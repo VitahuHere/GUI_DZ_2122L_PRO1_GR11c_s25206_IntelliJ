@@ -3,6 +3,7 @@ package port;
 import containers.classes.StandardContainer;
 import main.TimeOperations;
 import utils.Constants;
+import utils.Returns;
 
 import java.util.ArrayList;
 
@@ -54,15 +55,11 @@ public class Warehouse {
         return this.containers;
     }
 
-    public void loadContainers(ArrayList<StandardContainer> containers){
-        this.containers.addAll(containers);
-    }
-
     @Override
     public String toString() {
         return "Warehouse" +
                 ", current capacity:" + currentCapacity +
-                ", containers: " + containers;
+                ", containers: " + Returns.listContainers(this.containers);
     }
 
     public String toSaveString(){

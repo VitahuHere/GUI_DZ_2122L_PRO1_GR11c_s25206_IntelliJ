@@ -33,8 +33,8 @@ public class ExplosivesContainer extends HeavyContainer{
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
                 Evaluators.getIntFromInput("Cargo Weight"),
-                Evaluators.getArrayListFromInput("safety measures"),
-                Evaluators.getArrayListFromInput("certificates"),
+                Evaluators.getArrayListFromInput("Safety measures"),
+                Evaluators.getArrayListFromInput("Certificates"),
                 Evaluators.getIntFromInput("Armor thickness in millimeters"),
                 Evaluators.getStringFromInput("StandardContainer material")
         );

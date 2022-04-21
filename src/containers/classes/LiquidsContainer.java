@@ -1,11 +1,11 @@
 package containers.classes;
 
-import java.util.ArrayList;
-
 import containers.interfaces.LiquidInterface;
 import sender.Sender;
 import utils.ConsoleColors;
 import utils.Evaluators;
+
+import java.util.ArrayList;
 
 public class LiquidsContainer extends StandardContainer implements LiquidInterface {
     public final int maxCapacity;
@@ -28,8 +28,8 @@ public class LiquidsContainer extends StandardContainer implements LiquidInterfa
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
                 Evaluators.getIntFromInput("Cargo weight"),
-                Evaluators.getArrayListFromInput("safety measures"),
-                Evaluators.getArrayListFromInput("certificates")
+                Evaluators.getArrayListFromInput("Safety measures"),
+                Evaluators.getArrayListFromInput("Certificates")
         );
         this.maxCapacity = Evaluators.getIntFromInput("Maximum capacity");
         ConsoleColors.printGreen("Successfully created container!");

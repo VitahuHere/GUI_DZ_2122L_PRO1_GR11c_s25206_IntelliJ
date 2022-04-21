@@ -2,6 +2,7 @@ package utils.caching;
 
 import containers.classes.StandardContainer;
 import main.App;
+import main.TimeOperations;
 import port.Port;
 import port.Train;
 import sender.Sender;
@@ -9,6 +10,7 @@ import ship.Ship;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 import static utils.Constants.*;
@@ -42,7 +44,7 @@ public class Saver {
     }
 
     public static void saveTrains(){
-        try(FileOutputStream fos = new FileOutputStream(APP_TRAINS, true)){
+        try(FileOutputStream fos = new FileOutputStream(APP_TRAINS)){
             for(Train train : App.trains){
                 fos.write(("{" + train.toSaveString() + "\n}\n").getBytes());
             }
@@ -66,7 +68,18 @@ public class Saver {
     public static void saveWarehouse() {
         try (FileOutputStream fos = new FileOutputStream(PORT_WAREHOUSE)) {
             fos.write(("{" + Port.warehouse.toSaveString() + "\n}\n").getBytes());
-        } catch (IOException ignore) {
-        }
+        } catch (IOException ignore) {}
+    }
+
+    public static void saveRemovedIds(){
+        try (FileOutputStream fos = new FileOutputStream(REMOVED_IDS)){
+            fos.write(App.removedIds.toString().getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ignore){}
+    }
+
+    public static void saveCurrentTime(){
+        try(FileOutputStream fos = new FileOutputStream(CURRENT_TIME)){
+            fos.write(TimeOperations.currentDate.toString().getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ignore){}
     }
 }

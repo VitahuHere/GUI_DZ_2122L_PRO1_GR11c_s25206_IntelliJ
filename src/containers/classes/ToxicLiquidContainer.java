@@ -32,8 +32,8 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
                 Evaluators.getIntFromInput("Cargo Weight"),
-                Evaluators.getArrayListFromInput("safety measures"),
-                Evaluators.getArrayListFromInput("certificates"),
+                Evaluators.getArrayListFromInput("Safety measures"),
+                Evaluators.getArrayListFromInput("Certificates"),
                 Evaluators.getIntFromInput("Armor thickness in millimeters"),
                 Evaluators.getStringFromInput("Container material")
         );

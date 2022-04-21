@@ -62,8 +62,8 @@ public class StandardContainer implements Comparable<StandardContainer> {
         this.size = Evaluators.getIntFromInput("Size");
         this.cargoWeight = Evaluators.getIntFromInput("Cargo weight");
         this.totalWeight = cargoWeight + tare;
-        this.safetyMeasures = Evaluators.getArrayListFromInput("safety measures");
-        this.certificates = Evaluators.getArrayListFromInput("certificates");
+        this.safetyMeasures = Evaluators.getArrayListFromInput("Safety measures");
+        this.certificates = Evaluators.getArrayListFromInput("Certificates");
         ConsoleColors.printGreen("Successfully created container!");
         App.containers.add(this);
     }
@@ -99,7 +99,7 @@ public class StandardContainer implements Comparable<StandardContainer> {
                 ", \n\ttotalWeight: " + totalWeight +
                 ", \n\tsafetyMeasures: " + safetyMeasures +
                 ", \n\tcertificates: " + certificates +
-                ", \n\tsender: " + sender.PESEL +
+                ", \n\tsender: " + (sender != null ? sender.PESEL : "null") +
                 ", \n\tarrivalDate: " + arrivalDate +
                 ", \n\tdueDate: " + dueDate;
     }

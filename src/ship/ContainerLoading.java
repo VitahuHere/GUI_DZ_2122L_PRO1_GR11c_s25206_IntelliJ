@@ -1,7 +1,7 @@
 package ship;
 
-import main.App;
 import containers.classes.StandardContainer;
+import main.App;
 import port.Port;
 import port.Warehouse;
 import sender.Sender;
@@ -102,11 +102,13 @@ public class ContainerLoading {
     private static void loadContainer(Ship ship, StandardContainer container) {
         ship.addContainerOfType(container);
         App.containers.remove(container);
+        container.arrivalDate = null;
+        container.dueDate = null;
         ConsoleColors.printGreen("Successfully loaded container.");
     }
 
     private static boolean checkList(Ship ship, StandardContainer container){
-        if(ship.getSlotsAvailable() <= 0 || ship.getWeightAvailable() + container.totalWeight > ship.maxCargoWeight){
+        if(ship.getSlotsAvailable() <= 0 || ship.getWeightAvailable() - container.totalWeight < 0){
             ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
             return false;
         }
@@ -152,10 +154,6 @@ public class ContainerLoading {
         }
     }
 
-    private static Ship shipLookUp(int choice){
-        return searchForShip(choice);
-    }
-
     private static boolean listAvailableShips() {
         if (Port.ships.size() > 0) {
             ConsoleColors.printYellow("Available ships in port:");
@@ -175,7 +173,7 @@ public class ContainerLoading {
         return Port.ships.size() > 0;
     }
 
-    private static Ship searchForShip(int choice) {
+    private static Ship shipLookUp(int choice) {
         while(true){
             if(choice == -1){
                 return null;

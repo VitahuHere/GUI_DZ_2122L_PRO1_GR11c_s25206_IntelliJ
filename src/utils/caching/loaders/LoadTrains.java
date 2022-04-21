@@ -1,5 +1,6 @@
 package utils.caching.loaders;
 
+import main.App;
 import port.Train;
 import utils.Constants;
 import utils.caching.Parser;
@@ -18,9 +19,12 @@ public class LoadTrains {
             Train t = new Train();
             t.setParams(Integer.parseInt(train.get("id")), Integer.parseInt(train.get("id")));
             portTrain = t;
-            for(String s : train.get("ids").split(",")){
-                containerIds.add(Integer.parseInt(s));
+            if(train.get("ids") != null){
+                for(String s : train.get("ids").split(",")){
+                    containerIds.add(Integer.parseInt(s));
+                }
             }
         }
+        App.trains.remove(portTrain);
     }
 }

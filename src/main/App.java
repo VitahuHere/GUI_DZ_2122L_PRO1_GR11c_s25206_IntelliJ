@@ -9,6 +9,7 @@ import ship.ContainerUnloading;
 import ship.Ship;
 import utils.ConsoleColors;
 import utils.Evaluators;
+import utils.caching.CacheHandler;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class App {
     public static ArrayList<StandardContainer> containers = new ArrayList<>();
     public static ArrayList<Train> trains = new ArrayList<>();
     public static ArrayList<Sender> senders = new ArrayList<>();
+    public static ArrayList<Integer> removedIds = new ArrayList<>();
 
     public static void menu() {
         ConsoleColors.printYellow("Main menu:");
@@ -33,14 +35,15 @@ public class App {
                 8. Information about warehouse
                 9. Information about trains
                 10. Information about senders
+                11. Save current port status
                 0. Exit
                 """);
         ConsoleColors.printYellow("Type in number of the command you want to perform: ");
 
-        int option = Evaluators.getIntFromInput(0, 10);
+        int option = Evaluators.getIntFromInput(0, 11);
 
         switch (option) {
-            case 0 -> System.exit(0);
+            case 0 -> exit();
             case 1 -> shipCreation();
             case 2 -> createContainer();
             case 3 -> new Sender();
@@ -51,8 +54,18 @@ public class App {
             case 8 -> showWarehouseInfo();
             case 9 -> showTrainInfo();
             case 10 -> showSendersInfo();
+            case 11 -> save();
         }
         App.menu();
+    }
+
+    private static void save(){
+        CacheHandler.saveApp();
+    }
+
+    private static void exit(){
+        CacheHandler.saveApp();
+        System.exit(0);
     }
 
     public static void shipCreation(){
@@ -185,7 +198,7 @@ public class App {
             ConsoleColors.printGreen("N/A");
         } else {
             for (Ship ship : ships) {
-                ConsoleColors.printBlue(ship.toString());
+                System.out.println(ship.toString());
             }
         }
         System.out.println("Ships in port: ");
@@ -193,7 +206,7 @@ public class App {
             ConsoleColors.printGreen("N/A");
         } else {
             for (Ship ship : Port.ships) {
-                ConsoleColors.printBlue(ship.toString());
+                System.out.println(ship.toString() + "\n");
             }
         }
     }

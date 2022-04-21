@@ -1,6 +1,8 @@
 package utils.caching.loaders;
 
 import containers.classes.*;
+import main.App;
+import sender.Sender;
 import utils.Constants;
 import utils.caching.Parser;
 
@@ -42,7 +44,12 @@ public class LoadContainers {
     public static void loadAppContainers() {
         ArrayList<HashMap<String, String>> alex = getContainers();
         alex.sort(Comparator.comparing(o -> Integer.parseInt(o.get("id"))));
+        int i = 1;
         for (HashMap<String, String> map : alex) {
+            if(LoadRemovedIds.removedIds.contains(i)){
+                StandardContainer container = new StandardContainer(0, 0, 0, new ArrayList<>(), new ArrayList<>(), new Sender("", "", "", ""));
+                App.containers.remove(container);
+            }
             StandardContainer container = null;
             switch (map.get("type")) {
                 case "StandardContainer" -> container = Standard(map);
@@ -68,6 +75,7 @@ public class LoadContainers {
                 }
             }
             allContainers.add(container);
+            i++;
         }
     }
 

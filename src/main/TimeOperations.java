@@ -39,6 +39,7 @@ public class TimeOperations extends TimerTask {
         }
         for(StandardContainer container : toBeRemoved){
             Port.warehouse.removeContainer(container);
+            App.removedIds.add(container.id);
         }
     }
 

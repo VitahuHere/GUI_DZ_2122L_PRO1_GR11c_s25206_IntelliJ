@@ -112,7 +112,7 @@ public class Parser {
         StringBuilder value = new StringBuilder();
         int c, i = 0;
         while((c = list.charAt(++i)) != ']'){
-            if(c == ','){
+            if(c == ',' && list.charAt(++i) == ' '){
                 result.add(value.toString());
                 value.setLength(0);
             }

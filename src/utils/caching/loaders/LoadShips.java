@@ -1,5 +1,6 @@
 package utils.caching.loaders;
 
+import port.Port;
 import ship.Ship;
 import utils.Constants;
 import utils.caching.Parser;
@@ -34,6 +35,7 @@ public class LoadShips {
                     );
             s.departurePort = ship.get("departurePort");
             s.arrivalPort = ship.get("arrivalPort");
+            Port.ships.remove(s);
             allShips.add(s);
         }
     }

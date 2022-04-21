@@ -1,7 +1,6 @@
 package utils;
 
 import containers.classes.StandardContainer;
-import main.App;
 import sender.Sender;
 import utils.caching.loaders.LoadSenders;
 
@@ -22,7 +21,11 @@ public class Returns {
         ArrayList<String> containerList = new ArrayList<>();
         for (StandardContainer container : containers) {
             containerList.add(
-                    "\nid: " + container.id + ", container type: " + container.getClass().getSimpleName() + ", sender: " + container.sender.name + " " + container.sender.surname
+                    "\nid: " + container.id +
+                            ", container type: " + container.getClass().getSimpleName() +
+                            ", sender: " + container.sender.name + " " + container.sender.surname +
+                            (container.arrivalDate == null ? "" : ", arrival date: " + container.arrivalDate) +
+                            (container.dueDate == null ? "" : ", due date: " + container.dueDate)
             );
         }
         return containerList;
