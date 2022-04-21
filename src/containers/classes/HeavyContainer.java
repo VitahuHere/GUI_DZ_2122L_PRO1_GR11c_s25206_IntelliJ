@@ -60,7 +60,7 @@ public class HeavyContainer extends StandardContainer {
     }
 
     @Override
-    public String toSaveString(){
+    public String toSaveString() {
         return super.toSaveString() +
                 ", \n\tarmorThickness: " + this.armorThickness +
                 ", \n\tcontainerMaterial: '" + this.containerMaterial + "'";

@@ -32,7 +32,7 @@ public class Returns {
     }
 
     public static Sender findSender(String PESEL) {
-        for(Sender sender : LoadSenders.senders) {
+        for (Sender sender : LoadSenders.senders) {
             if (sender.PESEL.equals(PESEL)) {
                 return sender;
             }

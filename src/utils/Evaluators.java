@@ -37,7 +37,7 @@ public class Evaluators {
         return returner;
     }
 
-    public static int getIntFromInput(){
+    public static int getIntFromInput() {
         int choice;
         while (true) {
             try {
@@ -53,7 +53,7 @@ public class Evaluators {
     public static int getIntFromInput(String key) {
         System.out.println(key + ":");
         int choice = getIntFromInput();
-        while(choice < 0){
+        while (choice < 0) {
             ConsoleColors.printRed("Invalid value, please enter again.");
             choice = getIntFromInput();
         }

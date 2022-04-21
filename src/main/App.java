@@ -59,22 +59,22 @@ public class App {
         App.menu();
     }
 
-    private static void save(){
+    private static void save() {
         CacheHandler.saveApp();
     }
 
-    private static void exit(){
+    private static void exit() {
         CacheHandler.saveApp();
         System.exit(0);
     }
 
-    public static void shipCreation(){
+    public static void shipCreation() {
         ConsoleColors.printYellow("Welcome to Ship creation page!");
         ConsoleColors.printYellow("Please enter following information:");
         new Ship();
     }
 
-    public static void manageContainers(){
+    public static void manageContainers() {
         ConsoleColors.printYellow("Welcome to container managing page");
         ConsoleColors.printBlue("""
                 Please select from the following:
@@ -85,7 +85,7 @@ public class App {
                 0. Back
                 """);
         int choice = Evaluators.getIntFromInput(0, 4);
-        switch (choice){
+        switch (choice) {
             case 1 -> ContainerLoading.loadContainerOntoAShip();
             case 2 -> containerUnloading();
             case 3 -> manualContainerRemoval();
@@ -93,9 +93,9 @@ public class App {
         }
     }
 
-    private static ArrayList<String> listContainers(){
+    private static ArrayList<String> listContainers() {
         ArrayList<String> lc = new ArrayList<>();
-        for(StandardContainer container : Port.warehouse.getContainers()){
+        for (StandardContainer container : Port.warehouse.getContainers()) {
             lc.add("id: " + container.id +
                     ", arrival date: " + container.arrivalDate +
                     ", due date: " + container.dueDate);
@@ -103,22 +103,21 @@ public class App {
         return lc;
     }
 
-    private static void manualContainerRemoval(){
-        if(Port.warehouse.getContainers().size() == 0){
+    private static void manualContainerRemoval() {
+        if (Port.warehouse.getContainers().size() == 0) {
             System.out.println("No containers available");
-        }
-        else{
+        } else {
             ConsoleColors.printYellow("Select container to be removed:");
             for (int i = 1; i <= Port.warehouse.getContainers().size(); i++) {
-                System.out.println(i + ") " + listContainers().get(i-1));
+                System.out.println(i + ") " + listContainers().get(i - 1));
             }
             int choice = Evaluators.getIntFromInput(1, Port.warehouse.getContainers().size());
-            Port.warehouse.removeContainer(Port.warehouse.getContainers().get(choice-1));
-           ConsoleColors.printGreen("Successfully removed");
+            Port.warehouse.removeContainer(Port.warehouse.getContainers().get(choice - 1));
+            ConsoleColors.printGreen("Successfully removed");
         }
     }
 
-    private static ArrayList<String> listShip(ArrayList<Ship> ships){
+    private static ArrayList<String> listShip(ArrayList<Ship> ships) {
         ArrayList<String> s = new ArrayList<>();
         ships.forEach(ship -> s.add(
                 "Ship id: " + ship.id +
@@ -131,35 +130,33 @@ public class App {
     }
 
     public static void arriveShip() {
-        if(App.ships.size() == 0){
+        if (App.ships.size() == 0) {
             System.out.println("No ships available");
-        }
-        else{
+        } else {
             ConsoleColors.printYellow("Select a ship to dock: ");
             for (int i = 1; i <= App.ships.size(); i++) {
-                System.out.println(i + ") " + listShip(App.ships).get(i-1));
+                System.out.println(i + ") " + listShip(App.ships).get(i - 1));
             }
             int choice = Evaluators.getIntFromInput(1, App.ships.size());
-            Port.ships.add(App.ships.get(choice-1));
-            App.ships.get(choice-1).arrivalPort = Port.name;
-            App.ships.remove(App.ships.get(choice-1));
+            Port.ships.add(App.ships.get(choice - 1));
+            App.ships.get(choice - 1).arrivalPort = Port.name;
+            App.ships.remove(App.ships.get(choice - 1));
             ConsoleColors.printGreen("Ship arrived");
         }
     }
 
     public static void departShip() {
-        if(Port.ships.size() == 0){
+        if (Port.ships.size() == 0) {
             System.out.println("No ships available");
-        }
-        else{
+        } else {
             ConsoleColors.printYellow("Select a ship to depart: ");
             for (int i = 1; i <= Port.ships.size(); i++) {
-                System.out.println(i + ") " + listShip(Port.ships).get(i-1));
+                System.out.println(i + ") " + listShip(Port.ships).get(i - 1));
             }
             int choice = Evaluators.getIntFromInput(1, Port.ships.size());
-            App.ships.add(Port.ships.get(choice-1));
-            Port.ships.get(choice-1).departurePort = Port.name;
-            Port.ships.remove(Port.ships.get(choice-1));
+            App.ships.add(Port.ships.get(choice - 1));
+            Port.ships.get(choice - 1).departurePort = Port.name;
+            Port.ships.remove(Port.ships.get(choice - 1));
             ConsoleColors.printGreen("Ship departed");
         }
     }
@@ -183,10 +180,9 @@ public class App {
 
     public static void showWarehouseInfo() {
         System.out.println("Current date: " + TimeOperations.currentDate);
-        if(Port.warehouse.getContainers().size() == 0){
+        if (Port.warehouse.getContainers().size() == 0) {
             System.out.println("Warehouse is empty.");
-        }
-        else{
+        } else {
             System.out.println(Port.warehouse);
         }
 

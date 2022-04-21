@@ -14,8 +14,8 @@ public class ContainerUnloading {
         ConsoleColors.printYellow("Welcome to warehouse container unloading page.");
         if (listAvailableContainers()) {
             container = containerLookUp();
-            if(container != null){
-                if(checkForStrikes(container)){
+            if (container != null) {
+                if (checkForStrikes(container)) {
                     Port.warehouse.addContainer(container);
                     ship.removeContainerOfType(container);
                     ConsoleColors.printGreen("Successfully offloaded container to warehouse");
@@ -29,7 +29,7 @@ public class ContainerUnloading {
         ConsoleColors.printYellow("Welcome to train container unloading page.");
         if (listAvailableContainers()) {
             container = containerLookUp();
-            if(container != null){
+            if (container != null) {
                 Port.train.addContainer(container);
             }
         }
@@ -64,14 +64,14 @@ public class ContainerUnloading {
     private static StandardContainer containerLookUp() {
         ConsoleColors.printYellow("Please enter container id: ");
         int id;
-        while(true){
+        while (true) {
             id = Evaluators.getIntFromInput();
-            if(id == -1){
+            if (id == -1) {
                 return null;
             }
             for (Ship s : Port.ships) {
                 for (StandardContainer cont : s.containers) {
-                    if(cont.id == id){
+                    if (cont.id == id) {
                         container = cont;
                         ship = s;
                         return cont;
@@ -82,7 +82,7 @@ public class ContainerUnloading {
         }
     }
 
-    private static boolean checkForStrikes(StandardContainer container){
+    private static boolean checkForStrikes(StandardContainer container) {
         return container.sender.strikes < 2;
     }
 }

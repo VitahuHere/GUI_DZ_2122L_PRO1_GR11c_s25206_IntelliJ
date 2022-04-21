@@ -7,7 +7,7 @@ import utils.Evaluators;
 
 import java.util.ArrayList;
 
-public class ExplosivesContainer extends HeavyContainer{
+public class ExplosivesContainer extends HeavyContainer {
     public final int riskLevel;
     public final int maxTemp;
 
@@ -22,13 +22,13 @@ public class ExplosivesContainer extends HeavyContainer{
             int riskLevel,
             int maxTemp,
             Sender sender
-    ){
+    ) {
         super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial, sender);
         this.riskLevel = evalRisk(riskLevel);
         this.maxTemp = maxTemp;
     }
 
-    public ExplosivesContainer(){
+    public ExplosivesContainer() {
         super(
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
@@ -43,11 +43,10 @@ public class ExplosivesContainer extends HeavyContainer{
         ConsoleColors.printGreen("Successfully created container!");
     }
 
-    private int evalRisk(int value){
-        if(Constants.MIN_RISK_VALUE < value && value < Constants.MAX_RISK_VALUE){
+    private int evalRisk(int value) {
+        if (Constants.MIN_RISK_VALUE < value && value < Constants.MAX_RISK_VALUE) {
             return riskLevel;
-        }
-        else if(value < Constants.MIN_RISK_VALUE){
+        } else if (value < Constants.MIN_RISK_VALUE) {
             ConsoleColors.printRed("Invalid value: Risk level too low, setting to 0");
             return 0;
         }
@@ -63,7 +62,7 @@ public class ExplosivesContainer extends HeavyContainer{
     }
 
     @Override
-    public String toSaveString(){
+    public String toSaveString() {
         return super.toSaveString() +
                 ", \n\triskLevel: " + riskLevel +
                 ", \n\tmaxTemp: " + maxTemp;

@@ -47,7 +47,7 @@ public class ToxicLooseMaterialContainer extends ToxicAbstract {
     }
 
     @Override
-    public String toSaveString(){
+    public String toSaveString() {
         return super.toSaveString() +
                 ", \n\twaterproof: " + waterproof;
     }

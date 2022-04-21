@@ -69,7 +69,7 @@ public class StandardContainer implements Comparable<StandardContainer> {
     }
 
     public int daysLeft() {
-        if(dueDate == null) {
+        if (dueDate == null) {
             return 1;
         }
         return TimeOperations.currentDate.until(dueDate).getDays();
@@ -106,8 +106,8 @@ public class StandardContainer implements Comparable<StandardContainer> {
 
     @Override
     public int compareTo(StandardContainer o) {
-        if(Port.warehouse.getContainers().contains(this) && Port.warehouse.getContainers().contains(o)) {
-            if(this.arrivalDate.compareTo(o.arrivalDate) == 0){
+        if (Port.warehouse.getContainers().contains(this) && Port.warehouse.getContainers().contains(o)) {
+            if (this.arrivalDate.compareTo(o.arrivalDate) == 0) {
                 return (this.sender.name + this.sender.surname).compareTo(o.sender.name + o.sender.surname);
             }
             return this.arrivalDate.compareTo(o.arrivalDate);

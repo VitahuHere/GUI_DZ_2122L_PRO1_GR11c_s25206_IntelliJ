@@ -16,24 +16,24 @@ import static utils.Returns.findSender;
 public class LoadContainers {
     public static final ArrayList<StandardContainer> allContainers = new ArrayList<>();
 
-    private static ArrayList<HashMap<String, String>> extractContainers(String path){
+    private static ArrayList<HashMap<String, String>> extractContainers(String path) {
         ArrayList<HashMap<String, String>> allContainers = new ArrayList<>();
         ArrayList<HashMap<String, String>> storage = Parser.parse(path);
-        for(HashMap<String, String> map : storage){
+        for (HashMap<String, String> map : storage) {
             ArrayList<HashMap<String, String>> shipContainers = Parser.containerExtraction(map.get("containers"));
-            if(shipContainers != null){
+            if (shipContainers != null) {
                 allContainers.addAll(shipContainers);
             }
         }
         return allContainers;
     }
 
-    private static ArrayList<HashMap<String, String>> getContainers(){
+    private static ArrayList<HashMap<String, String>> getContainers() {
         ArrayList<HashMap<String, String>> allContainers = new ArrayList<>(Parser.parse(Constants.APP_CONTAINERS));
         String[] places = {Constants.PORT_SHIPS, Constants.APP_SHIPS, Constants.PORT_WAREHOUSE, Constants.PORT_TRAIN};
-        for(String place : places){
+        for (String place : places) {
             ArrayList<HashMap<String, String>> x = extractContainers(place);
-            if(x.size() > 0){
+            if (x.size() > 0) {
                 allContainers.addAll(x);
             }
         }
@@ -46,7 +46,7 @@ public class LoadContainers {
         alex.sort(Comparator.comparing(o -> Integer.parseInt(o.get("id"))));
         int i = 1;
         for (HashMap<String, String> map : alex) {
-            if(LoadRemovedIds.removedIds.contains(i)){
+            if (LoadRemovedIds.removedIds.contains(i)) {
                 StandardContainer container = new StandardContainer(0, 0, 0, new ArrayList<>(), new ArrayList<>(), new Sender("", "", "", ""));
                 App.containers.remove(container);
             }
@@ -61,16 +61,14 @@ public class LoadContainers {
                 case "ToxicLooseMaterialContainer" -> container = ToxicLoose(map);
             }
             if (container != null) {
-                if(!map.get("arrivalDate").equals("null")){
+                if (!map.get("arrivalDate").equals("null")) {
                     container.arrivalDate = LocalDate.parse(map.get("arrivalDate"));
-                }
-                else{
+                } else {
                     container.arrivalDate = null;
                 }
-                if(!map.get("dueDate").equals("null")){
+                if (!map.get("dueDate").equals("null")) {
                     container.dueDate = LocalDate.parse(map.get("dueDate"));
-                }
-                else{
+                } else {
                     container.dueDate = null;
                 }
             }

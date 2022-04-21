@@ -11,8 +11,8 @@ import static utils.Returns.listContainersToSave;
 
 public class Warehouse {
     public final int maxCapacity;
-    private int currentCapacity;
     private final ArrayList<StandardContainer> containers;
+    private int currentCapacity;
 
     public Warehouse(int maxCapacity) {
         this.maxCapacity = maxCapacity;
@@ -35,8 +35,7 @@ public class Warehouse {
             this.currentCapacity++;
             container.arrivalDate = TimeOperations.currentDate;
             container.dueDate = container.arrivalDate.plusDays(checkContainerType(container)) == container.arrivalDate ? null : container.arrivalDate.plusDays(checkContainerType(container));
-        }
-        else{
+        } else {
             System.out.println("Warehouse is full!");
         }
     }
@@ -45,8 +44,7 @@ public class Warehouse {
         if (this.containers.contains(container)) {
             this.containers.remove(container);
             this.currentCapacity--;
-        }
-        else{
+        } else {
             System.out.println("Container is not in the warehouse!");
         }
     }
@@ -62,7 +60,7 @@ public class Warehouse {
                 ", containers: " + Returns.listContainers(this.containers);
     }
 
-    public String toSaveString(){
+    public String toSaveString() {
         return "\n\ttype: Warehouse" +
                 ", \n\tcurrent capacity: " + currentCapacity +
                 ", \n\tcontainers: " + listContainersToSave(containers);

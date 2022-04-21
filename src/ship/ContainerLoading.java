@@ -15,37 +15,36 @@ public class ContainerLoading {
         App.containers.remove(container);
     }
 
-    public static void loadContainerToWarehouse(){
+    public static void loadContainerToWarehouse() {
         ConsoleColors.printYellow("Welcome to the container loading page.");
-        if(App.containers.size() > 0 && checkList(Port.warehouse)){
+        if (App.containers.size() > 0 && checkList(Port.warehouse)) {
             ConsoleColors.printYellow("Please select a container");
             int id = Evaluators.getIntFromInput("Container id");
             StandardContainer container = containerLookUp(id);
 
-            if(container != null){
+            if (container != null) {
                 loadContainerToWarehouse(container);
             }
-        }
-        else{
+        } else {
             ConsoleColors.printRed("No containers available or Warehouse is full");
         }
     }
 
-    private static boolean checkList(Warehouse warehouse){
+    private static boolean checkList(Warehouse warehouse) {
         return warehouse.getContainers().size() < warehouse.maxCapacity;
     }
 
     public static void loadContainerOntoAShip() {
         ConsoleColors.printYellow("Welcome to the container loading page.");
-        if(listContainers()){
+        if (listContainers()) {
             ConsoleColors.printYellow("Please select a container");
             int id = Evaluators.getIntFromInput("Container id");
             StandardContainer container = containerLookUp(id);
 
-            if(container != null){
+            if (container != null) {
                 ConsoleColors.printYellow("Please select a ship: ");
 
-                if(listAvailableShips()) {
+                if (listAvailableShips()) {
                     id = Evaluators.getIntFromInput("Ship id");
                     Ship ship = shipLookUp(id);
 
@@ -60,7 +59,7 @@ public class ContainerLoading {
         }
     }
 
-    private static void listFreeContainers(){
+    private static void listFreeContainers() {
         if (App.containers.size() > 0) {
             for (StandardContainer container : App.containers) {
                 System.out.println(
@@ -75,7 +74,7 @@ public class ContainerLoading {
         }
     }
 
-    private static void listWarehouseContainers(){
+    private static void listWarehouseContainers() {
         if (Port.warehouse.getContainers().size() > 0) {
             for (StandardContainer container : Port.warehouse.getContainers()) {
                 System.out.println(
@@ -106,12 +105,12 @@ public class ContainerLoading {
         ConsoleColors.printGreen("Successfully loaded container.");
     }
 
-    private static boolean checkList(Ship ship, StandardContainer container){
-        if(ship.getSlotsAvailable() <= 0 || ship.getWeightAvailable() - container.totalWeight < 0){
+    private static boolean checkList(Ship ship, StandardContainer container) {
+        if (ship.getSlotsAvailable() <= 0 || ship.getWeightAvailable() - container.totalWeight < 0) {
             ConsoleColors.printRed("Maximum container count or mass reached. Cannot add another one.");
             return false;
         }
-        if(container.sender == null){
+        if (container.sender == null) {
             ConsoleColors.printRed("Container doesn't have sender. Please assign sender before loading");
             setSender(container);
         }
@@ -128,13 +127,13 @@ public class ContainerLoading {
                 ConsoleColors.printBlue(i + ") " + sender.name + " " + sender.surname + " " + sender.getBirthday());
             }
             int senderIndex = Evaluators.getIntFromInput(App.senders.size());
-            container.sender = App.senders.get(senderIndex-1);
+            container.sender = App.senders.get(senderIndex - 1);
         }
     }
 
     private static StandardContainer containerLookUp(int choice) {
-        while(true){
-            if(choice == -1){
+        while (true) {
+            if (choice == -1) {
                 return null;
             }
             for (StandardContainer c : App.containers) {
@@ -173,8 +172,8 @@ public class ContainerLoading {
     }
 
     private static Ship shipLookUp(int choice) {
-        while(true){
-            if(choice == -1){
+        while (true) {
+            if (choice == -1) {
                 return null;
             }
             for (Ship ship : Port.ships) {

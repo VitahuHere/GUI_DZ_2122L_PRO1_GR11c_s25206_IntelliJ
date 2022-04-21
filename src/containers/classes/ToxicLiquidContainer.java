@@ -22,12 +22,12 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
             String containerMaterial,
             boolean acidSafe,
             Sender sender
-    ){
+    ) {
         super(tare, size, cargoWeight, safetyMeasures, certificates, armorThickness, containerMaterial, sender);
         this.acidSafe = acidSafe;
     }
 
-    public ToxicLiquidContainer(){
+    public ToxicLiquidContainer() {
         super(
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
@@ -49,7 +49,7 @@ public class ToxicLiquidContainer extends ToxicAbstract implements LiquidInterfa
     }
 
     @Override
-    public String toSaveString(){
+    public String toSaveString() {
         return super.toSaveString() +
                 ", \n\tacidSafe: " + this.acidSafe +
                 ", \n\tvalveDiameter: " + valveDiameter;

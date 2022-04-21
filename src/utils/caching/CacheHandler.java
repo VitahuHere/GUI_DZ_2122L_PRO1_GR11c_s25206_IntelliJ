@@ -12,8 +12,8 @@ import java.nio.file.Paths;
 import static utils.Constants.*;
 
 public class CacheHandler {
-    public static void saveApp(){
-        try{
+    public static void saveApp() {
+        try {
             Files.createDirectories(Paths.get("cache/ships"));
             Files.createDirectories(Paths.get("cache/containers"));
             Files.createDirectories(Paths.get("cache/trains"));
@@ -28,8 +28,8 @@ public class CacheHandler {
             Files.createFile(Paths.get(PORT_WAREHOUSE));
             Files.createFile(Paths.get(REMOVED_IDS));
             Files.createFile(Paths.get(CURRENT_TIME));
+        } catch (IOException ignore) {
         }
-        catch (IOException ignore){}
         Saver.saveAppContainers();
         Saver.saveSenders();
         Saver.saveTrains();
@@ -50,17 +50,17 @@ public class CacheHandler {
         connect();
     }
 
-    private static void connect(){
+    private static void connect() {
         connectTrain();
         connectShips();
         connectWarehouse();
     }
 
-    private static void connectTrain(){
+    private static void connectTrain() {
         Port.train = LoadTrains.portTrain;
-        for(int i : LoadTrains.containerIds){
-            for(StandardContainer c : LoadContainers.allContainers){
-                if(c.id == i){
+        for (int i : LoadTrains.containerIds) {
+            for (StandardContainer c : LoadContainers.allContainers) {
+                if (c.id == i) {
                     Port.train.addContainer(c);
                     App.containers.remove(c);
                     LoadContainers.allContainers.remove(c);
@@ -70,13 +70,13 @@ public class CacheHandler {
         }
     }
 
-    private static void connectShips(){
+    private static void connectShips() {
         for (int i = 0; i < LoadShips.allShips.size(); i++) {
             String containerIds = LoadShips.shipMap.get(i).get("ids");
-            if(containerIds != null){
-                for (String j : containerIds.split(",")){
-                    for(StandardContainer container : LoadContainers.allContainers){
-                        if(container.id == Integer.parseInt(j)){
+            if (containerIds != null) {
+                for (String j : containerIds.split(",")) {
+                    for (StandardContainer container : LoadContainers.allContainers) {
+                        if (container.id == Integer.parseInt(j)) {
                             LoadShips.allShips.get(i).addContainerOfType(container);
                             LoadContainers.allContainers.remove(container);
                             App.containers.remove(container);
@@ -87,20 +87,19 @@ public class CacheHandler {
             }
         }
         for (int i = 0; i < LoadShips.allShips.size(); i++) {
-            if(LoadShips.shipMap.get(i).get("place").equals("port")){
+            if (LoadShips.shipMap.get(i).get("place").equals("port")) {
                 Port.ships.add(LoadShips.allShips.get(i));
-            }
-            else{
+            } else {
                 App.ships.add(LoadShips.allShips.get(i));
             }
         }
     }
 
-    private static void connectWarehouse(){
+    private static void connectWarehouse() {
         Port.warehouse = LoadWarehouse.warehouse;
-        for(int i : LoadWarehouse.containerIds){
-            for(StandardContainer container : LoadContainers.allContainers){
-                if(container.id == i){
+        for (int i : LoadWarehouse.containerIds) {
+            for (StandardContainer container : LoadContainers.allContainers) {
+                if (container.id == i) {
                     Port.warehouse.addContainer(container);
                     LoadContainers.allContainers.remove(container);
                     App.containers.remove(container);

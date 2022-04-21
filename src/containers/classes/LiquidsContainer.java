@@ -23,7 +23,7 @@ public class LiquidsContainer extends StandardContainer implements LiquidInterfa
         this.maxCapacity = maxCapacity;
     }
 
-    public LiquidsContainer(){
+    public LiquidsContainer() {
         super(
                 Evaluators.getIntFromInput("Tare"),
                 Evaluators.getIntFromInput("Size"),
@@ -43,7 +43,7 @@ public class LiquidsContainer extends StandardContainer implements LiquidInterfa
     }
 
     @Override
-    public String toSaveString(){
+    public String toSaveString() {
         return super.toSaveString() +
                 ", \n\tmaxCapacity: " + maxCapacity +
                 ", \n\tvalveDiameter: " + valveDiameter;

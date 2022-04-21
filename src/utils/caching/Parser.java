@@ -82,41 +82,39 @@ public class Parser {
     }
 
     public static ArrayList<HashMap<String, String>> containerExtraction(String list) {
-        if(list.length() == 2) {
+        if (list.length() == 2) {
             return null;
         }
         indexer = 0;
         ArrayList<HashMap<String, String>> result = new ArrayList<>();
         HashMap<String, String> object = new HashMap<>();
         StringBuilder value = new StringBuilder();
-        for (int i = 1; i < list.length()-1; i++) {
-            if(list.charAt(i) == ':'){
+        for (int i = 1; i < list.length() - 1; i++) {
+            if (list.charAt(i) == ':') {
                 object.put(value.toString(), getValue(list, i));
                 value.setLength(0);
                 i = indexer;
-                if(list.charAt(i) == ']'){
+                if (list.charAt(i) == ']') {
                     result.add(object);
                     object = new HashMap<>();
                 }
-            }
-            else if(!Constants.WHITE_SPACE.contains(list.charAt(i)) && list.charAt(i) != '['
-                    && list.charAt(i) != ' ' && list.charAt(i) != ','){
+            } else if (!Constants.WHITE_SPACE.contains(list.charAt(i)) && list.charAt(i) != '['
+                    && list.charAt(i) != ' ' && list.charAt(i) != ',') {
                 value.append(list.charAt(i));
             }
         }
         return result;
     }
 
-    public static ArrayList<String> getParamList(String list){
+    public static ArrayList<String> getParamList(String list) {
         ArrayList<String> result = new ArrayList<>();
         StringBuilder value = new StringBuilder();
         int c, i = 0;
-        while((c = list.charAt(++i)) != ']'){
-            if(c == ',' && list.charAt(++i) == ' '){
+        while ((c = list.charAt(++i)) != ']') {
+            if (c == ',' && list.charAt(++i) == ' ') {
                 result.add(value.toString());
                 value.setLength(0);
-            }
-            else {
+            } else {
                 value.append((char) c);
             }
         }

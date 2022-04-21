@@ -10,13 +10,11 @@ import utils.Returns;
 import java.util.ArrayList;
 
 public class Train {
-    public final int MAX_CAPACITY;
-    public int currentCapacity;
-
     private static int trainIndex = 0;
-    private int id;
+    public final int MAX_CAPACITY;
     private final ArrayList<StandardContainer> containers;
-
+    public int currentCapacity;
+    private int id;
     private boolean isFull;
 
     public Train() {
@@ -29,12 +27,11 @@ public class Train {
     }
 
     public void addContainer(StandardContainer container) {
-        if(this.currentCapacity < this.MAX_CAPACITY) {
+        if (this.currentCapacity < this.MAX_CAPACITY) {
             this.containers.add(container);
             this.currentCapacity++;
-        }
-        else{
-            if(!isFull){
+        } else {
+            if (!isFull) {
                 TimeOperations.newTrainDelay();
             }
             ConsoleColors.printRed("Train is full. Waiting for a new train. Please wait " + TimeOperations.getRemainingTime() + " seconds.");
@@ -46,7 +43,7 @@ public class Train {
         return containers;
     }
 
-    public void setParams(int id, int index){
+    public void setParams(int id, int index) {
         this.id = id;
         trainIndex = index;
     }

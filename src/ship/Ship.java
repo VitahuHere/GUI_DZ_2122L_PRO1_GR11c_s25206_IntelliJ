@@ -22,17 +22,14 @@ public class Ship implements Comparable<Ship> {
     public final int maxHeavyContainersCount;
     public final int maxElectricContainersCount;
     public final ArrayList<StandardContainer> containers;
-
+    public String departurePort;
+    public String arrivalPort;
     // helper fields
     int cargoWeight;
     int toxicExplosiveCounter;
     int heavyCounter;
     int electricCounter;
     int slotsAvailable;
-
-
-    public String departurePort;
-    public String arrivalPort;
 
     public Ship(
             String name,
@@ -124,7 +121,7 @@ public class Ship implements Comparable<Ship> {
     public void removeContainerOfType(StandardContainer container) {
         if (this.containers.contains(container)) {
             String containerType = container.getClass().getSimpleName();
-            switch(containerType){
+            switch (containerType) {
                 case "ExplosivesContainer":
                 case "ToxicLiquidContainer":
                 case "ToxicLooseMaterialContainer":

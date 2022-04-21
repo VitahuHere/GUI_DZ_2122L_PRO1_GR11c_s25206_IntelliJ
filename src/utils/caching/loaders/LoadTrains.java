@@ -19,8 +19,8 @@ public class LoadTrains {
             Train t = new Train();
             t.setParams(Integer.parseInt(train.get("id")), Integer.parseInt(train.get("id")));
             portTrain = t;
-            if(train.get("ids") != null){
-                for(String s : train.get("ids").split(",")){
+            if (train.get("ids") != null) {
+                for (String s : train.get("ids").split(",")) {
                     containerIds.add(Integer.parseInt(s));
                 }
             }
