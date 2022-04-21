@@ -58,7 +58,6 @@ public class ContainerLoading {
                 }
             }
         }
-        App.menu();
     }
 
     private static void listFreeContainers(){

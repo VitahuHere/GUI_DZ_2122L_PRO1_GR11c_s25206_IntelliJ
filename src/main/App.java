@@ -177,7 +177,7 @@ public class App {
         if (Port.train.getContainers().size() == 0) {
             System.out.println("Train is empty");
         } else {
-            Port.train.getContainers().forEach(System.out::println);
+            System.out.println(Port.train);
         }
     }
 
