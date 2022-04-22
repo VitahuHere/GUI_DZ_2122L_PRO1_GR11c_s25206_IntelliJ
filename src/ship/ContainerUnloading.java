@@ -32,13 +32,14 @@ public class ContainerUnloading {
             container = containerLookUp();
             if (container != null) {
                 Port.train.addContainer(container);
+                ship.removeContainerOfType(container);
                 ConsoleColors.printGreen("Successfully offloaded container");
             }
         }
     }
 
     public static boolean listAvailableContainers() {
-        if (Port.ships.size() == 0) {
+        if (Port.ships.size() <= 0) {
             ConsoleColors.printRed("There are no ships in the port.");
             return false;
         }

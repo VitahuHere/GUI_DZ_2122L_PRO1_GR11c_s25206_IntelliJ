@@ -107,6 +107,7 @@ public class ContainerLoading {
     private static void loadContainer(Ship ship, StandardContainer container) {
         ship.addContainerOfType(container);
         App.containers.remove(container);
+        Port.warehouse.removeContainer(container);
         container.arrivalDate = null;
         container.dueDate = null;
         ConsoleColors.printGreen("Successfully loaded container.");

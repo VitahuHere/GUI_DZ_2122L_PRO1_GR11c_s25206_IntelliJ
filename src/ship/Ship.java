@@ -165,7 +165,7 @@ public class Ship implements Comparable<Ship> {
             return 0;
         } else if (this.slotsAvailable - value < 0) {
             ConsoleColors.printRed("Value entered exceed slots available left. Please re-enter: ");
-            value = Evaluators.getIntFromInput(this.slotsAvailable);
+            value = Evaluators.getIntFromInput(0, this.slotsAvailable);
         }
         this.slotsAvailable -= value;
         ConsoleColors.printBlue(this.slotsAvailable + " slots left");

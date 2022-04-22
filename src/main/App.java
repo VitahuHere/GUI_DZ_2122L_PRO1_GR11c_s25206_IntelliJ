@@ -9,6 +9,7 @@ import ship.ContainerUnloading;
 import ship.Ship;
 import utils.ConsoleColors;
 import utils.Evaluators;
+import utils.Returns;
 import utils.caching.CacheHandler;
 
 import java.util.ArrayList;
@@ -94,25 +95,16 @@ public class App {
         }
     }
 
-    private static ArrayList<String> listContainers() {
-        ArrayList<String> lc = new ArrayList<>();
-        for (StandardContainer container : Port.warehouse.getContainers()) {
-            lc.add("id: " + container.id +
-                    ", arrival date: " + container.arrivalDate +
-                    ", due date: " + container.dueDate);
-        }
-        return lc;
-    }
-
     private static void manualContainerRemoval() {
-        if (Port.warehouse.getContainers().size() == 0) {
+        if (Port.warehouse.getContainers().size() <= 0) {
             System.out.println("No containers available");
         } else {
             ConsoleColors.printYellow("Select container to be removed:");
-            for (int i = 1; i <= Port.warehouse.getContainers().size(); i++) {
-                System.out.println(i + ") " + listContainers().get(i - 1));
+            for (int i = 0; i < Port.warehouse.getContainers().size(); i++) {
+                System.out.println(i+1 + ") " + Returns.listContainers(Port.warehouse.getContainers()).get(i));
             }
             int choice = Evaluators.getIntFromInput(1, Port.warehouse.getContainers().size());
+            App.removedIds.add(Port.warehouse.getContainers().get(choice-1).id);
             Port.warehouse.removeContainer(Port.warehouse.getContainers().get(choice - 1));
             ConsoleColors.printGreen("Successfully removed");
         }
@@ -233,7 +225,6 @@ public class App {
             case 5 -> new LiquidsContainer();
             case 6 -> new ToxicLiquidContainer();
             case 7 -> new ToxicLooseMaterialContainer();
-            case 0 -> App.menu();
         }
     }
 
@@ -248,7 +239,6 @@ public class App {
         int choice = Evaluators.getIntFromInput(0, 2);
 
         switch (choice) {
-            case 0 -> App.menu();
             case 1 -> ContainerUnloading.unloadToWarehouse();
             case 2 -> ContainerUnloading.unloadToTrain();
         }

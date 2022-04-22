@@ -50,9 +50,9 @@ public class Main {
         Port.ships.get(0).addContainerOfType(new ToxicLiquidContainer(180, 20, 2342, safetyMeasures, certificates, 22, "Plastic", true, sender2));
 
         Port.ships.get(4).addContainerOfType(new StandardContainer(430, 20, 2341, safetyMeasures, certificates, sender));
-        Port.ships.get(3).addContainerOfType(new ChillerContainer(420, 20, 4269, safetyMeasures, certificates, 54, "Steel", 9000, sender3));
-        Port.ships.get(4).addContainerOfType(new LiquidsContainer(243, 20, 5432, safetyMeasures, certificates, 9200, sender4));
-        Port.ships.get(1).addContainerOfType(new ToxicLooseMaterialContainer(754, 45, 8690, safetyMeasures, certificates, 22, "n/a", true, sender));
+        Port.ships.get(3).addContainerOfType(new ChillerContainer(300, 20, 2342, safetyMeasures, certificates, 54, "Steel", 9000, sender3));
+        Port.ships.get(4).addContainerOfType(new LiquidsContainer(243, 20, 6544, safetyMeasures, certificates, 9200, sender4));
+        Port.ships.get(1).addContainerOfType(new ToxicLooseMaterialContainer(754, 45, 7555, safetyMeasures, certificates, 26, "n/a", true, sender2));
 
         Timer timer = new Timer();
         timer.schedule(new TimeOperations(), 0, 1000);
