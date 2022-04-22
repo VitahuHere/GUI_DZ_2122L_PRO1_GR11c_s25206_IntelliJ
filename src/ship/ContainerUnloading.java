@@ -1,7 +1,6 @@
 package ship;
 
 import containers.classes.StandardContainer;
-import main.App;
 import port.Port;
 import utils.ConsoleColors;
 import utils.Evaluators;
@@ -20,9 +19,11 @@ public class ContainerUnloading {
                     ship.removeContainerOfType(container);
                     ConsoleColors.printGreen("Successfully offloaded container to warehouse");
                 }
+                else {
+                    ConsoleColors.printRed("Sender has 2 strikes. Container stayed on ship");
+                }
             }
         }
-        App.menu();
     }
 
     public static void unloadToTrain() {
@@ -31,9 +32,9 @@ public class ContainerUnloading {
             container = containerLookUp();
             if (container != null) {
                 Port.train.addContainer(container);
+                ConsoleColors.printGreen("Successfully offloaded container");
             }
         }
-        App.menu();
     }
 
     public static boolean listAvailableContainers() {

@@ -53,6 +53,11 @@ public class Warehouse {
         return this.containers;
     }
 
+    public void LoadContainer(StandardContainer container){
+        this.containers.add(container);
+        this.currentCapacity++;
+    }
+
     @Override
     public String toString() {
         return "Warehouse" +

@@ -1,5 +1,6 @@
 package utils.caching.loaders;
 
+import main.App;
 import utils.Constants;
 
 import java.io.FileReader;
@@ -22,6 +23,7 @@ public class LoadRemovedIds {
                 for (String s : sb.toString().split(",")) {
                     removedIds.add(Integer.parseInt(s));
                 }
+                App.removedIds = removedIds;
             }
         } catch (IOException ignore) {
         }

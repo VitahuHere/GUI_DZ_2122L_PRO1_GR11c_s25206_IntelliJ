@@ -100,7 +100,7 @@ public class CacheHandler {
         for (int i : LoadWarehouse.containerIds) {
             for (StandardContainer container : LoadContainers.allContainers) {
                 if (container.id == i) {
-                    Port.warehouse.addContainer(container);
+                    Port.warehouse.LoadContainer(container);
                     LoadContainers.allContainers.remove(container);
                     App.containers.remove(container);
                     break;

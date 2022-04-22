@@ -17,7 +17,7 @@ public class Evaluators {
     public static String getStringFromInput(String key) {
         System.out.println(key + ":");
         Scanner scanner = new Scanner(System.in);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public static ArrayList<String> getArrayListFromInput(String key) {

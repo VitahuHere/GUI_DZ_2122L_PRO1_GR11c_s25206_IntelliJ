@@ -61,6 +61,7 @@ public class App {
 
     private static void save() {
         CacheHandler.saveApp();
+        ConsoleColors.printGreen("Saved!");
     }
 
     private static void exit() {
@@ -197,7 +198,7 @@ public class App {
                 System.out.println(ship.toString());
             }
         }
-        System.out.println("Ships in port: ");
+        System.out.println("\nShips in port: ");
         if (Port.ships.size() == 0) {
             ConsoleColors.printGreen("N/A");
         } else {

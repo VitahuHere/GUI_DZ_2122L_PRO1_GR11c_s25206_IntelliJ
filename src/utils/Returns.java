@@ -23,7 +23,7 @@ public class Returns {
             containerList.add(
                     "\nid: " + container.id +
                             ", container type: " + container.getClass().getSimpleName() +
-                            ", sender: " + container.sender.name + " " + container.sender.surname +
+                            ", sender: " + (container.sender == null ? "not set" : container.sender.name + " " + container.sender.surname) +
                             (container.arrivalDate == null ? "" : ", arrival date: " + container.arrivalDate) +
                             (container.dueDate == null ? "" : ", due date: " + container.dueDate)
             );

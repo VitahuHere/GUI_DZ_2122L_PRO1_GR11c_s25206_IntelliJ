@@ -2,7 +2,6 @@ package utils.caching.loaders;
 
 import containers.classes.*;
 import main.App;
-import sender.Sender;
 import utils.Constants;
 import utils.caching.Parser;
 
@@ -47,7 +46,7 @@ public class LoadContainers {
         int i = 1;
         for (HashMap<String, String> map : alex) {
             if (LoadRemovedIds.removedIds.contains(i)) {
-                StandardContainer container = new StandardContainer(0, 0, 0, new ArrayList<>(), new ArrayList<>(), new Sender("", "", "", ""));
+                StandardContainer container = new StandardContainer(0, 0, 0, new ArrayList<>(), new ArrayList<>(), LoadSenders.senders.get(0));
                 App.containers.remove(container);
             }
             StandardContainer container = null;

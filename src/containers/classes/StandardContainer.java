@@ -108,7 +108,15 @@ public class StandardContainer implements Comparable<StandardContainer> {
     public int compareTo(StandardContainer o) {
         if (Port.warehouse.getContainers().contains(this) && Port.warehouse.getContainers().contains(o)) {
             if (this.arrivalDate.compareTo(o.arrivalDate) == 0) {
-                return (this.sender.name + this.sender.surname).compareTo(o.sender.name + o.sender.surname);
+                if (this.sender != null && o.sender != null){
+                    return (this.sender.name + this.sender.surname).compareTo(o.sender.name + o.sender.surname);
+                }
+                else if (this.sender == null && o.sender != null){
+                    return "null".compareTo(o.sender.name + o.sender.surname);
+                }
+                else if (this.sender != null){
+                    return (this.sender.name + this.sender.surname).compareTo("null");
+                }
             }
             return this.arrivalDate.compareTo(o.arrivalDate);
         }

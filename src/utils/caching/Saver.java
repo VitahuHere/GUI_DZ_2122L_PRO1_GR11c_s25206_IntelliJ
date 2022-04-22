@@ -38,7 +38,7 @@ public class Saver {
         Collections.sort(App.containers);
         try (FileOutputStream fos = new FileOutputStream(APP_CONTAINERS)) {
             for (StandardContainer container : App.containers) {
-                fos.write(("{" + container.toSaveString() + "\n}\n").getBytes());
+                fos.write(("{" + container.toSaveString() + "\n}\n").getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException ignore) {
         }
@@ -47,13 +47,13 @@ public class Saver {
     public static void saveTrains() {
         try (FileOutputStream fos = new FileOutputStream(APP_TRAINS)) {
             for (Train train : App.trains) {
-                fos.write(("{" + train.toSaveString() + "\n}\n").getBytes());
+                fos.write(("{" + train.toSaveString() + "\n}\n").getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException ignore) {
         }
 
         try (FileOutputStream fos = new FileOutputStream(PORT_TRAIN)) {
-            fos.write(("{" + Port.train.toSaveString() + "\n}\n").getBytes());
+            fos.write(("{" + Port.train.toSaveString() + "\n}\n").getBytes(StandardCharsets.UTF_8));
         } catch (IOException ignore) {
         }
     }
@@ -61,7 +61,7 @@ public class Saver {
     public static void saveSenders() {
         try (FileOutputStream fos = new FileOutputStream(APP_SENDERS)) {
             for (Sender sender : App.senders) {
-                fos.write(("{" + sender.toSaveString() + "\n}\n").getBytes());
+                fos.write(("{" + sender.toSaveString() + "\n}\n").getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException ignore) {
         }
@@ -69,7 +69,7 @@ public class Saver {
 
     public static void saveWarehouse() {
         try (FileOutputStream fos = new FileOutputStream(PORT_WAREHOUSE)) {
-            fos.write(("{" + Port.warehouse.toSaveString() + "\n}\n").getBytes());
+            fos.write(("{" + Port.warehouse.toSaveString() + "\n}\n").getBytes(StandardCharsets.UTF_8));
         } catch (IOException ignore) {
         }
     }

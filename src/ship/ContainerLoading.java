@@ -19,11 +19,18 @@ public class ContainerLoading {
         ConsoleColors.printYellow("Welcome to the container loading page.");
         if (App.containers.size() > 0 && checkList(Port.warehouse)) {
             ConsoleColors.printYellow("Please select a container");
+            listFreeContainers();
             int id = Evaluators.getIntFromInput("Container id");
             StandardContainer container = containerLookUp(id);
 
             if (container != null) {
-                loadContainerToWarehouse(container);
+                if (container.sender == null){
+                    System.out.println("Sender not set. Please assign sender before moving the container");
+                    setSender(container);
+                    loadContainerToWarehouse(container);
+                    ConsoleColors.printGreen("Successfully moved container");
+                }
+
             }
         } else {
             ConsoleColors.printRed("No containers available or Warehouse is full");
@@ -148,7 +155,7 @@ public class ContainerLoading {
             }
             ConsoleColors.printYellow("Container with id " + choice + " does not exist or is not available. " +
                     "Please re-enter or type -1 to exit:");
-            choice = Evaluators.getIntFromInput("Container id");
+            choice = Evaluators.getIntFromInput();
         }
     }
 

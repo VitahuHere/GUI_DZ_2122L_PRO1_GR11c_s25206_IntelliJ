@@ -82,7 +82,7 @@ public class Ship implements Comparable<Ship> {
     }
 
     public void addContainerOfType(StandardContainer container) {
-        // spent too much time trying to optimise this and nothing works>:((
+        // spent too much time trying to optimise this and nothing works >:((
         String containerType = container.getClass().getSimpleName();
         switch (containerType) {
             case "ExplosivesContainer":
