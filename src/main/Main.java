@@ -55,6 +55,7 @@ public class Main {
         Port.ships.get(1).addContainerOfType(new ToxicLooseMaterialContainer(754, 45, 7555, safetyMeasures, certificates, 26, "n/a", true, sender2));
 
         Timer timer = new Timer();
+
         timer.schedule(new TimeOperations(), 0, 1000);
 
         ContainerLoading.loadContainerToWarehouse(new StandardContainer(430, 20, 2341, safetyMeasures, certificates, sender));
