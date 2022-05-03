@@ -11,16 +11,17 @@ import utils.caching.CacheHandler;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Timer;
 
 
 public class Main {
+    public static Thread mainThread = Thread.currentThread();
+
     public static void main(String[] args) {
         File ignore = new File("cache");
         if (ignore.exists() && ignore.isDirectory()) {
             ConsoleColors.printGreen("Session restored!");
-            Timer timer = new Timer();
-            timer.schedule(new TimeOperations(), 0, 1000);
+            TimeOperations timeOperations = new TimeOperations();
+            timeOperations.start();
             CacheHandler.loadApp();
             ConsoleColors.printGreen("Welcome to CargoApp. Here you will manage your containers na ships.");
             App.menu();
@@ -54,9 +55,8 @@ public class Main {
         Port.ships.get(4).addContainerOfType(new LiquidsContainer(243, 20, 6544, safetyMeasures, certificates, 9200, sender4));
         Port.ships.get(1).addContainerOfType(new ToxicLooseMaterialContainer(754, 45, 7555, safetyMeasures, certificates, 26, "n/a", true, sender2));
 
-        Timer timer = new Timer();
-
-        timer.schedule(new TimeOperations(), 0, 1000);
+        TimeOperations timeOperations = new TimeOperations();
+        timeOperations.start();
 
         ContainerLoading.loadContainerToWarehouse(new StandardContainer(430, 20, 2341, safetyMeasures, certificates, sender));
         ContainerLoading.loadContainerToWarehouse(new ChillerContainer(420, 20, 4269, safetyMeasures, certificates, 54, "Steel", 9000, sender3));

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
-public class TimeOperations extends TimerTask {
+public class TimeOperations extends Thread {
     public static LocalDate currentDate = Constants.startDate;
     static boolean waitingNewTrain = false;
     static int trainTick = 0;
@@ -71,12 +71,19 @@ public class TimeOperations extends TimerTask {
 
     @Override
     public void run() {
-        ticks++;
-        if (newDay()) {
-            checkContainers();
-        }
-        if (waitingNewTrain) {
-            newTrainDelay();
+        while(Main.mainThread.isInterrupted()){
+            ticks++;
+            if (newDay()) {
+                checkContainers();
+            }
+            if (waitingNewTrain) {
+                newTrainDelay();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
