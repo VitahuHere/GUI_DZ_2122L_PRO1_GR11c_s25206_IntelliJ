@@ -194,7 +194,7 @@ public class Ship implements Comparable<Ship> {
                 ", \ncargo weight: " + cargoWeight +
                 ", \ndeparture port: " + (departurePort == null ? "n/a" : departurePort) +
                 ", \narrival port: " + (arrivalPort == null ? "n/a" : arrivalPort) +
-                ", \ncontainers: " + (Returns.listContainers(containers).size() == 0 ? "n/a" : Returns.listContainers(containers));
+                ", \ncontainers: " + (Returns.listContainers(containers).isEmpty() ? "n/a" : Returns.listContainers(containers));
     }
 
     public String toSaveString() {

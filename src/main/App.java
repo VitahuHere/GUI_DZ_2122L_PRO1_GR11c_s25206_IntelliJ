@@ -43,8 +43,12 @@ public class App {
 
         int option = Evaluators.getIntFromInput(0, 11);
 
+        if (option == 0){
+            exit();
+            return;
+        }
+
         switch (option) {
-            case 0 -> exit();
             case 1 -> shipCreation();
             case 2 -> createContainer();
             case 3 -> new Sender();
@@ -67,7 +71,6 @@ public class App {
 
     private static void exit() {
         CacheHandler.saveApp();
-        System.exit(0);
     }
 
     public static void shipCreation() {
@@ -123,7 +126,7 @@ public class App {
     }
 
     public static void arriveShip() {
-        if (App.ships.size() == 0) {
+        if (App.ships.isEmpty()) {
             System.out.println("No ships available");
         } else {
             ConsoleColors.printYellow("Select a ship to dock: ");
@@ -139,7 +142,7 @@ public class App {
     }
 
     public static void departShip() {
-        if (Port.ships.size() == 0) {
+        if (Port.ships.isEmpty()) {
             System.out.println("No ships available");
         } else {
             ConsoleColors.printYellow("Select a ship to depart: ");
@@ -155,7 +158,7 @@ public class App {
     }
 
     public static void showSendersInfo() {
-        if (senders.size() == 0) {
+        if (senders.isEmpty()) {
             System.out.println("There are no senders");
         } else {
             System.out.println("List of senders: ");
@@ -164,7 +167,7 @@ public class App {
     }
 
     public static void showTrainInfo() {
-        if (Port.train.getContainers().size() == 0) {
+        if (Port.train.getContainers().isEmpty()) {
             System.out.println("Train is empty");
         } else {
             System.out.println(Port.train);
@@ -173,7 +176,7 @@ public class App {
 
     public static void showWarehouseInfo() {
         System.out.println("Current date: " + TimeOperations.currentDate);
-        if (Port.warehouse.getContainers().size() == 0) {
+        if (Port.warehouse.getContainers().isEmpty()) {
             System.out.println("Warehouse is empty.");
         } else {
             System.out.println(Port.warehouse);
@@ -183,7 +186,7 @@ public class App {
 
     public static void showShipInfo() {
         System.out.println("Ships sailing: ");
-        if (ships.size() == 0) {
+        if (ships.isEmpty()) {
             ConsoleColors.printGreen("N/A");
         } else {
             for (Ship ship : ships) {
@@ -191,7 +194,7 @@ public class App {
             }
         }
         System.out.println("\nShips in port: ");
-        if (Port.ships.size() == 0) {
+        if (Port.ships.isEmpty()) {
             ConsoleColors.printGreen("N/A");
         } else {
             for (Ship ship : Port.ships) {

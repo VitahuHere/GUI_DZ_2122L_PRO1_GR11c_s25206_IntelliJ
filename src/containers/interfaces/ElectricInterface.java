@@ -1,11 +1,11 @@
 package containers.interfaces;
 
 public interface ElectricInterface {
-    default void PowerOn() {
+    default void powerOn() {
         System.out.println("Container connected");
     }
 
-    default void PowerOff() {
+    default void powerOff() {
         System.out.println("Container powered off");
     }
 }

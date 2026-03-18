@@ -17,7 +17,7 @@ public class ContainerLoading {
 
     public static void loadContainerToWarehouse() {
         ConsoleColors.printYellow("Welcome to the container loading page.");
-        if (App.containers.size() > 0 && checkList(Port.warehouse)) {
+        if (!App.containers.isEmpty() && checkList(Port.warehouse)) {
             ConsoleColors.printYellow("Please select a container");
             listFreeContainers();
             int id = Evaluators.getIntFromInput("Container id");
@@ -67,7 +67,7 @@ public class ContainerLoading {
     }
 
     private static void listFreeContainers() {
-        if (App.containers.size() > 0) {
+        if (!App.containers.isEmpty()) {
             for (StandardContainer container : App.containers) {
                 System.out.println(
                         "Container type: " + container.getClass().getSimpleName() +
@@ -82,7 +82,7 @@ public class ContainerLoading {
     }
 
     private static void listWarehouseContainers() {
-        if (Port.warehouse.getContainers().size() > 0) {
+        if (!Port.warehouse.getContainers().isEmpty()) {
             for (StandardContainer container : Port.warehouse.getContainers()) {
                 System.out.println(
                         "Container id " + container.id +
@@ -101,7 +101,7 @@ public class ContainerLoading {
         listFreeContainers();
         ConsoleColors.printYellow("Free available containers in warehouse:");
         listWarehouseContainers();
-        return Port.warehouse.getContainers().size() > 0 || App.containers.size() > 0;
+        return !Port.warehouse.getContainers().isEmpty() || !App.containers.isEmpty();
     }
 
     private static void loadContainer(Ship ship, StandardContainer container) {
@@ -126,7 +126,7 @@ public class ContainerLoading {
     }
 
     private static void setSender(StandardContainer container) {
-        if (App.senders.size() == 0) {
+        if (App.senders.isEmpty()) {
             ConsoleColors.printRed("No senders available. Please create new sender to be able to load container");
         } else {
             ConsoleColors.printYellow("Please select sender:");
@@ -161,7 +161,7 @@ public class ContainerLoading {
     }
 
     private static boolean listAvailableShips() {
-        if (Port.ships.size() > 0) {
+        if (!Port.ships.isEmpty()) {
             ConsoleColors.printYellow("Available ships in port:");
             for (Ship ship : Port.ships) {
                 System.out.println(
@@ -176,7 +176,7 @@ public class ContainerLoading {
         } else {
             ConsoleColors.printYellow("No ships available.");
         }
-        return Port.ships.size() > 0;
+        return !Port.ships.isEmpty();
     }
 
     private static Ship shipLookUp(int choice) {
